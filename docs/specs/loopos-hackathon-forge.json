@@ -34,7 +34,7 @@
   {
     "id": 5,
     "category": "complex",
-    "description": "ingest_voice_note + triage writers in backend/src/servicers/ops_ticket.py. ingest_voice_note(property_id, audio_url) writer creates OpsTicket(status=NEW), calls whisper.transcribe_and_translate, populates transcripts, fires triage. triage(ticket_id) writer calls classify_fast for category/severity/language, retrieve_brain_context for matched_*_ids, attaches skill_artifact (loads data/skills/handle_hvac_leak.json for hvac_leak), calls reason_strong for dispatch draft, gates severity >= 4 to AWAITING_HUMAN else auto-authorize up to property monthly_budget_usd/30. Both methods decorated mcp=Tool().",
+    "description": "ingest_text_message + ingest_voice_note + triage writers in backend/src/servicers/ops_ticket.py. ingest_text_message(property_id, text, sender_user_id) writer (demo critical path — text-only Beat 1) creates OpsTicket(status=NEW) with raw_input=text source=text transcript_native=text, derives transcript_en via reason_strong translate-prompt if non-English, fires triage. ingest_voice_note(property_id, audio_url) writer (architectural completeness) creates OpsTicket(status=NEW), calls whisper.transcribe_and_translate, populates transcripts, fires triage. triage(ticket_id) writer calls classify_fast for category/severity/language, retrieve_brain_context for matched_*_ids, attaches skill_artifact (loads data/skills/handle_hvac_leak.json for hvac_leak), calls reason_strong for dispatch draft, gates severity >= 4 to AWAITING_HUMAN else auto-authorize up to property monthly_budget_usd/30. All three methods decorated mcp=Tool().",
     "verify": "python -m pytest backend/tests/test_ops_ticket.py::test_ingest_and_triage_shirley_path -v",
     "passes": false,
     "skipped": false

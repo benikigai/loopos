@@ -20,7 +20,7 @@ This spec discards the current FastAPI/Next.js loop-core/loop-skin contract scaf
 3. **Strict master-spec phase ordering** (§5.0–5.7), not a vertical slice. Two critic-driven inserts: **T7** (multiplayer smoke at minute ~95) and **T10** (Lightsprint smoke right after `propose_new_rule` ships).
 4. **Loop-skin tmux session repurposed** to data corpus population (T3) running in parallel with T1/T2/T4 in this session. Frontend is no longer a separate app.
 5. **Voice corpus synthesized initially** (5–8 entries based on stated business knowledge — Mr. Wang Taipei, Ito vendor cadence, Miguel Yosemite, etc.). Ben swaps real Slack/WhatsApp artifacts in if T13 dry run leaves time. Entries tagged `representative: true` to be honest about provenance.
-6. **Hardcoded transcript fallback for all 3 voice notes** (Shirley/Haru/Celine). Shirley audio recorded in parallel during T1–T4 by Ben. Haru/Celine appear in `historical_resolutions.json` and team data for breadth without audio assets.
+6. **Demo Beat 1 uses text path, not audio.** Ben's call (no audio recording in time budget). T5 adds `ingest_text_message` writer alongside `ingest_voice_note`. Beat 1 demo: paste Mandarin text into Claude → triage classifies in zh-TW → dispatch draft. Whisper helper (T2) still ships for architectural completeness — Runpod becomes a Q&A bridge ("yes we handle voice via Runpod faster-whisper, fallback dict for stage; ran text path here for time"). Loses one sponsor on-stage moment; three remain load-bearing (TokenRouter Beat 2, Reboot Beat 5, Lightsprint Beat 6). Hardcoded transcript dict still exists in `whisper.py` for off-stage testing.
 7. **ChatGPT MCP connector is best-effort.** T7 is the GO/NO-GO. If unavailable to Ben's account, Beat 5 degrades to verbal claim — same MCP, two clients — and the demo continues.
 8. **Master spec architecture is not negotiated.** Where master and current local code disagree, master wins (OpsTicket flat shape, `NEW/TRIAGED/AWAITING_HUMAN/DISPATCHED/RESOLVED` statuses, expanded `Property` model, separate `Dispatch` model, SkillArtifact gains `name/description/inputs_required/workflow_steps`).
 
@@ -101,10 +101,11 @@ This spec discards the current FastAPI/Next.js loop-core/loop-skin contract scaf
 **Dependencies:** T2, T3, T4
 **Files to change:** `backend/src/servicers/ops_ticket.py`, `api/loopos/v1/app.py` (Pydantic models if not produced by scaffold)
 **Acceptance criteria:**
-  - `ingest_voice_note(property_id, audio_url)` writer creates `OpsTicket(status=NEW)`, calls `whisper.transcribe_and_translate`, populates `transcript_native/transcript_en/detected_language`, fires `triage` writer
+  - `ingest_text_message(property_id, text, sender_user_id)` writer (**demo critical path**) creates `OpsTicket(status=NEW)` with `raw_input=text, transcript_native=text, source="text"`, derives `transcript_en` via `reason_strong` translate-prompt if `text` is non-English, fires `triage`
+  - `ingest_voice_note(property_id, audio_url)` writer (architectural completeness, off-stage) creates `OpsTicket(status=NEW)`, calls `whisper.transcribe_and_translate`, populates transcripts, fires `triage`
   - `triage(ticket_id)` writer calls `classify_fast` to set `category/severity/language`, calls `retrieve_brain_context` to populate `matched_sop_id/matched_voice_memo_ids/matched_historical_ids`, attaches `skill_artifact` (loads `data/skills/handle_hvac_leak.json` for category=hvac_leak), calls `reason_strong` to draft dispatch with vendor + cost, gates on severity ≥ 4 → `AWAITING_HUMAN`, else auto-authorize up to property `monthly_budget_usd / 30` daily cap
-  - Both methods exposed via `mcp=Tool()` decorator
-  - For Shirley fixture: severity=4, category="hvac_leak", `matched_voice_memo_ids` includes `vm_2024_03_taipei_ac`, `matched_sop_id="hvac_leak"`, `skill_artifact` loaded, status=`AWAITING_HUMAN`
+  - All three methods exposed via `mcp=Tool()` decorator
+  - For Shirley demo path (`ingest_text_message` with Mandarin text "Ben，Warm Taipei 主臥冷氣在漏水…"): severity=4, category="hvac_leak", `matched_voice_memo_ids` includes `vm_2024_03_taipei_ac`, `matched_sop_id="hvac_leak"`, `skill_artifact` loaded, status=`AWAITING_HUMAN`
 **Test plan:**
   - Unit: pytest writers with mocked LLM helpers; assert state transitions
   - Smoke: MCP inspector → invoke `ingest_voice_note(property_id="warm_taipei_2br", audio_url="demo_assets/shirley_ac_zh.m4a")` (with `RUNPOD_WHISPER_URL` invalid to force fallback) → poll `live_state` (T6) → ticket appears with full triage state
@@ -198,7 +199,7 @@ This spec discards the current FastAPI/Next.js loop-core/loop-skin contract scaf
 **Acceptance criteria:**
   - `render()` ui method returns three-pane React component visible in Claude Desktop:
     - **TicketList (left):** linear feed with status / property / severity / last-action / cost per ticket
-    - **ChatPane (center):** voice-drop zone + transcript reveal + classification + dispatch draft
+    - **ChatPane (center):** text-input box (primary, demo path) + voice-drop zone (secondary, off-stage) + transcript reveal + classification + dispatch draft
     - **CostTicker (right):** per-property cards reading from `/api/usage` endpoint; for Warm Taipei 2BR shows `today $0.043 · budget remaining $499.96` (from `usage.jsonl`)
   - On RESOLVED status: BrainSources reveal panel with 3 cards (founder voice memo / SOP / historical resolution)
   - SkillArtifact JSON viewer renders pretty-printed (syntax highlighting, collapsible tree)
@@ -268,7 +269,7 @@ This spec discards the current FastAPI/Next.js loop-core/loop-skin contract scaf
 | 5 | Voice corpus authenticity (synthesized vs real) | Low | Low | Tag `representative: true`; pitch line "20 in production, sample shown" |
 | 6 | Lightsprint sandbox down at demo time | Low | Medium | T10 captures screenshot regardless; Beat 6 falls back to screenshot reveal |
 | 7 | Stage WiFi dies | Low | High | All paths run on localhost; only Lightsprint cameo needs network; screenshot fallback covers it |
-| 8 | Shirley audio not recorded by demo | Medium | Medium | Hardcoded transcript fallback dict in `whisper.py` covers all 3 voice notes |
+| 8 | Runpod loses on-stage moment (text-only demo) | Confirmed | Low | Sponsor checkbox still ticked via `whisper.py` in codebase + Q&A bridge; three other sponsors remain load-bearing |
 
 ## Research Notes
 
