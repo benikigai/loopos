@@ -1,0 +1,26 @@
+# env
+.env
+.env.local
+backend/.env
+
+# usage log (per-deploy)
+usage.jsonl
+backend/usage.jsonl
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# node
+node_modules/
+.next/
+dist/
+build/
+*.log
+
+# os
+.DS_Store
