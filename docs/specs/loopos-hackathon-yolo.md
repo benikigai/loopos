@@ -11,7 +11,7 @@
 - [ ] T8: dispatch_with_escalation workflow — MODERATE
 - [x] T9: propose_new_rule writer — SIMPLE
 - [ ] T10: Lightsprint smoke test — SIMPLE
-- [ ] T11: Three-pane React UI (render method) — COMPLEX
+- [x] T11: Three-pane React UI (render method) — COMPLEX
 - [ ] T12: README + push — SIMPLE
 - [ ] T13: Two timed dry runs — SIMPLE
 - [ ] T14: Submit + Lightsprint bounty post — SIMPLE

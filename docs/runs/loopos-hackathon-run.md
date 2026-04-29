@@ -2,7 +2,22 @@
 **Date:** 2026-04-29
 **Spec:** docs/specs/loopos-hackathon.md
 **Branch:** reboot-pivot
-**Status:** In progress (7/14 done — T7 awaiting Ben's smoke run)
+**Status:** In progress (8/14 done — T7 awaiting Ben's smoke run; T8 + T10 deferrable per spec)
+
+## Task 11: Three-pane React UI (out of order; T7 still gated on Ben)
+**Status:** Complete
+**Files changed:**
+  - `api/loopos/v1/loopos.py` — extended `ShowBrainSourcesResponse` with `skill_artifact: Optional[SkillArtifact]`, `property_id`, `severity`, `category`, `status`, `transcript_native`, `transcript_en` (so the UI can hydrate the ticket-card display + Beat 4 SkillArtifact viewer + ticket sidebar via a single Reader subscription)
+  - `backend/src/servicers/loopos.py` — `show_brain_sources` populates the new fields from `self.state`
+  - `web/ui/loopos-ui/App.tsx` — full rewrite (~250 lines): three-pane layout with `TicketRow` (sidebar with severity pill + status), `BrainSourcesPanel` (Beat 3 — 3 cards), `SkillArtifactViewer` (Beat 4 — pretty-printed JSON), `ProposeRuleCard` (Beat 6 — calls proposeNewRule mutator and shows the lightsprint_prompt for paste-into-Lightsprint), `CostTicker` (right rail; hardcoded gdrive verbatim string `Warm Taipei 2BR · today $0.043 · budget remaining $499.96` for stage reliability — real ticker tails usage.jsonl)
+  - `web/ui/loopos-ui/App.module.css` — full rewrite: zinc/stone palette, Inter font, monospace labels, no gradients, no emoji, severity pill turns orange when ≥4, ticker numbers in green
+  - `backend/api/**`, `web/api/**` — regenerated bindings after API change
+**What changed and why:** Beats 2/3/4/6 of the demo arc are now visible inside Claude Desktop via Reboot's `show_loopos_dashboard` UI tool. Trade-off: cost ticker hardcoded to gdrive doc verbatim string for stage reliability per master §9 fallback row 3 — real `usage.jsonl` aggregation deferred to v1.
+**Tests run:** `tsc --noEmit` clean, `vite build` clean (253 modules → 491KB/125KB gzipped); `rbt generate` clean after API addition.
+**Issues found / fixed:** None
+**Remaining risks:** UI not yet visually verified inside Claude Desktop — happens at T7 once Ben starts the dev servers.
+**Reviewer verdict:** PASS (self-review)
+**Deslop pass:** Nothing to clean.
 
 ## Task 9: propose_new_rule writer (out-of-order, T7 is human-gated)
 **Status:** Complete

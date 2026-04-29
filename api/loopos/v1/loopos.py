@@ -151,6 +151,13 @@ class ShowBrainSourcesResponse(Model):
     voice_memo: Optional[BrainVoiceMemo] = Field(tag=1, default=None)
     sop: Optional[BrainSOP] = Field(tag=2, default=None)
     historical: Optional[BrainHistorical] = Field(tag=3, default=None)
+    skill_artifact: Optional[SkillArtifact] = Field(tag=4, default=None)
+    property_id: str = Field(tag=5, default="")
+    severity: int = Field(tag=6, default=0)
+    category: str = Field(tag=7, default="")
+    status: str = Field(tag=8, default="")
+    transcript_native: str = Field(tag=9, default="")
+    transcript_en: str = Field(tag=10, default="")
 
 
 class DispatchRequest(Model):

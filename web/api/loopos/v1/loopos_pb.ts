@@ -7,932 +7,6 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
- * @generated from message loopos.v1.User
- */
-export class User extends Message<User> {
-  /**
-   * @generated from field: optional loopos.v1.User.TicketIdsArray ticket_ids = 1;
-   */
-  ticketIds?: User_TicketIdsArray;
-
-  constructor(data?: PartialMessage<User>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.User";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "ticket_ids", kind: "message", T: User_TicketIdsArray, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): User {
-    return new User().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): User {
-    return new User().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): User {
-    return new User().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: User | PlainMessage<User> | undefined, b: User | PlainMessage<User> | undefined): boolean {
-    return proto3.util.equals(User, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.User.TicketIdsArray
- */
-export class User_TicketIdsArray extends Message<User_TicketIdsArray> {
-  /**
-   * @generated from field: repeated string items = 1;
-   */
-  items: string[] = [];
-
-  constructor(data?: PartialMessage<User_TicketIdsArray>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.User.TicketIdsArray";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): User_TicketIdsArray {
-    return new User_TicketIdsArray().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): User_TicketIdsArray {
-    return new User_TicketIdsArray().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): User_TicketIdsArray {
-    return new User_TicketIdsArray().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: User_TicketIdsArray | PlainMessage<User_TicketIdsArray> | undefined, b: User_TicketIdsArray | PlainMessage<User_TicketIdsArray> | undefined): boolean {
-    return proto3.util.equals(User_TicketIdsArray, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserIngestTextMessageRequest
- */
-export class UserIngestTextMessageRequest extends Message<UserIngestTextMessageRequest> {
-  /**
-   * @generated from field: optional string property_id = 1;
-   */
-  propertyId?: string;
-
-  /**
-   * @generated from field: optional string text = 2;
-   */
-  text?: string;
-
-  /**
-   * @generated from field: optional string sender_user_id = 3;
-   */
-  senderUserId?: string;
-
-  constructor(data?: PartialMessage<UserIngestTextMessageRequest>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserIngestTextMessageRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 2, name: "text", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 3, name: "sender_user_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserIngestTextMessageRequest {
-    return new UserIngestTextMessageRequest().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserIngestTextMessageRequest {
-    return new UserIngestTextMessageRequest().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserIngestTextMessageRequest {
-    return new UserIngestTextMessageRequest().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserIngestTextMessageRequest | PlainMessage<UserIngestTextMessageRequest> | undefined, b: UserIngestTextMessageRequest | PlainMessage<UserIngestTextMessageRequest> | undefined): boolean {
-    return proto3.util.equals(UserIngestTextMessageRequest, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserIngestTextMessageResponse
- */
-export class UserIngestTextMessageResponse extends Message<UserIngestTextMessageResponse> {
-  /**
-   * @generated from field: optional string ticket_id = 1;
-   */
-  ticketId?: string;
-
-  constructor(data?: PartialMessage<UserIngestTextMessageResponse>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserIngestTextMessageResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserIngestTextMessageResponse {
-    return new UserIngestTextMessageResponse().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserIngestTextMessageResponse {
-    return new UserIngestTextMessageResponse().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserIngestTextMessageResponse {
-    return new UserIngestTextMessageResponse().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserIngestTextMessageResponse | PlainMessage<UserIngestTextMessageResponse> | undefined, b: UserIngestTextMessageResponse | PlainMessage<UserIngestTextMessageResponse> | undefined): boolean {
-    return proto3.util.equals(UserIngestTextMessageResponse, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserIngestVoiceNoteRequest
- */
-export class UserIngestVoiceNoteRequest extends Message<UserIngestVoiceNoteRequest> {
-  /**
-   * @generated from field: optional string property_id = 1;
-   */
-  propertyId?: string;
-
-  /**
-   * @generated from field: optional string audio_url = 2;
-   */
-  audioUrl?: string;
-
-  /**
-   * @generated from field: optional string sender_user_id = 3;
-   */
-  senderUserId?: string;
-
-  constructor(data?: PartialMessage<UserIngestVoiceNoteRequest>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserIngestVoiceNoteRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 2, name: "audio_url", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 3, name: "sender_user_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserIngestVoiceNoteRequest {
-    return new UserIngestVoiceNoteRequest().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserIngestVoiceNoteRequest {
-    return new UserIngestVoiceNoteRequest().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserIngestVoiceNoteRequest {
-    return new UserIngestVoiceNoteRequest().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserIngestVoiceNoteRequest | PlainMessage<UserIngestVoiceNoteRequest> | undefined, b: UserIngestVoiceNoteRequest | PlainMessage<UserIngestVoiceNoteRequest> | undefined): boolean {
-    return proto3.util.equals(UserIngestVoiceNoteRequest, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserIngestVoiceNoteResponse
- */
-export class UserIngestVoiceNoteResponse extends Message<UserIngestVoiceNoteResponse> {
-  /**
-   * @generated from field: optional string ticket_id = 1;
-   */
-  ticketId?: string;
-
-  constructor(data?: PartialMessage<UserIngestVoiceNoteResponse>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserIngestVoiceNoteResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserIngestVoiceNoteResponse {
-    return new UserIngestVoiceNoteResponse().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserIngestVoiceNoteResponse {
-    return new UserIngestVoiceNoteResponse().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserIngestVoiceNoteResponse {
-    return new UserIngestVoiceNoteResponse().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserIngestVoiceNoteResponse | PlainMessage<UserIngestVoiceNoteResponse> | undefined, b: UserIngestVoiceNoteResponse | PlainMessage<UserIngestVoiceNoteResponse> | undefined): boolean {
-    return proto3.util.equals(UserIngestVoiceNoteResponse, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserListTicketsResponse
- */
-export class UserListTicketsResponse extends Message<UserListTicketsResponse> {
-  /**
-   * @generated from field: optional loopos.v1.UserListTicketsResponse.TicketsArray tickets = 1;
-   */
-  tickets?: UserListTicketsResponse_TicketsArray;
-
-  constructor(data?: PartialMessage<UserListTicketsResponse>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserListTicketsResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "tickets", kind: "message", T: UserListTicketsResponse_TicketsArray, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserListTicketsResponse {
-    return new UserListTicketsResponse().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserListTicketsResponse {
-    return new UserListTicketsResponse().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserListTicketsResponse {
-    return new UserListTicketsResponse().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserListTicketsResponse | PlainMessage<UserListTicketsResponse> | undefined, b: UserListTicketsResponse | PlainMessage<UserListTicketsResponse> | undefined): boolean {
-    return proto3.util.equals(UserListTicketsResponse, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserListTicketsResponse.TicketsArray
- */
-export class UserListTicketsResponse_TicketsArray extends Message<UserListTicketsResponse_TicketsArray> {
-  /**
-   * @generated from field: repeated loopos.v1.UserListTicketsResponse.TicketsArray.TicketSummary items = 1;
-   */
-  items: UserListTicketsResponse_TicketsArray_TicketSummary[] = [];
-
-  constructor(data?: PartialMessage<UserListTicketsResponse_TicketsArray>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserListTicketsResponse.TicketsArray";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "items", kind: "message", T: UserListTicketsResponse_TicketsArray_TicketSummary, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserListTicketsResponse_TicketsArray {
-    return new UserListTicketsResponse_TicketsArray().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserListTicketsResponse_TicketsArray {
-    return new UserListTicketsResponse_TicketsArray().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserListTicketsResponse_TicketsArray {
-    return new UserListTicketsResponse_TicketsArray().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserListTicketsResponse_TicketsArray | PlainMessage<UserListTicketsResponse_TicketsArray> | undefined, b: UserListTicketsResponse_TicketsArray | PlainMessage<UserListTicketsResponse_TicketsArray> | undefined): boolean {
-    return proto3.util.equals(UserListTicketsResponse_TicketsArray, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserListTicketsResponse.TicketsArray.TicketSummary
- */
-export class UserListTicketsResponse_TicketsArray_TicketSummary extends Message<UserListTicketsResponse_TicketsArray_TicketSummary> {
-  /**
-   * @generated from field: optional string ticket_id = 1;
-   */
-  ticketId?: string;
-
-  /**
-   * @generated from field: optional string property_id = 2;
-   */
-  propertyId?: string;
-
-  /**
-   * @generated from field: optional string status = 3;
-   */
-  status?: string;
-
-  /**
-   * @generated from field: optional double severity = 4;
-   */
-  severity?: number;
-
-  /**
-   * @generated from field: optional string category = 5;
-   */
-  category?: string;
-
-  /**
-   * @generated from field: optional string last_action = 6;
-   */
-  lastAction?: string;
-
-  /**
-   * @generated from field: optional double cost_authorized_usd = 7;
-   */
-  costAuthorizedUsd?: number;
-
-  /**
-   * @generated from field: optional string snippet = 8;
-   */
-  snippet?: string;
-
-  constructor(data?: PartialMessage<UserListTicketsResponse_TicketsArray_TicketSummary>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserListTicketsResponse.TicketsArray.TicketSummary";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 2, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 3, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 4, name: "severity", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
-    { no: 5, name: "category", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 6, name: "last_action", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 7, name: "cost_authorized_usd", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
-    { no: 8, name: "snippet", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserListTicketsResponse_TicketsArray_TicketSummary {
-    return new UserListTicketsResponse_TicketsArray_TicketSummary().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserListTicketsResponse_TicketsArray_TicketSummary {
-    return new UserListTicketsResponse_TicketsArray_TicketSummary().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserListTicketsResponse_TicketsArray_TicketSummary {
-    return new UserListTicketsResponse_TicketsArray_TicketSummary().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserListTicketsResponse_TicketsArray_TicketSummary | PlainMessage<UserListTicketsResponse_TicketsArray_TicketSummary> | undefined, b: UserListTicketsResponse_TicketsArray_TicketSummary | PlainMessage<UserListTicketsResponse_TicketsArray_TicketSummary> | undefined): boolean {
-    return proto3.util.equals(UserListTicketsResponse_TicketsArray_TicketSummary, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserQueryBrainRequest
- */
-export class UserQueryBrainRequest extends Message<UserQueryBrainRequest> {
-  /**
-   * @generated from field: optional string query = 1;
-   */
-  query?: string;
-
-  /**
-   * @generated from field: optional string property_id = 2;
-   */
-  propertyId?: string;
-
-  constructor(data?: PartialMessage<UserQueryBrainRequest>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserQueryBrainRequest";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "query", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 2, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainRequest {
-    return new UserQueryBrainRequest().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainRequest {
-    return new UserQueryBrainRequest().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainRequest {
-    return new UserQueryBrainRequest().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserQueryBrainRequest | PlainMessage<UserQueryBrainRequest> | undefined, b: UserQueryBrainRequest | PlainMessage<UserQueryBrainRequest> | undefined): boolean {
-    return proto3.util.equals(UserQueryBrainRequest, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserQueryBrainResponse
- */
-export class UserQueryBrainResponse extends Message<UserQueryBrainResponse> {
-  /**
-   * @generated from field: optional loopos.v1.UserQueryBrainResponse.VoiceMemosArray voice_memos = 1;
-   */
-  voiceMemos?: UserQueryBrainResponse_VoiceMemosArray;
-
-  /**
-   * @generated from field: optional loopos.v1.UserQueryBrainResponse.Sop sop = 2;
-   */
-  sop?: UserQueryBrainResponse_Sop;
-
-  /**
-   * @generated from field: optional loopos.v1.UserQueryBrainResponse.HistoricalArray historical = 3;
-   */
-  historical?: UserQueryBrainResponse_HistoricalArray;
-
-  constructor(data?: PartialMessage<UserQueryBrainResponse>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserQueryBrainResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "voice_memos", kind: "message", T: UserQueryBrainResponse_VoiceMemosArray, opt: true },
-    { no: 2, name: "sop", kind: "message", T: UserQueryBrainResponse_Sop, opt: true },
-    { no: 3, name: "historical", kind: "message", T: UserQueryBrainResponse_HistoricalArray, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse {
-    return new UserQueryBrainResponse().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse {
-    return new UserQueryBrainResponse().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse {
-    return new UserQueryBrainResponse().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserQueryBrainResponse | PlainMessage<UserQueryBrainResponse> | undefined, b: UserQueryBrainResponse | PlainMessage<UserQueryBrainResponse> | undefined): boolean {
-    return proto3.util.equals(UserQueryBrainResponse, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserQueryBrainResponse.VoiceMemosArray
- */
-export class UserQueryBrainResponse_VoiceMemosArray extends Message<UserQueryBrainResponse_VoiceMemosArray> {
-  /**
-   * @generated from field: repeated loopos.v1.UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo items = 1;
-   */
-  items: UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo[] = [];
-
-  constructor(data?: PartialMessage<UserQueryBrainResponse_VoiceMemosArray>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserQueryBrainResponse.VoiceMemosArray";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "items", kind: "message", T: UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_VoiceMemosArray {
-    return new UserQueryBrainResponse_VoiceMemosArray().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_VoiceMemosArray {
-    return new UserQueryBrainResponse_VoiceMemosArray().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_VoiceMemosArray {
-    return new UserQueryBrainResponse_VoiceMemosArray().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserQueryBrainResponse_VoiceMemosArray | PlainMessage<UserQueryBrainResponse_VoiceMemosArray> | undefined, b: UserQueryBrainResponse_VoiceMemosArray | PlainMessage<UserQueryBrainResponse_VoiceMemosArray> | undefined): boolean {
-    return proto3.util.equals(UserQueryBrainResponse_VoiceMemosArray, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo
- */
-export class UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo extends Message<UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo> {
-  /**
-   * @generated from field: optional string id = 1;
-   */
-  id?: string;
-
-  /**
-   * @generated from field: optional string text = 2;
-   */
-  text?: string;
-
-  /**
-   * @generated from field: optional string context = 3;
-   */
-  context?: string;
-
-  /**
-   * @generated from field: optional string date = 4;
-   */
-  date?: string;
-
-  /**
-   * @generated from field: optional double relevance = 5;
-   */
-  relevance?: number;
-
-  constructor(data?: PartialMessage<UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 2, name: "text", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 3, name: "context", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 4, name: "date", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 5, name: "relevance", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo {
-    return new UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo {
-    return new UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo {
-    return new UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo | PlainMessage<UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo> | undefined, b: UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo | PlainMessage<UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo> | undefined): boolean {
-    return proto3.util.equals(UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserQueryBrainResponse.Sop
- */
-export class UserQueryBrainResponse_Sop extends Message<UserQueryBrainResponse_Sop> {
-  /**
-   * @generated from field: optional string id = 1;
-   */
-  id?: string;
-
-  /**
-   * @generated from field: optional string title = 2;
-   */
-  title?: string;
-
-  /**
-   * @generated from field: optional string snippet = 3;
-   */
-  snippet?: string;
-
-  constructor(data?: PartialMessage<UserQueryBrainResponse_Sop>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserQueryBrainResponse.Sop";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 3, name: "snippet", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_Sop {
-    return new UserQueryBrainResponse_Sop().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_Sop {
-    return new UserQueryBrainResponse_Sop().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_Sop {
-    return new UserQueryBrainResponse_Sop().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserQueryBrainResponse_Sop | PlainMessage<UserQueryBrainResponse_Sop> | undefined, b: UserQueryBrainResponse_Sop | PlainMessage<UserQueryBrainResponse_Sop> | undefined): boolean {
-    return proto3.util.equals(UserQueryBrainResponse_Sop, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserQueryBrainResponse.HistoricalArray
- */
-export class UserQueryBrainResponse_HistoricalArray extends Message<UserQueryBrainResponse_HistoricalArray> {
-  /**
-   * @generated from field: repeated loopos.v1.UserQueryBrainResponse.HistoricalArray.BrainHistorical items = 1;
-   */
-  items: UserQueryBrainResponse_HistoricalArray_BrainHistorical[] = [];
-
-  constructor(data?: PartialMessage<UserQueryBrainResponse_HistoricalArray>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserQueryBrainResponse.HistoricalArray";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "items", kind: "message", T: UserQueryBrainResponse_HistoricalArray_BrainHistorical, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_HistoricalArray {
-    return new UserQueryBrainResponse_HistoricalArray().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_HistoricalArray {
-    return new UserQueryBrainResponse_HistoricalArray().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_HistoricalArray {
-    return new UserQueryBrainResponse_HistoricalArray().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserQueryBrainResponse_HistoricalArray | PlainMessage<UserQueryBrainResponse_HistoricalArray> | undefined, b: UserQueryBrainResponse_HistoricalArray | PlainMessage<UserQueryBrainResponse_HistoricalArray> | undefined): boolean {
-    return proto3.util.equals(UserQueryBrainResponse_HistoricalArray, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserQueryBrainResponse.HistoricalArray.BrainHistorical
- */
-export class UserQueryBrainResponse_HistoricalArray_BrainHistorical extends Message<UserQueryBrainResponse_HistoricalArray_BrainHistorical> {
-  /**
-   * @generated from field: optional string ticket_id = 1;
-   */
-  ticketId?: string;
-
-  /**
-   * @generated from field: optional string title = 2;
-   */
-  title?: string;
-
-  /**
-   * @generated from field: optional string snippet = 3;
-   */
-  snippet?: string;
-
-  /**
-   * @generated from field: optional double relevance = 4;
-   */
-  relevance?: number;
-
-  constructor(data?: PartialMessage<UserQueryBrainResponse_HistoricalArray_BrainHistorical>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserQueryBrainResponse.HistoricalArray.BrainHistorical";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 3, name: "snippet", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 4, name: "relevance", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_HistoricalArray_BrainHistorical {
-    return new UserQueryBrainResponse_HistoricalArray_BrainHistorical().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_HistoricalArray_BrainHistorical {
-    return new UserQueryBrainResponse_HistoricalArray_BrainHistorical().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_HistoricalArray_BrainHistorical {
-    return new UserQueryBrainResponse_HistoricalArray_BrainHistorical().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserQueryBrainResponse_HistoricalArray_BrainHistorical | PlainMessage<UserQueryBrainResponse_HistoricalArray_BrainHistorical> | undefined, b: UserQueryBrainResponse_HistoricalArray_BrainHistorical | PlainMessage<UserQueryBrainResponse_HistoricalArray_BrainHistorical> | undefined): boolean {
-    return proto3.util.equals(UserQueryBrainResponse_HistoricalArray_BrainHistorical, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserLiveStateResponse
- */
-export class UserLiveStateResponse extends Message<UserLiveStateResponse> {
-  /**
-   * @generated from field: optional loopos.v1.UserLiveStateResponse.TicketsArray tickets = 1;
-   */
-  tickets?: UserLiveStateResponse_TicketsArray;
-
-  /**
-   * @generated from field: optional loopos.v1.UserLiveStateResponse.RecentEventJsonsArray recent_event_jsons = 2;
-   */
-  recentEventJsons?: UserLiveStateResponse_RecentEventJsonsArray;
-
-  constructor(data?: PartialMessage<UserLiveStateResponse>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserLiveStateResponse";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "tickets", kind: "message", T: UserLiveStateResponse_TicketsArray, opt: true },
-    { no: 2, name: "recent_event_jsons", kind: "message", T: UserLiveStateResponse_RecentEventJsonsArray, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserLiveStateResponse {
-    return new UserLiveStateResponse().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserLiveStateResponse {
-    return new UserLiveStateResponse().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserLiveStateResponse {
-    return new UserLiveStateResponse().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserLiveStateResponse | PlainMessage<UserLiveStateResponse> | undefined, b: UserLiveStateResponse | PlainMessage<UserLiveStateResponse> | undefined): boolean {
-    return proto3.util.equals(UserLiveStateResponse, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserLiveStateResponse.TicketsArray
- */
-export class UserLiveStateResponse_TicketsArray extends Message<UserLiveStateResponse_TicketsArray> {
-  /**
-   * @generated from field: repeated loopos.v1.UserLiveStateResponse.TicketsArray.TicketSummary items = 1;
-   */
-  items: UserLiveStateResponse_TicketsArray_TicketSummary[] = [];
-
-  constructor(data?: PartialMessage<UserLiveStateResponse_TicketsArray>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserLiveStateResponse.TicketsArray";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "items", kind: "message", T: UserLiveStateResponse_TicketsArray_TicketSummary, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserLiveStateResponse_TicketsArray {
-    return new UserLiveStateResponse_TicketsArray().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserLiveStateResponse_TicketsArray {
-    return new UserLiveStateResponse_TicketsArray().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserLiveStateResponse_TicketsArray {
-    return new UserLiveStateResponse_TicketsArray().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserLiveStateResponse_TicketsArray | PlainMessage<UserLiveStateResponse_TicketsArray> | undefined, b: UserLiveStateResponse_TicketsArray | PlainMessage<UserLiveStateResponse_TicketsArray> | undefined): boolean {
-    return proto3.util.equals(UserLiveStateResponse_TicketsArray, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserLiveStateResponse.TicketsArray.TicketSummary
- */
-export class UserLiveStateResponse_TicketsArray_TicketSummary extends Message<UserLiveStateResponse_TicketsArray_TicketSummary> {
-  /**
-   * @generated from field: optional string ticket_id = 1;
-   */
-  ticketId?: string;
-
-  /**
-   * @generated from field: optional string property_id = 2;
-   */
-  propertyId?: string;
-
-  /**
-   * @generated from field: optional string status = 3;
-   */
-  status?: string;
-
-  /**
-   * @generated from field: optional double severity = 4;
-   */
-  severity?: number;
-
-  /**
-   * @generated from field: optional string category = 5;
-   */
-  category?: string;
-
-  /**
-   * @generated from field: optional string last_action = 6;
-   */
-  lastAction?: string;
-
-  /**
-   * @generated from field: optional double cost_authorized_usd = 7;
-   */
-  costAuthorizedUsd?: number;
-
-  /**
-   * @generated from field: optional string snippet = 8;
-   */
-  snippet?: string;
-
-  constructor(data?: PartialMessage<UserLiveStateResponse_TicketsArray_TicketSummary>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserLiveStateResponse.TicketsArray.TicketSummary";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 2, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 3, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 4, name: "severity", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
-    { no: 5, name: "category", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 6, name: "last_action", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-    { no: 7, name: "cost_authorized_usd", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
-    { no: 8, name: "snippet", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserLiveStateResponse_TicketsArray_TicketSummary {
-    return new UserLiveStateResponse_TicketsArray_TicketSummary().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserLiveStateResponse_TicketsArray_TicketSummary {
-    return new UserLiveStateResponse_TicketsArray_TicketSummary().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserLiveStateResponse_TicketsArray_TicketSummary {
-    return new UserLiveStateResponse_TicketsArray_TicketSummary().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserLiveStateResponse_TicketsArray_TicketSummary | PlainMessage<UserLiveStateResponse_TicketsArray_TicketSummary> | undefined, b: UserLiveStateResponse_TicketsArray_TicketSummary | PlainMessage<UserLiveStateResponse_TicketsArray_TicketSummary> | undefined): boolean {
-    return proto3.util.equals(UserLiveStateResponse_TicketsArray_TicketSummary, a, b);
-  }
-}
-
-/**
- * @generated from message loopos.v1.UserLiveStateResponse.RecentEventJsonsArray
- */
-export class UserLiveStateResponse_RecentEventJsonsArray extends Message<UserLiveStateResponse_RecentEventJsonsArray> {
-  /**
-   * @generated from field: repeated string items = 1;
-   */
-  items: string[] = [];
-
-  constructor(data?: PartialMessage<UserLiveStateResponse_RecentEventJsonsArray>) {
-    super();
-    proto3.util.initPartial(data, this);
-  }
-
-  static readonly runtime: typeof proto3 = proto3;
-  static readonly typeName = "loopos.v1.UserLiveStateResponse.RecentEventJsonsArray";
-  static readonly fields: FieldList = proto3.util.newFieldList(() => [
-    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-  ]);
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserLiveStateResponse_RecentEventJsonsArray {
-    return new UserLiveStateResponse_RecentEventJsonsArray().fromBinary(bytes, options);
-  }
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserLiveStateResponse_RecentEventJsonsArray {
-    return new UserLiveStateResponse_RecentEventJsonsArray().fromJson(jsonValue, options);
-  }
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserLiveStateResponse_RecentEventJsonsArray {
-    return new UserLiveStateResponse_RecentEventJsonsArray().fromJsonString(jsonString, options);
-  }
-
-  static equals(a: UserLiveStateResponse_RecentEventJsonsArray | PlainMessage<UserLiveStateResponse_RecentEventJsonsArray> | undefined, b: UserLiveStateResponse_RecentEventJsonsArray | PlainMessage<UserLiveStateResponse_RecentEventJsonsArray> | undefined): boolean {
-    return proto3.util.equals(UserLiveStateResponse_RecentEventJsonsArray, a, b);
-  }
-}
-
-/**
  * @generated from message loopos.v1.OpsTicket
  */
 export class OpsTicket extends Message<OpsTicket> {
@@ -2009,6 +1083,41 @@ export class OpsTicketShowBrainSourcesResponse extends Message<OpsTicketShowBrai
    */
   historical?: OpsTicketShowBrainSourcesResponse_Historical;
 
+  /**
+   * @generated from field: optional loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact skill_artifact = 4;
+   */
+  skillArtifact?: OpsTicketShowBrainSourcesResponse_SkillArtifact;
+
+  /**
+   * @generated from field: optional string property_id = 5;
+   */
+  propertyId?: string;
+
+  /**
+   * @generated from field: optional double severity = 6;
+   */
+  severity?: number;
+
+  /**
+   * @generated from field: optional string category = 7;
+   */
+  category?: string;
+
+  /**
+   * @generated from field: optional string status = 8;
+   */
+  status?: string;
+
+  /**
+   * @generated from field: optional string transcript_native = 9;
+   */
+  transcriptNative?: string;
+
+  /**
+   * @generated from field: optional string transcript_en = 10;
+   */
+  transcriptEn?: string;
+
   constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse>) {
     super();
     proto3.util.initPartial(data, this);
@@ -2020,6 +1129,13 @@ export class OpsTicketShowBrainSourcesResponse extends Message<OpsTicketShowBrai
     { no: 1, name: "voice_memo", kind: "message", T: OpsTicketShowBrainSourcesResponse_VoiceMemo, opt: true },
     { no: 2, name: "sop", kind: "message", T: OpsTicketShowBrainSourcesResponse_Sop, opt: true },
     { no: 3, name: "historical", kind: "message", T: OpsTicketShowBrainSourcesResponse_Historical, opt: true },
+    { no: 4, name: "skill_artifact", kind: "message", T: OpsTicketShowBrainSourcesResponse_SkillArtifact, opt: true },
+    { no: 5, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "severity", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 7, name: "category", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 8, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 9, name: "transcript_native", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 10, name: "transcript_en", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse {
@@ -2201,6 +1317,1306 @@ export class OpsTicketShowBrainSourcesResponse_Historical extends Message<OpsTic
 
   static equals(a: OpsTicketShowBrainSourcesResponse_Historical | PlainMessage<OpsTicketShowBrainSourcesResponse_Historical> | undefined, b: OpsTicketShowBrainSourcesResponse_Historical | PlainMessage<OpsTicketShowBrainSourcesResponse_Historical> | undefined): boolean {
     return proto3.util.equals(OpsTicketShowBrainSourcesResponse_Historical, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact
+ */
+export class OpsTicketShowBrainSourcesResponse_SkillArtifact extends Message<OpsTicketShowBrainSourcesResponse_SkillArtifact> {
+  /**
+   * @generated from field: optional string skill_id = 1;
+   */
+  skillId?: string;
+
+  /**
+   * @generated from field: optional string name = 2;
+   */
+  name?: string;
+
+  /**
+   * @generated from field: optional string description = 3;
+   */
+  description?: string;
+
+  /**
+   * @generated from field: optional loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.TriggerConditionsArray trigger_conditions = 4;
+   */
+  triggerConditions?: OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray;
+
+  /**
+   * @generated from field: optional loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.InputsRequiredArray inputs_required = 5;
+   */
+  inputsRequired?: OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray;
+
+  /**
+   * @generated from field: optional loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.WorkflowStepsArray workflow_steps = 6;
+   */
+  workflowSteps?: OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray;
+
+  /**
+   * @generated from field: optional loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.PreferredVendorsArray preferred_vendors = 7;
+   */
+  preferredVendors?: OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray;
+
+  /**
+   * @generated from field: optional double auth_cap_usd = 8;
+   */
+  authCapUsd?: number;
+
+  /**
+   * @generated from field: optional string guest_voice_style = 9;
+   */
+  guestVoiceStyle?: string;
+
+  /**
+   * @generated from field: optional loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.ApprovalRulesArray approval_rules = 10;
+   */
+  approvalRules?: OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray;
+
+  /**
+   * @generated from field: optional loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.Sources sources = 11;
+   */
+  sources?: OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources;
+
+  constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "skill_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "trigger_conditions", kind: "message", T: OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray, opt: true },
+    { no: 5, name: "inputs_required", kind: "message", T: OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray, opt: true },
+    { no: 6, name: "workflow_steps", kind: "message", T: OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray, opt: true },
+    { no: 7, name: "preferred_vendors", kind: "message", T: OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray, opt: true },
+    { no: 8, name: "auth_cap_usd", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 9, name: "guest_voice_style", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 10, name: "approval_rules", kind: "message", T: OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray, opt: true },
+    { no: 11, name: "sources", kind: "message", T: OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpsTicketShowBrainSourcesResponse_SkillArtifact | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact> | undefined, b: OpsTicketShowBrainSourcesResponse_SkillArtifact | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact> | undefined): boolean {
+    return proto3.util.equals(OpsTicketShowBrainSourcesResponse_SkillArtifact, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.TriggerConditionsArray
+ */
+export class OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray extends Message<OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray> {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[] = [];
+
+  constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.TriggerConditionsArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray> | undefined, b: OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray> | undefined): boolean {
+    return proto3.util.equals(OpsTicketShowBrainSourcesResponse_SkillArtifact_TriggerConditionsArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.InputsRequiredArray
+ */
+export class OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray extends Message<OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray> {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[] = [];
+
+  constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.InputsRequiredArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray> | undefined, b: OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray> | undefined): boolean {
+    return proto3.util.equals(OpsTicketShowBrainSourcesResponse_SkillArtifact_InputsRequiredArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.WorkflowStepsArray
+ */
+export class OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray extends Message<OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray> {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[] = [];
+
+  constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.WorkflowStepsArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray> | undefined, b: OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray> | undefined): boolean {
+    return proto3.util.equals(OpsTicketShowBrainSourcesResponse_SkillArtifact_WorkflowStepsArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.PreferredVendorsArray
+ */
+export class OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray extends Message<OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray> {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[] = [];
+
+  constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.PreferredVendorsArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray> | undefined, b: OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray> | undefined): boolean {
+    return proto3.util.equals(OpsTicketShowBrainSourcesResponse_SkillArtifact_PreferredVendorsArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.ApprovalRulesArray
+ */
+export class OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray extends Message<OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray> {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[] = [];
+
+  constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.ApprovalRulesArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray> | undefined, b: OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray> | undefined): boolean {
+    return proto3.util.equals(OpsTicketShowBrainSourcesResponse_SkillArtifact_ApprovalRulesArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.Sources
+ */
+export class OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources extends Message<OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources> {
+  /**
+   * @generated from field: optional string derived_from_ticket = 1;
+   */
+  derivedFromTicket?: string;
+
+  /**
+   * @generated from field: optional loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.Sources.BrainLayersUsedArray brain_layers_used = 2;
+   */
+  brainLayersUsed?: OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray;
+
+  /**
+   * @generated from field: optional string generated_by = 3;
+   */
+  generatedBy?: string;
+
+  /**
+   * @generated from field: optional string generated_at = 4;
+   */
+  generatedAt?: string;
+
+  constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.Sources";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "derived_from_ticket", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "brain_layers_used", kind: "message", T: OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray, opt: true },
+    { no: 3, name: "generated_by", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "generated_at", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources> | undefined, b: OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources> | undefined): boolean {
+    return proto3.util.equals(OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.Sources.BrainLayersUsedArray
+ */
+export class OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray extends Message<OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray> {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[] = [];
+
+  constructor(data?: PartialMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.OpsTicketShowBrainSourcesResponse.SkillArtifact.Sources.BrainLayersUsedArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray {
+    return new OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray> | undefined, b: OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray | PlainMessage<OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray> | undefined): boolean {
+    return proto3.util.equals(OpsTicketShowBrainSourcesResponse_SkillArtifact_Sources_BrainLayersUsedArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.User
+ */
+export class User extends Message<User> {
+  /**
+   * @generated from field: optional loopos.v1.User.TicketIdsArray ticket_ids = 1;
+   */
+  ticketIds?: User_TicketIdsArray;
+
+  constructor(data?: PartialMessage<User>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.User";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "ticket_ids", kind: "message", T: User_TicketIdsArray, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): User {
+    return new User().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): User {
+    return new User().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): User {
+    return new User().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: User | PlainMessage<User> | undefined, b: User | PlainMessage<User> | undefined): boolean {
+    return proto3.util.equals(User, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.User.TicketIdsArray
+ */
+export class User_TicketIdsArray extends Message<User_TicketIdsArray> {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[] = [];
+
+  constructor(data?: PartialMessage<User_TicketIdsArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.User.TicketIdsArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): User_TicketIdsArray {
+    return new User_TicketIdsArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): User_TicketIdsArray {
+    return new User_TicketIdsArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): User_TicketIdsArray {
+    return new User_TicketIdsArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: User_TicketIdsArray | PlainMessage<User_TicketIdsArray> | undefined, b: User_TicketIdsArray | PlainMessage<User_TicketIdsArray> | undefined): boolean {
+    return proto3.util.equals(User_TicketIdsArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserIngestTextMessageRequest
+ */
+export class UserIngestTextMessageRequest extends Message<UserIngestTextMessageRequest> {
+  /**
+   * @generated from field: optional string property_id = 1;
+   */
+  propertyId?: string;
+
+  /**
+   * @generated from field: optional string text = 2;
+   */
+  text?: string;
+
+  /**
+   * @generated from field: optional string sender_user_id = 3;
+   */
+  senderUserId?: string;
+
+  constructor(data?: PartialMessage<UserIngestTextMessageRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserIngestTextMessageRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "text", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "sender_user_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserIngestTextMessageRequest {
+    return new UserIngestTextMessageRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserIngestTextMessageRequest {
+    return new UserIngestTextMessageRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserIngestTextMessageRequest {
+    return new UserIngestTextMessageRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserIngestTextMessageRequest | PlainMessage<UserIngestTextMessageRequest> | undefined, b: UserIngestTextMessageRequest | PlainMessage<UserIngestTextMessageRequest> | undefined): boolean {
+    return proto3.util.equals(UserIngestTextMessageRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserIngestTextMessageResponse
+ */
+export class UserIngestTextMessageResponse extends Message<UserIngestTextMessageResponse> {
+  /**
+   * @generated from field: optional string ticket_id = 1;
+   */
+  ticketId?: string;
+
+  constructor(data?: PartialMessage<UserIngestTextMessageResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserIngestTextMessageResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserIngestTextMessageResponse {
+    return new UserIngestTextMessageResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserIngestTextMessageResponse {
+    return new UserIngestTextMessageResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserIngestTextMessageResponse {
+    return new UserIngestTextMessageResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserIngestTextMessageResponse | PlainMessage<UserIngestTextMessageResponse> | undefined, b: UserIngestTextMessageResponse | PlainMessage<UserIngestTextMessageResponse> | undefined): boolean {
+    return proto3.util.equals(UserIngestTextMessageResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserIngestVoiceNoteRequest
+ */
+export class UserIngestVoiceNoteRequest extends Message<UserIngestVoiceNoteRequest> {
+  /**
+   * @generated from field: optional string property_id = 1;
+   */
+  propertyId?: string;
+
+  /**
+   * @generated from field: optional string audio_url = 2;
+   */
+  audioUrl?: string;
+
+  /**
+   * @generated from field: optional string sender_user_id = 3;
+   */
+  senderUserId?: string;
+
+  constructor(data?: PartialMessage<UserIngestVoiceNoteRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserIngestVoiceNoteRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "audio_url", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "sender_user_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserIngestVoiceNoteRequest {
+    return new UserIngestVoiceNoteRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserIngestVoiceNoteRequest {
+    return new UserIngestVoiceNoteRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserIngestVoiceNoteRequest {
+    return new UserIngestVoiceNoteRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserIngestVoiceNoteRequest | PlainMessage<UserIngestVoiceNoteRequest> | undefined, b: UserIngestVoiceNoteRequest | PlainMessage<UserIngestVoiceNoteRequest> | undefined): boolean {
+    return proto3.util.equals(UserIngestVoiceNoteRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserIngestVoiceNoteResponse
+ */
+export class UserIngestVoiceNoteResponse extends Message<UserIngestVoiceNoteResponse> {
+  /**
+   * @generated from field: optional string ticket_id = 1;
+   */
+  ticketId?: string;
+
+  constructor(data?: PartialMessage<UserIngestVoiceNoteResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserIngestVoiceNoteResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserIngestVoiceNoteResponse {
+    return new UserIngestVoiceNoteResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserIngestVoiceNoteResponse {
+    return new UserIngestVoiceNoteResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserIngestVoiceNoteResponse {
+    return new UserIngestVoiceNoteResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserIngestVoiceNoteResponse | PlainMessage<UserIngestVoiceNoteResponse> | undefined, b: UserIngestVoiceNoteResponse | PlainMessage<UserIngestVoiceNoteResponse> | undefined): boolean {
+    return proto3.util.equals(UserIngestVoiceNoteResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserListTicketsResponse
+ */
+export class UserListTicketsResponse extends Message<UserListTicketsResponse> {
+  /**
+   * @generated from field: optional loopos.v1.UserListTicketsResponse.TicketsArray tickets = 1;
+   */
+  tickets?: UserListTicketsResponse_TicketsArray;
+
+  constructor(data?: PartialMessage<UserListTicketsResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserListTicketsResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "tickets", kind: "message", T: UserListTicketsResponse_TicketsArray, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserListTicketsResponse {
+    return new UserListTicketsResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserListTicketsResponse {
+    return new UserListTicketsResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserListTicketsResponse {
+    return new UserListTicketsResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserListTicketsResponse | PlainMessage<UserListTicketsResponse> | undefined, b: UserListTicketsResponse | PlainMessage<UserListTicketsResponse> | undefined): boolean {
+    return proto3.util.equals(UserListTicketsResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserListTicketsResponse.TicketsArray
+ */
+export class UserListTicketsResponse_TicketsArray extends Message<UserListTicketsResponse_TicketsArray> {
+  /**
+   * @generated from field: repeated loopos.v1.UserListTicketsResponse.TicketsArray.TicketSummary items = 1;
+   */
+  items: UserListTicketsResponse_TicketsArray_TicketSummary[] = [];
+
+  constructor(data?: PartialMessage<UserListTicketsResponse_TicketsArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserListTicketsResponse.TicketsArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "message", T: UserListTicketsResponse_TicketsArray_TicketSummary, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserListTicketsResponse_TicketsArray {
+    return new UserListTicketsResponse_TicketsArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserListTicketsResponse_TicketsArray {
+    return new UserListTicketsResponse_TicketsArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserListTicketsResponse_TicketsArray {
+    return new UserListTicketsResponse_TicketsArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserListTicketsResponse_TicketsArray | PlainMessage<UserListTicketsResponse_TicketsArray> | undefined, b: UserListTicketsResponse_TicketsArray | PlainMessage<UserListTicketsResponse_TicketsArray> | undefined): boolean {
+    return proto3.util.equals(UserListTicketsResponse_TicketsArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserListTicketsResponse.TicketsArray.TicketSummary
+ */
+export class UserListTicketsResponse_TicketsArray_TicketSummary extends Message<UserListTicketsResponse_TicketsArray_TicketSummary> {
+  /**
+   * @generated from field: optional string ticket_id = 1;
+   */
+  ticketId?: string;
+
+  /**
+   * @generated from field: optional string property_id = 2;
+   */
+  propertyId?: string;
+
+  /**
+   * @generated from field: optional string status = 3;
+   */
+  status?: string;
+
+  /**
+   * @generated from field: optional double severity = 4;
+   */
+  severity?: number;
+
+  /**
+   * @generated from field: optional string category = 5;
+   */
+  category?: string;
+
+  /**
+   * @generated from field: optional string last_action = 6;
+   */
+  lastAction?: string;
+
+  /**
+   * @generated from field: optional double cost_authorized_usd = 7;
+   */
+  costAuthorizedUsd?: number;
+
+  /**
+   * @generated from field: optional string snippet = 8;
+   */
+  snippet?: string;
+
+  constructor(data?: PartialMessage<UserListTicketsResponse_TicketsArray_TicketSummary>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserListTicketsResponse.TicketsArray.TicketSummary";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "severity", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 5, name: "category", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "last_action", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 7, name: "cost_authorized_usd", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 8, name: "snippet", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserListTicketsResponse_TicketsArray_TicketSummary {
+    return new UserListTicketsResponse_TicketsArray_TicketSummary().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserListTicketsResponse_TicketsArray_TicketSummary {
+    return new UserListTicketsResponse_TicketsArray_TicketSummary().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserListTicketsResponse_TicketsArray_TicketSummary {
+    return new UserListTicketsResponse_TicketsArray_TicketSummary().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserListTicketsResponse_TicketsArray_TicketSummary | PlainMessage<UserListTicketsResponse_TicketsArray_TicketSummary> | undefined, b: UserListTicketsResponse_TicketsArray_TicketSummary | PlainMessage<UserListTicketsResponse_TicketsArray_TicketSummary> | undefined): boolean {
+    return proto3.util.equals(UserListTicketsResponse_TicketsArray_TicketSummary, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserQueryBrainRequest
+ */
+export class UserQueryBrainRequest extends Message<UserQueryBrainRequest> {
+  /**
+   * @generated from field: optional string query = 1;
+   */
+  query?: string;
+
+  /**
+   * @generated from field: optional string property_id = 2;
+   */
+  propertyId?: string;
+
+  constructor(data?: PartialMessage<UserQueryBrainRequest>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserQueryBrainRequest";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "query", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainRequest {
+    return new UserQueryBrainRequest().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainRequest {
+    return new UserQueryBrainRequest().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainRequest {
+    return new UserQueryBrainRequest().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserQueryBrainRequest | PlainMessage<UserQueryBrainRequest> | undefined, b: UserQueryBrainRequest | PlainMessage<UserQueryBrainRequest> | undefined): boolean {
+    return proto3.util.equals(UserQueryBrainRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserQueryBrainResponse
+ */
+export class UserQueryBrainResponse extends Message<UserQueryBrainResponse> {
+  /**
+   * @generated from field: optional loopos.v1.UserQueryBrainResponse.VoiceMemosArray voice_memos = 1;
+   */
+  voiceMemos?: UserQueryBrainResponse_VoiceMemosArray;
+
+  /**
+   * @generated from field: optional loopos.v1.UserQueryBrainResponse.Sop sop = 2;
+   */
+  sop?: UserQueryBrainResponse_Sop;
+
+  /**
+   * @generated from field: optional loopos.v1.UserQueryBrainResponse.HistoricalArray historical = 3;
+   */
+  historical?: UserQueryBrainResponse_HistoricalArray;
+
+  constructor(data?: PartialMessage<UserQueryBrainResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserQueryBrainResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "voice_memos", kind: "message", T: UserQueryBrainResponse_VoiceMemosArray, opt: true },
+    { no: 2, name: "sop", kind: "message", T: UserQueryBrainResponse_Sop, opt: true },
+    { no: 3, name: "historical", kind: "message", T: UserQueryBrainResponse_HistoricalArray, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse {
+    return new UserQueryBrainResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse {
+    return new UserQueryBrainResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse {
+    return new UserQueryBrainResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserQueryBrainResponse | PlainMessage<UserQueryBrainResponse> | undefined, b: UserQueryBrainResponse | PlainMessage<UserQueryBrainResponse> | undefined): boolean {
+    return proto3.util.equals(UserQueryBrainResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserQueryBrainResponse.VoiceMemosArray
+ */
+export class UserQueryBrainResponse_VoiceMemosArray extends Message<UserQueryBrainResponse_VoiceMemosArray> {
+  /**
+   * @generated from field: repeated loopos.v1.UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo items = 1;
+   */
+  items: UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo[] = [];
+
+  constructor(data?: PartialMessage<UserQueryBrainResponse_VoiceMemosArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserQueryBrainResponse.VoiceMemosArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "message", T: UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_VoiceMemosArray {
+    return new UserQueryBrainResponse_VoiceMemosArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_VoiceMemosArray {
+    return new UserQueryBrainResponse_VoiceMemosArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_VoiceMemosArray {
+    return new UserQueryBrainResponse_VoiceMemosArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserQueryBrainResponse_VoiceMemosArray | PlainMessage<UserQueryBrainResponse_VoiceMemosArray> | undefined, b: UserQueryBrainResponse_VoiceMemosArray | PlainMessage<UserQueryBrainResponse_VoiceMemosArray> | undefined): boolean {
+    return proto3.util.equals(UserQueryBrainResponse_VoiceMemosArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo
+ */
+export class UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo extends Message<UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo> {
+  /**
+   * @generated from field: optional string id = 1;
+   */
+  id?: string;
+
+  /**
+   * @generated from field: optional string text = 2;
+   */
+  text?: string;
+
+  /**
+   * @generated from field: optional string context = 3;
+   */
+  context?: string;
+
+  /**
+   * @generated from field: optional string date = 4;
+   */
+  date?: string;
+
+  /**
+   * @generated from field: optional double relevance = 5;
+   */
+  relevance?: number;
+
+  constructor(data?: PartialMessage<UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "text", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "context", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "date", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "relevance", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo {
+    return new UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo {
+    return new UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo {
+    return new UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo | PlainMessage<UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo> | undefined, b: UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo | PlainMessage<UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo> | undefined): boolean {
+    return proto3.util.equals(UserQueryBrainResponse_VoiceMemosArray_BrainVoiceMemo, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserQueryBrainResponse.Sop
+ */
+export class UserQueryBrainResponse_Sop extends Message<UserQueryBrainResponse_Sop> {
+  /**
+   * @generated from field: optional string id = 1;
+   */
+  id?: string;
+
+  /**
+   * @generated from field: optional string title = 2;
+   */
+  title?: string;
+
+  /**
+   * @generated from field: optional string snippet = 3;
+   */
+  snippet?: string;
+
+  constructor(data?: PartialMessage<UserQueryBrainResponse_Sop>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserQueryBrainResponse.Sop";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "snippet", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_Sop {
+    return new UserQueryBrainResponse_Sop().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_Sop {
+    return new UserQueryBrainResponse_Sop().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_Sop {
+    return new UserQueryBrainResponse_Sop().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserQueryBrainResponse_Sop | PlainMessage<UserQueryBrainResponse_Sop> | undefined, b: UserQueryBrainResponse_Sop | PlainMessage<UserQueryBrainResponse_Sop> | undefined): boolean {
+    return proto3.util.equals(UserQueryBrainResponse_Sop, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserQueryBrainResponse.HistoricalArray
+ */
+export class UserQueryBrainResponse_HistoricalArray extends Message<UserQueryBrainResponse_HistoricalArray> {
+  /**
+   * @generated from field: repeated loopos.v1.UserQueryBrainResponse.HistoricalArray.BrainHistorical items = 1;
+   */
+  items: UserQueryBrainResponse_HistoricalArray_BrainHistorical[] = [];
+
+  constructor(data?: PartialMessage<UserQueryBrainResponse_HistoricalArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserQueryBrainResponse.HistoricalArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "message", T: UserQueryBrainResponse_HistoricalArray_BrainHistorical, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_HistoricalArray {
+    return new UserQueryBrainResponse_HistoricalArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_HistoricalArray {
+    return new UserQueryBrainResponse_HistoricalArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_HistoricalArray {
+    return new UserQueryBrainResponse_HistoricalArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserQueryBrainResponse_HistoricalArray | PlainMessage<UserQueryBrainResponse_HistoricalArray> | undefined, b: UserQueryBrainResponse_HistoricalArray | PlainMessage<UserQueryBrainResponse_HistoricalArray> | undefined): boolean {
+    return proto3.util.equals(UserQueryBrainResponse_HistoricalArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserQueryBrainResponse.HistoricalArray.BrainHistorical
+ */
+export class UserQueryBrainResponse_HistoricalArray_BrainHistorical extends Message<UserQueryBrainResponse_HistoricalArray_BrainHistorical> {
+  /**
+   * @generated from field: optional string ticket_id = 1;
+   */
+  ticketId?: string;
+
+  /**
+   * @generated from field: optional string title = 2;
+   */
+  title?: string;
+
+  /**
+   * @generated from field: optional string snippet = 3;
+   */
+  snippet?: string;
+
+  /**
+   * @generated from field: optional double relevance = 4;
+   */
+  relevance?: number;
+
+  constructor(data?: PartialMessage<UserQueryBrainResponse_HistoricalArray_BrainHistorical>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserQueryBrainResponse.HistoricalArray.BrainHistorical";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "title", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "snippet", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "relevance", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserQueryBrainResponse_HistoricalArray_BrainHistorical {
+    return new UserQueryBrainResponse_HistoricalArray_BrainHistorical().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_HistoricalArray_BrainHistorical {
+    return new UserQueryBrainResponse_HistoricalArray_BrainHistorical().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserQueryBrainResponse_HistoricalArray_BrainHistorical {
+    return new UserQueryBrainResponse_HistoricalArray_BrainHistorical().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserQueryBrainResponse_HistoricalArray_BrainHistorical | PlainMessage<UserQueryBrainResponse_HistoricalArray_BrainHistorical> | undefined, b: UserQueryBrainResponse_HistoricalArray_BrainHistorical | PlainMessage<UserQueryBrainResponse_HistoricalArray_BrainHistorical> | undefined): boolean {
+    return proto3.util.equals(UserQueryBrainResponse_HistoricalArray_BrainHistorical, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserLiveStateResponse
+ */
+export class UserLiveStateResponse extends Message<UserLiveStateResponse> {
+  /**
+   * @generated from field: optional loopos.v1.UserLiveStateResponse.TicketsArray tickets = 1;
+   */
+  tickets?: UserLiveStateResponse_TicketsArray;
+
+  /**
+   * @generated from field: optional loopos.v1.UserLiveStateResponse.RecentEventJsonsArray recent_event_jsons = 2;
+   */
+  recentEventJsons?: UserLiveStateResponse_RecentEventJsonsArray;
+
+  constructor(data?: PartialMessage<UserLiveStateResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserLiveStateResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "tickets", kind: "message", T: UserLiveStateResponse_TicketsArray, opt: true },
+    { no: 2, name: "recent_event_jsons", kind: "message", T: UserLiveStateResponse_RecentEventJsonsArray, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserLiveStateResponse {
+    return new UserLiveStateResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserLiveStateResponse {
+    return new UserLiveStateResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserLiveStateResponse {
+    return new UserLiveStateResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserLiveStateResponse | PlainMessage<UserLiveStateResponse> | undefined, b: UserLiveStateResponse | PlainMessage<UserLiveStateResponse> | undefined): boolean {
+    return proto3.util.equals(UserLiveStateResponse, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserLiveStateResponse.TicketsArray
+ */
+export class UserLiveStateResponse_TicketsArray extends Message<UserLiveStateResponse_TicketsArray> {
+  /**
+   * @generated from field: repeated loopos.v1.UserLiveStateResponse.TicketsArray.TicketSummary items = 1;
+   */
+  items: UserLiveStateResponse_TicketsArray_TicketSummary[] = [];
+
+  constructor(data?: PartialMessage<UserLiveStateResponse_TicketsArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserLiveStateResponse.TicketsArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "message", T: UserLiveStateResponse_TicketsArray_TicketSummary, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserLiveStateResponse_TicketsArray {
+    return new UserLiveStateResponse_TicketsArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserLiveStateResponse_TicketsArray {
+    return new UserLiveStateResponse_TicketsArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserLiveStateResponse_TicketsArray {
+    return new UserLiveStateResponse_TicketsArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserLiveStateResponse_TicketsArray | PlainMessage<UserLiveStateResponse_TicketsArray> | undefined, b: UserLiveStateResponse_TicketsArray | PlainMessage<UserLiveStateResponse_TicketsArray> | undefined): boolean {
+    return proto3.util.equals(UserLiveStateResponse_TicketsArray, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserLiveStateResponse.TicketsArray.TicketSummary
+ */
+export class UserLiveStateResponse_TicketsArray_TicketSummary extends Message<UserLiveStateResponse_TicketsArray_TicketSummary> {
+  /**
+   * @generated from field: optional string ticket_id = 1;
+   */
+  ticketId?: string;
+
+  /**
+   * @generated from field: optional string property_id = 2;
+   */
+  propertyId?: string;
+
+  /**
+   * @generated from field: optional string status = 3;
+   */
+  status?: string;
+
+  /**
+   * @generated from field: optional double severity = 4;
+   */
+  severity?: number;
+
+  /**
+   * @generated from field: optional string category = 5;
+   */
+  category?: string;
+
+  /**
+   * @generated from field: optional string last_action = 6;
+   */
+  lastAction?: string;
+
+  /**
+   * @generated from field: optional double cost_authorized_usd = 7;
+   */
+  costAuthorizedUsd?: number;
+
+  /**
+   * @generated from field: optional string snippet = 8;
+   */
+  snippet?: string;
+
+  constructor(data?: PartialMessage<UserLiveStateResponse_TicketsArray_TicketSummary>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserLiveStateResponse.TicketsArray.TicketSummary";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "ticket_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "property_id", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "severity", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 5, name: "category", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "last_action", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 7, name: "cost_authorized_usd", kind: "scalar", T: 1 /* ScalarType.DOUBLE */, opt: true },
+    { no: 8, name: "snippet", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserLiveStateResponse_TicketsArray_TicketSummary {
+    return new UserLiveStateResponse_TicketsArray_TicketSummary().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserLiveStateResponse_TicketsArray_TicketSummary {
+    return new UserLiveStateResponse_TicketsArray_TicketSummary().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserLiveStateResponse_TicketsArray_TicketSummary {
+    return new UserLiveStateResponse_TicketsArray_TicketSummary().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserLiveStateResponse_TicketsArray_TicketSummary | PlainMessage<UserLiveStateResponse_TicketsArray_TicketSummary> | undefined, b: UserLiveStateResponse_TicketsArray_TicketSummary | PlainMessage<UserLiveStateResponse_TicketsArray_TicketSummary> | undefined): boolean {
+    return proto3.util.equals(UserLiveStateResponse_TicketsArray_TicketSummary, a, b);
+  }
+}
+
+/**
+ * @generated from message loopos.v1.UserLiveStateResponse.RecentEventJsonsArray
+ */
+export class UserLiveStateResponse_RecentEventJsonsArray extends Message<UserLiveStateResponse_RecentEventJsonsArray> {
+  /**
+   * @generated from field: repeated string items = 1;
+   */
+  items: string[] = [];
+
+  constructor(data?: PartialMessage<UserLiveStateResponse_RecentEventJsonsArray>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "loopos.v1.UserLiveStateResponse.RecentEventJsonsArray";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "items", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserLiveStateResponse_RecentEventJsonsArray {
+    return new UserLiveStateResponse_RecentEventJsonsArray().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserLiveStateResponse_RecentEventJsonsArray {
+    return new UserLiveStateResponse_RecentEventJsonsArray().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserLiveStateResponse_RecentEventJsonsArray {
+    return new UserLiveStateResponse_RecentEventJsonsArray().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: UserLiveStateResponse_RecentEventJsonsArray | PlainMessage<UserLiveStateResponse_RecentEventJsonsArray> | undefined, b: UserLiveStateResponse_RecentEventJsonsArray | PlainMessage<UserLiveStateResponse_RecentEventJsonsArray> | undefined): boolean {
+    return proto3.util.equals(UserLiveStateResponse_RecentEventJsonsArray, a, b);
   }
 }
 

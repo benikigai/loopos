@@ -683,4 +683,11 @@ class OpsTicketServicer(OpsTicket.Servicer):
             voice_memo=voice_memo,
             sop=sop,
             historical=historical,
+            skill_artifact=self.state.skill_artifact,
+            property_id=self.state.property_id,
+            severity=self.state.severity,
+            category=self.state.category,
+            status=self.state.status,
+            transcript_native=self.state.transcript_native,
+            transcript_en=self.state.transcript_en,
         )

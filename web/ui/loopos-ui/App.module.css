@@ -4,17 +4,15 @@
   font-family: var(--font-sans);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 20px;
   min-height: 100vh;
 }
 
 .header {
   display: flex;
   align-items: baseline;
-  gap: 12px;
+  gap: 14px;
   border-bottom: 1px solid var(--color-border);
-  padding-bottom: 12px;
+  padding: 14px 20px;
 }
 
 .brand {
@@ -29,41 +27,229 @@
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-text-muted);
+  letter-spacing: 0.02em;
 }
 
-.panel {
+.threePane {
+  display: grid;
+  grid-template-columns: 220px 1fr 280px;
+  gap: 16px;
+  padding: 16px 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+.leftPane,
+.rightPane {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.centerPane {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.muted {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: 8px 4px;
+}
+
+.cardLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ticketRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--color-text);
+  transition: border-color 0.12s ease;
+}
+
+.ticketRow:hover {
+  border-color: var(--color-accent);
+}
+
+.ticketRowSelected {
+  border-color: var(--color-accent);
+  background: var(--color-bg-dark);
+}
+
+.ticketRowTop,
+.ticketRowBottom {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ticketProperty {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text);
+}
+
+.ticketCategory {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.ticketStatus {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.severityPill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.severityHigh {
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+}
+
+.brainCards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.brainCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.cardTitle {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.cardBody {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.cardMeta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.skillBlock {
   display: flex;
   flex-direction: column;
   gap: 8px;
   background: var(--color-panel);
   border: 1px solid var(--color-border);
   border-radius: 6px;
-  padding: 16px;
+  padding: 12px 14px;
 }
 
-.label {
+.skillJson {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--color-text-muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: var(--color-text);
+  background: var(--color-bg-dark);
+  padding: 10px 12px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  line-height: 1.5;
 }
 
-.value {
+.button {
   font-family: var(--font-mono);
-  font-size: 28px;
+  font-size: 12px;
+  padding: 8px 12px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tickerCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.tickerProperty {
+  font-family: var(--font-mono);
+  font-size: 13px;
   font-weight: 600;
   color: var(--color-text);
 }
 
-.hint {
+.tickerLine {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--color-text-muted);
+  color: var(--color-text);
+  display: flex;
+  justify-content: space-between;
 }
 
-.loading {
+.tickerNumber {
+  color: var(--color-green);
+  font-weight: 600;
+}
+
+.tickerSplit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 8px;
+}
+
+.tickerSubLine {
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--color-text-muted);
+  font-size: 11px;
+  color: var(--color-text);
 }
