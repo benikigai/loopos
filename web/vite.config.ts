@@ -55,6 +55,8 @@ export default defineConfig(({ command, mode }) => {
       emptyOutDir: false,
       assetsInlineLimit: 100000000,
       cssCodeSplit: false,
+      minify: false,
+      sourcemap: "inline",
       rollupOptions: {
         input: ui.input,
         output: {

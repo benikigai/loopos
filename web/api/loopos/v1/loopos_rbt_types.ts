@@ -325,18 +325,6 @@ export const OpsTicketStateSchema = z.object({
 
 export type OpsTicketState = z.infer<typeof OpsTicketStateSchema>;
 
-export const OpsTicketTriageRequestSchema = z.object({});
-
-export type OpsTicketTriageRequest = z.infer<typeof OpsTicketTriageRequestSchema>;
-
-export const OpsTicketProposeNewRuleRequestSchema = z.object({});
-
-export type OpsTicketProposeNewRuleRequest = z.infer<typeof OpsTicketProposeNewRuleRequestSchema>;
-
-export const OpsTicketShowBrainSourcesRequestSchema = z.object({});
-
-export type OpsTicketShowBrainSourcesRequest = z.infer<typeof OpsTicketShowBrainSourcesRequestSchema>;
-
 export const UserListTicketsRequestSchema = z.object({});
 
 export type UserListTicketsRequest = z.infer<typeof UserListTicketsRequestSchema>;
@@ -349,37 +337,19 @@ export const UserCreateRequestSchema = z.object({});
 
 export type UserCreateRequest = z.infer<typeof UserCreateRequestSchema>;
 
+export const OpsTicketTriageRequestSchema = z.object({});
+
+export type OpsTicketTriageRequest = z.infer<typeof OpsTicketTriageRequestSchema>;
+
+export const OpsTicketProposeNewRuleRequestSchema = z.object({});
+
+export type OpsTicketProposeNewRuleRequest = z.infer<typeof OpsTicketProposeNewRuleRequestSchema>;
+
+export const OpsTicketShowBrainSourcesRequestSchema = z.object({});
+
+export type OpsTicketShowBrainSourcesRequest = z.infer<typeof OpsTicketShowBrainSourcesRequestSchema>;
+
 export const api = {
-  OpsTicket: {
-    state: OpsTicketStateSchema,
-    methods: {
-      create: reboot_api.writer({
-        factory: {},
-        request: CreateTicketRequestSchema,
-        response: z.void(),
-      }),
-      triage: reboot_api.writer({
-        request: OpsTicketTriageRequestSchema,
-        response: z.void(),
-      }),
-      acknowledgeDispatch: reboot_api.writer({
-        request: AcknowledgeDispatchRequestSchema,
-        response: z.void(),
-      }),
-      dispatchWithEscalation: reboot_api.workflow({
-        request: DispatchRequestSchema,
-        response: DispatchResponseSchema,
-      }),
-      proposeNewRule: reboot_api.writer({
-        request: OpsTicketProposeNewRuleRequestSchema,
-        response: ProposeNewRuleResponseSchema,
-      }),
-      showBrainSources: reboot_api.reader({
-        request: OpsTicketShowBrainSourcesRequestSchema,
-        response: ShowBrainSourcesResponseSchema,
-      }),
-    },
-  },
   User: {
     state: UserStateSchema,
     methods: {
@@ -407,6 +377,36 @@ export const api = {
         factory: {},
         request: UserCreateRequestSchema,
         response: z.void(),
+      }),
+    },
+  },
+  OpsTicket: {
+    state: OpsTicketStateSchema,
+    methods: {
+      create: reboot_api.writer({
+        factory: {},
+        request: CreateTicketRequestSchema,
+        response: z.void(),
+      }),
+      triage: reboot_api.writer({
+        request: OpsTicketTriageRequestSchema,
+        response: z.void(),
+      }),
+      acknowledgeDispatch: reboot_api.writer({
+        request: AcknowledgeDispatchRequestSchema,
+        response: z.void(),
+      }),
+      dispatchWithEscalation: reboot_api.workflow({
+        request: DispatchRequestSchema,
+        response: DispatchResponseSchema,
+      }),
+      proposeNewRule: reboot_api.writer({
+        request: OpsTicketProposeNewRuleRequestSchema,
+        response: ProposeNewRuleResponseSchema,
+      }),
+      showBrainSources: reboot_api.reader({
+        request: OpsTicketShowBrainSourcesRequestSchema,
+        response: ShowBrainSourcesResponseSchema,
       }),
     },
   },

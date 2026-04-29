@@ -13,6 +13,490 @@ import typing
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing.final
+class User(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class TicketIdsArray(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        ITEMS_FIELD_NUMBER: builtins.int
+        @property
+        def items(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def __init__(
+            self,
+            *,
+            items: collections.abc.Iterable[builtins.str] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
+
+    TICKET_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def ticket_ids(self) -> global___User.TicketIdsArray: ...
+    def __init__(
+        self,
+        *,
+        ticket_ids: global___User.TicketIdsArray | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_ticket_ids", b"_ticket_ids", "ticket_ids", b"ticket_ids"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_ticket_ids", b"_ticket_ids", "ticket_ids", b"ticket_ids"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_ticket_ids", b"_ticket_ids"]) -> typing.Literal["ticket_ids"] | None: ...
+
+global___User = User
+
+@typing.final
+class UserIngestTextMessageRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PROPERTY_ID_FIELD_NUMBER: builtins.int
+    TEXT_FIELD_NUMBER: builtins.int
+    SENDER_USER_ID_FIELD_NUMBER: builtins.int
+    property_id: builtins.str
+    text: builtins.str
+    sender_user_id: builtins.str
+    def __init__(
+        self,
+        *,
+        property_id: builtins.str | None = ...,
+        text: builtins.str | None = ...,
+        sender_user_id: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_property_id", b"_property_id", "_sender_user_id", b"_sender_user_id", "_text", b"_text", "property_id", b"property_id", "sender_user_id", b"sender_user_id", "text", b"text"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_property_id", b"_property_id", "_sender_user_id", b"_sender_user_id", "_text", b"_text", "property_id", b"property_id", "sender_user_id", b"sender_user_id", "text", b"text"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_sender_user_id", b"_sender_user_id"]) -> typing.Literal["sender_user_id"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_text", b"_text"]) -> typing.Literal["text"] | None: ...
+
+global___UserIngestTextMessageRequest = UserIngestTextMessageRequest
+
+@typing.final
+class UserIngestTextMessageResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TICKET_ID_FIELD_NUMBER: builtins.int
+    ticket_id: builtins.str
+    def __init__(
+        self,
+        *,
+        ticket_id: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_ticket_id", b"_ticket_id", "ticket_id", b"ticket_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_ticket_id", b"_ticket_id", "ticket_id", b"ticket_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
+
+global___UserIngestTextMessageResponse = UserIngestTextMessageResponse
+
+@typing.final
+class UserIngestVoiceNoteRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PROPERTY_ID_FIELD_NUMBER: builtins.int
+    AUDIO_URL_FIELD_NUMBER: builtins.int
+    SENDER_USER_ID_FIELD_NUMBER: builtins.int
+    property_id: builtins.str
+    audio_url: builtins.str
+    sender_user_id: builtins.str
+    def __init__(
+        self,
+        *,
+        property_id: builtins.str | None = ...,
+        audio_url: builtins.str | None = ...,
+        sender_user_id: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_audio_url", b"_audio_url", "_property_id", b"_property_id", "_sender_user_id", b"_sender_user_id", "audio_url", b"audio_url", "property_id", b"property_id", "sender_user_id", b"sender_user_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_audio_url", b"_audio_url", "_property_id", b"_property_id", "_sender_user_id", b"_sender_user_id", "audio_url", b"audio_url", "property_id", b"property_id", "sender_user_id", b"sender_user_id"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_audio_url", b"_audio_url"]) -> typing.Literal["audio_url"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_sender_user_id", b"_sender_user_id"]) -> typing.Literal["sender_user_id"] | None: ...
+
+global___UserIngestVoiceNoteRequest = UserIngestVoiceNoteRequest
+
+@typing.final
+class UserIngestVoiceNoteResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TICKET_ID_FIELD_NUMBER: builtins.int
+    ticket_id: builtins.str
+    def __init__(
+        self,
+        *,
+        ticket_id: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_ticket_id", b"_ticket_id", "ticket_id", b"ticket_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_ticket_id", b"_ticket_id", "ticket_id", b"ticket_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
+
+global___UserIngestVoiceNoteResponse = UserIngestVoiceNoteResponse
+
+@typing.final
+class UserListTicketsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class TicketsArray(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing.final
+        class TicketSummary(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            TICKET_ID_FIELD_NUMBER: builtins.int
+            PROPERTY_ID_FIELD_NUMBER: builtins.int
+            STATUS_FIELD_NUMBER: builtins.int
+            SEVERITY_FIELD_NUMBER: builtins.int
+            CATEGORY_FIELD_NUMBER: builtins.int
+            LAST_ACTION_FIELD_NUMBER: builtins.int
+            COST_AUTHORIZED_USD_FIELD_NUMBER: builtins.int
+            SNIPPET_FIELD_NUMBER: builtins.int
+            ticket_id: builtins.str
+            property_id: builtins.str
+            status: builtins.str
+            severity: builtins.float
+            category: builtins.str
+            last_action: builtins.str
+            cost_authorized_usd: builtins.float
+            snippet: builtins.str
+            def __init__(
+                self,
+                *,
+                ticket_id: builtins.str | None = ...,
+                property_id: builtins.str | None = ...,
+                status: builtins.str | None = ...,
+                severity: builtins.float | None = ...,
+                category: builtins.str | None = ...,
+                last_action: builtins.str | None = ...,
+                cost_authorized_usd: builtins.float | None = ...,
+                snippet: builtins.str | None = ...,
+            ) -> None: ...
+            def HasField(self, field_name: typing.Literal["_category", b"_category", "_cost_authorized_usd", b"_cost_authorized_usd", "_last_action", b"_last_action", "_property_id", b"_property_id", "_severity", b"_severity", "_snippet", b"_snippet", "_status", b"_status", "_ticket_id", b"_ticket_id", "category", b"category", "cost_authorized_usd", b"cost_authorized_usd", "last_action", b"last_action", "property_id", b"property_id", "severity", b"severity", "snippet", b"snippet", "status", b"status", "ticket_id", b"ticket_id"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["_category", b"_category", "_cost_authorized_usd", b"_cost_authorized_usd", "_last_action", b"_last_action", "_property_id", b"_property_id", "_severity", b"_severity", "_snippet", b"_snippet", "_status", b"_status", "_ticket_id", b"_ticket_id", "category", b"category", "cost_authorized_usd", b"cost_authorized_usd", "last_action", b"last_action", "property_id", b"property_id", "severity", b"severity", "snippet", b"snippet", "status", b"status", "ticket_id", b"ticket_id"]) -> None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_category", b"_category"]) -> typing.Literal["category"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_cost_authorized_usd", b"_cost_authorized_usd"]) -> typing.Literal["cost_authorized_usd"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_last_action", b"_last_action"]) -> typing.Literal["last_action"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_severity", b"_severity"]) -> typing.Literal["severity"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_snippet", b"_snippet"]) -> typing.Literal["snippet"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_status", b"_status"]) -> typing.Literal["status"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
+
+        ITEMS_FIELD_NUMBER: builtins.int
+        @property
+        def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserListTicketsResponse.TicketsArray.TicketSummary]: ...
+        def __init__(
+            self,
+            *,
+            items: collections.abc.Iterable[global___UserListTicketsResponse.TicketsArray.TicketSummary] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
+
+    TICKETS_FIELD_NUMBER: builtins.int
+    @property
+    def tickets(self) -> global___UserListTicketsResponse.TicketsArray: ...
+    def __init__(
+        self,
+        *,
+        tickets: global___UserListTicketsResponse.TicketsArray | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_tickets", b"_tickets", "tickets", b"tickets"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_tickets", b"_tickets", "tickets", b"tickets"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_tickets", b"_tickets"]) -> typing.Literal["tickets"] | None: ...
+
+global___UserListTicketsResponse = UserListTicketsResponse
+
+@typing.final
+class UserQueryBrainRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    QUERY_FIELD_NUMBER: builtins.int
+    PROPERTY_ID_FIELD_NUMBER: builtins.int
+    query: builtins.str
+    property_id: builtins.str
+    def __init__(
+        self,
+        *,
+        query: builtins.str | None = ...,
+        property_id: builtins.str | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_property_id", b"_property_id", "_query", b"_query", "property_id", b"property_id", "query", b"query"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_property_id", b"_property_id", "_query", b"_query", "property_id", b"property_id", "query", b"query"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_query", b"_query"]) -> typing.Literal["query"] | None: ...
+
+global___UserQueryBrainRequest = UserQueryBrainRequest
+
+@typing.final
+class UserQueryBrainResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class VoiceMemosArray(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing.final
+        class BrainVoiceMemo(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            ID_FIELD_NUMBER: builtins.int
+            TEXT_FIELD_NUMBER: builtins.int
+            CONTEXT_FIELD_NUMBER: builtins.int
+            DATE_FIELD_NUMBER: builtins.int
+            RELEVANCE_FIELD_NUMBER: builtins.int
+            id: builtins.str
+            text: builtins.str
+            context: builtins.str
+            date: builtins.str
+            relevance: builtins.float
+            def __init__(
+                self,
+                *,
+                id: builtins.str | None = ...,
+                text: builtins.str | None = ...,
+                context: builtins.str | None = ...,
+                date: builtins.str | None = ...,
+                relevance: builtins.float | None = ...,
+            ) -> None: ...
+            def HasField(self, field_name: typing.Literal["_context", b"_context", "_date", b"_date", "_id", b"_id", "_relevance", b"_relevance", "_text", b"_text", "context", b"context", "date", b"date", "id", b"id", "relevance", b"relevance", "text", b"text"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["_context", b"_context", "_date", b"_date", "_id", b"_id", "_relevance", b"_relevance", "_text", b"_text", "context", b"context", "date", b"date", "id", b"id", "relevance", b"relevance", "text", b"text"]) -> None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_context", b"_context"]) -> typing.Literal["context"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_date", b"_date"]) -> typing.Literal["date"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_id", b"_id"]) -> typing.Literal["id"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_relevance", b"_relevance"]) -> typing.Literal["relevance"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_text", b"_text"]) -> typing.Literal["text"] | None: ...
+
+        ITEMS_FIELD_NUMBER: builtins.int
+        @property
+        def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo]: ...
+        def __init__(
+            self,
+            *,
+            items: collections.abc.Iterable[global___UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
+
+    @typing.final
+    class Sop(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        ID_FIELD_NUMBER: builtins.int
+        TITLE_FIELD_NUMBER: builtins.int
+        SNIPPET_FIELD_NUMBER: builtins.int
+        id: builtins.str
+        title: builtins.str
+        snippet: builtins.str
+        def __init__(
+            self,
+            *,
+            id: builtins.str | None = ...,
+            title: builtins.str | None = ...,
+            snippet: builtins.str | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["_id", b"_id", "_snippet", b"_snippet", "_title", b"_title", "id", b"id", "snippet", b"snippet", "title", b"title"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["_id", b"_id", "_snippet", b"_snippet", "_title", b"_title", "id", b"id", "snippet", b"snippet", "title", b"title"]) -> None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_id", b"_id"]) -> typing.Literal["id"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_snippet", b"_snippet"]) -> typing.Literal["snippet"] | None: ...
+        @typing.overload
+        def WhichOneof(self, oneof_group: typing.Literal["_title", b"_title"]) -> typing.Literal["title"] | None: ...
+
+    @typing.final
+    class HistoricalArray(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing.final
+        class BrainHistorical(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            TICKET_ID_FIELD_NUMBER: builtins.int
+            TITLE_FIELD_NUMBER: builtins.int
+            SNIPPET_FIELD_NUMBER: builtins.int
+            RELEVANCE_FIELD_NUMBER: builtins.int
+            ticket_id: builtins.str
+            title: builtins.str
+            snippet: builtins.str
+            relevance: builtins.float
+            def __init__(
+                self,
+                *,
+                ticket_id: builtins.str | None = ...,
+                title: builtins.str | None = ...,
+                snippet: builtins.str | None = ...,
+                relevance: builtins.float | None = ...,
+            ) -> None: ...
+            def HasField(self, field_name: typing.Literal["_relevance", b"_relevance", "_snippet", b"_snippet", "_ticket_id", b"_ticket_id", "_title", b"_title", "relevance", b"relevance", "snippet", b"snippet", "ticket_id", b"ticket_id", "title", b"title"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["_relevance", b"_relevance", "_snippet", b"_snippet", "_ticket_id", b"_ticket_id", "_title", b"_title", "relevance", b"relevance", "snippet", b"snippet", "ticket_id", b"ticket_id", "title", b"title"]) -> None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_relevance", b"_relevance"]) -> typing.Literal["relevance"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_snippet", b"_snippet"]) -> typing.Literal["snippet"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_title", b"_title"]) -> typing.Literal["title"] | None: ...
+
+        ITEMS_FIELD_NUMBER: builtins.int
+        @property
+        def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserQueryBrainResponse.HistoricalArray.BrainHistorical]: ...
+        def __init__(
+            self,
+            *,
+            items: collections.abc.Iterable[global___UserQueryBrainResponse.HistoricalArray.BrainHistorical] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
+
+    VOICE_MEMOS_FIELD_NUMBER: builtins.int
+    SOP_FIELD_NUMBER: builtins.int
+    HISTORICAL_FIELD_NUMBER: builtins.int
+    @property
+    def voice_memos(self) -> global___UserQueryBrainResponse.VoiceMemosArray: ...
+    @property
+    def sop(self) -> global___UserQueryBrainResponse.Sop: ...
+    @property
+    def historical(self) -> global___UserQueryBrainResponse.HistoricalArray: ...
+    def __init__(
+        self,
+        *,
+        voice_memos: global___UserQueryBrainResponse.VoiceMemosArray | None = ...,
+        sop: global___UserQueryBrainResponse.Sop | None = ...,
+        historical: global___UserQueryBrainResponse.HistoricalArray | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_historical", b"_historical", "_sop", b"_sop", "_voice_memos", b"_voice_memos", "historical", b"historical", "sop", b"sop", "voice_memos", b"voice_memos"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_historical", b"_historical", "_sop", b"_sop", "_voice_memos", b"_voice_memos", "historical", b"historical", "sop", b"sop", "voice_memos", b"voice_memos"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_historical", b"_historical"]) -> typing.Literal["historical"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_sop", b"_sop"]) -> typing.Literal["sop"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_voice_memos", b"_voice_memos"]) -> typing.Literal["voice_memos"] | None: ...
+
+global___UserQueryBrainResponse = UserQueryBrainResponse
+
+@typing.final
+class UserLiveStateResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class TicketsArray(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing.final
+        class TicketSummary(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            TICKET_ID_FIELD_NUMBER: builtins.int
+            PROPERTY_ID_FIELD_NUMBER: builtins.int
+            STATUS_FIELD_NUMBER: builtins.int
+            SEVERITY_FIELD_NUMBER: builtins.int
+            CATEGORY_FIELD_NUMBER: builtins.int
+            LAST_ACTION_FIELD_NUMBER: builtins.int
+            COST_AUTHORIZED_USD_FIELD_NUMBER: builtins.int
+            SNIPPET_FIELD_NUMBER: builtins.int
+            ticket_id: builtins.str
+            property_id: builtins.str
+            status: builtins.str
+            severity: builtins.float
+            category: builtins.str
+            last_action: builtins.str
+            cost_authorized_usd: builtins.float
+            snippet: builtins.str
+            def __init__(
+                self,
+                *,
+                ticket_id: builtins.str | None = ...,
+                property_id: builtins.str | None = ...,
+                status: builtins.str | None = ...,
+                severity: builtins.float | None = ...,
+                category: builtins.str | None = ...,
+                last_action: builtins.str | None = ...,
+                cost_authorized_usd: builtins.float | None = ...,
+                snippet: builtins.str | None = ...,
+            ) -> None: ...
+            def HasField(self, field_name: typing.Literal["_category", b"_category", "_cost_authorized_usd", b"_cost_authorized_usd", "_last_action", b"_last_action", "_property_id", b"_property_id", "_severity", b"_severity", "_snippet", b"_snippet", "_status", b"_status", "_ticket_id", b"_ticket_id", "category", b"category", "cost_authorized_usd", b"cost_authorized_usd", "last_action", b"last_action", "property_id", b"property_id", "severity", b"severity", "snippet", b"snippet", "status", b"status", "ticket_id", b"ticket_id"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["_category", b"_category", "_cost_authorized_usd", b"_cost_authorized_usd", "_last_action", b"_last_action", "_property_id", b"_property_id", "_severity", b"_severity", "_snippet", b"_snippet", "_status", b"_status", "_ticket_id", b"_ticket_id", "category", b"category", "cost_authorized_usd", b"cost_authorized_usd", "last_action", b"last_action", "property_id", b"property_id", "severity", b"severity", "snippet", b"snippet", "status", b"status", "ticket_id", b"ticket_id"]) -> None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_category", b"_category"]) -> typing.Literal["category"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_cost_authorized_usd", b"_cost_authorized_usd"]) -> typing.Literal["cost_authorized_usd"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_last_action", b"_last_action"]) -> typing.Literal["last_action"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_severity", b"_severity"]) -> typing.Literal["severity"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_snippet", b"_snippet"]) -> typing.Literal["snippet"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_status", b"_status"]) -> typing.Literal["status"] | None: ...
+            @typing.overload
+            def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
+
+        ITEMS_FIELD_NUMBER: builtins.int
+        @property
+        def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserLiveStateResponse.TicketsArray.TicketSummary]: ...
+        def __init__(
+            self,
+            *,
+            items: collections.abc.Iterable[global___UserLiveStateResponse.TicketsArray.TicketSummary] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
+
+    @typing.final
+    class RecentEventJsonsArray(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        ITEMS_FIELD_NUMBER: builtins.int
+        @property
+        def items(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def __init__(
+            self,
+            *,
+            items: collections.abc.Iterable[builtins.str] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
+
+    TICKETS_FIELD_NUMBER: builtins.int
+    RECENT_EVENT_JSONS_FIELD_NUMBER: builtins.int
+    @property
+    def tickets(self) -> global___UserLiveStateResponse.TicketsArray: ...
+    @property
+    def recent_event_jsons(self) -> global___UserLiveStateResponse.RecentEventJsonsArray: ...
+    def __init__(
+        self,
+        *,
+        tickets: global___UserLiveStateResponse.TicketsArray | None = ...,
+        recent_event_jsons: global___UserLiveStateResponse.RecentEventJsonsArray | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_recent_event_jsons", b"_recent_event_jsons", "_tickets", b"_tickets", "recent_event_jsons", b"recent_event_jsons", "tickets", b"tickets"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_recent_event_jsons", b"_recent_event_jsons", "_tickets", b"_tickets", "recent_event_jsons", b"recent_event_jsons", "tickets", b"tickets"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_recent_event_jsons", b"_recent_event_jsons"]) -> typing.Literal["recent_event_jsons"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_tickets", b"_tickets"]) -> typing.Literal["tickets"] | None: ...
+
+global___UserLiveStateResponse = UserLiveStateResponse
+
+@typing.final
 class OpsTicket(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -947,487 +1431,3 @@ class OpsTicketShowBrainSourcesResponse(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["_voice_memo", b"_voice_memo"]) -> typing.Literal["voice_memo"] | None: ...
 
 global___OpsTicketShowBrainSourcesResponse = OpsTicketShowBrainSourcesResponse
-
-@typing.final
-class User(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    @typing.final
-    class TicketIdsArray(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        ITEMS_FIELD_NUMBER: builtins.int
-        @property
-        def items(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-        def __init__(
-            self,
-            *,
-            items: collections.abc.Iterable[builtins.str] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
-
-    TICKET_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def ticket_ids(self) -> global___User.TicketIdsArray: ...
-    def __init__(
-        self,
-        *,
-        ticket_ids: global___User.TicketIdsArray | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_ticket_ids", b"_ticket_ids", "ticket_ids", b"ticket_ids"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_ticket_ids", b"_ticket_ids", "ticket_ids", b"ticket_ids"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_ticket_ids", b"_ticket_ids"]) -> typing.Literal["ticket_ids"] | None: ...
-
-global___User = User
-
-@typing.final
-class UserIngestTextMessageRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PROPERTY_ID_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    SENDER_USER_ID_FIELD_NUMBER: builtins.int
-    property_id: builtins.str
-    text: builtins.str
-    sender_user_id: builtins.str
-    def __init__(
-        self,
-        *,
-        property_id: builtins.str | None = ...,
-        text: builtins.str | None = ...,
-        sender_user_id: builtins.str | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_property_id", b"_property_id", "_sender_user_id", b"_sender_user_id", "_text", b"_text", "property_id", b"property_id", "sender_user_id", b"sender_user_id", "text", b"text"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_property_id", b"_property_id", "_sender_user_id", b"_sender_user_id", "_text", b"_text", "property_id", b"property_id", "sender_user_id", b"sender_user_id", "text", b"text"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_sender_user_id", b"_sender_user_id"]) -> typing.Literal["sender_user_id"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_text", b"_text"]) -> typing.Literal["text"] | None: ...
-
-global___UserIngestTextMessageRequest = UserIngestTextMessageRequest
-
-@typing.final
-class UserIngestTextMessageResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TICKET_ID_FIELD_NUMBER: builtins.int
-    ticket_id: builtins.str
-    def __init__(
-        self,
-        *,
-        ticket_id: builtins.str | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_ticket_id", b"_ticket_id", "ticket_id", b"ticket_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_ticket_id", b"_ticket_id", "ticket_id", b"ticket_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
-
-global___UserIngestTextMessageResponse = UserIngestTextMessageResponse
-
-@typing.final
-class UserIngestVoiceNoteRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PROPERTY_ID_FIELD_NUMBER: builtins.int
-    AUDIO_URL_FIELD_NUMBER: builtins.int
-    SENDER_USER_ID_FIELD_NUMBER: builtins.int
-    property_id: builtins.str
-    audio_url: builtins.str
-    sender_user_id: builtins.str
-    def __init__(
-        self,
-        *,
-        property_id: builtins.str | None = ...,
-        audio_url: builtins.str | None = ...,
-        sender_user_id: builtins.str | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_audio_url", b"_audio_url", "_property_id", b"_property_id", "_sender_user_id", b"_sender_user_id", "audio_url", b"audio_url", "property_id", b"property_id", "sender_user_id", b"sender_user_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_audio_url", b"_audio_url", "_property_id", b"_property_id", "_sender_user_id", b"_sender_user_id", "audio_url", b"audio_url", "property_id", b"property_id", "sender_user_id", b"sender_user_id"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_audio_url", b"_audio_url"]) -> typing.Literal["audio_url"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_sender_user_id", b"_sender_user_id"]) -> typing.Literal["sender_user_id"] | None: ...
-
-global___UserIngestVoiceNoteRequest = UserIngestVoiceNoteRequest
-
-@typing.final
-class UserIngestVoiceNoteResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TICKET_ID_FIELD_NUMBER: builtins.int
-    ticket_id: builtins.str
-    def __init__(
-        self,
-        *,
-        ticket_id: builtins.str | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_ticket_id", b"_ticket_id", "ticket_id", b"ticket_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_ticket_id", b"_ticket_id", "ticket_id", b"ticket_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
-
-global___UserIngestVoiceNoteResponse = UserIngestVoiceNoteResponse
-
-@typing.final
-class UserListTicketsResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    @typing.final
-    class TicketsArray(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        @typing.final
-        class TicketSummary(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-            TICKET_ID_FIELD_NUMBER: builtins.int
-            PROPERTY_ID_FIELD_NUMBER: builtins.int
-            STATUS_FIELD_NUMBER: builtins.int
-            SEVERITY_FIELD_NUMBER: builtins.int
-            CATEGORY_FIELD_NUMBER: builtins.int
-            LAST_ACTION_FIELD_NUMBER: builtins.int
-            COST_AUTHORIZED_USD_FIELD_NUMBER: builtins.int
-            SNIPPET_FIELD_NUMBER: builtins.int
-            ticket_id: builtins.str
-            property_id: builtins.str
-            status: builtins.str
-            severity: builtins.float
-            category: builtins.str
-            last_action: builtins.str
-            cost_authorized_usd: builtins.float
-            snippet: builtins.str
-            def __init__(
-                self,
-                *,
-                ticket_id: builtins.str | None = ...,
-                property_id: builtins.str | None = ...,
-                status: builtins.str | None = ...,
-                severity: builtins.float | None = ...,
-                category: builtins.str | None = ...,
-                last_action: builtins.str | None = ...,
-                cost_authorized_usd: builtins.float | None = ...,
-                snippet: builtins.str | None = ...,
-            ) -> None: ...
-            def HasField(self, field_name: typing.Literal["_category", b"_category", "_cost_authorized_usd", b"_cost_authorized_usd", "_last_action", b"_last_action", "_property_id", b"_property_id", "_severity", b"_severity", "_snippet", b"_snippet", "_status", b"_status", "_ticket_id", b"_ticket_id", "category", b"category", "cost_authorized_usd", b"cost_authorized_usd", "last_action", b"last_action", "property_id", b"property_id", "severity", b"severity", "snippet", b"snippet", "status", b"status", "ticket_id", b"ticket_id"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing.Literal["_category", b"_category", "_cost_authorized_usd", b"_cost_authorized_usd", "_last_action", b"_last_action", "_property_id", b"_property_id", "_severity", b"_severity", "_snippet", b"_snippet", "_status", b"_status", "_ticket_id", b"_ticket_id", "category", b"category", "cost_authorized_usd", b"cost_authorized_usd", "last_action", b"last_action", "property_id", b"property_id", "severity", b"severity", "snippet", b"snippet", "status", b"status", "ticket_id", b"ticket_id"]) -> None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_category", b"_category"]) -> typing.Literal["category"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_cost_authorized_usd", b"_cost_authorized_usd"]) -> typing.Literal["cost_authorized_usd"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_last_action", b"_last_action"]) -> typing.Literal["last_action"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_severity", b"_severity"]) -> typing.Literal["severity"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_snippet", b"_snippet"]) -> typing.Literal["snippet"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_status", b"_status"]) -> typing.Literal["status"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
-
-        ITEMS_FIELD_NUMBER: builtins.int
-        @property
-        def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserListTicketsResponse.TicketsArray.TicketSummary]: ...
-        def __init__(
-            self,
-            *,
-            items: collections.abc.Iterable[global___UserListTicketsResponse.TicketsArray.TicketSummary] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
-
-    TICKETS_FIELD_NUMBER: builtins.int
-    @property
-    def tickets(self) -> global___UserListTicketsResponse.TicketsArray: ...
-    def __init__(
-        self,
-        *,
-        tickets: global___UserListTicketsResponse.TicketsArray | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_tickets", b"_tickets", "tickets", b"tickets"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_tickets", b"_tickets", "tickets", b"tickets"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_tickets", b"_tickets"]) -> typing.Literal["tickets"] | None: ...
-
-global___UserListTicketsResponse = UserListTicketsResponse
-
-@typing.final
-class UserQueryBrainRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    QUERY_FIELD_NUMBER: builtins.int
-    PROPERTY_ID_FIELD_NUMBER: builtins.int
-    query: builtins.str
-    property_id: builtins.str
-    def __init__(
-        self,
-        *,
-        query: builtins.str | None = ...,
-        property_id: builtins.str | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_property_id", b"_property_id", "_query", b"_query", "property_id", b"property_id", "query", b"query"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_property_id", b"_property_id", "_query", b"_query", "property_id", b"property_id", "query", b"query"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_query", b"_query"]) -> typing.Literal["query"] | None: ...
-
-global___UserQueryBrainRequest = UserQueryBrainRequest
-
-@typing.final
-class UserQueryBrainResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    @typing.final
-    class VoiceMemosArray(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        @typing.final
-        class BrainVoiceMemo(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-            ID_FIELD_NUMBER: builtins.int
-            TEXT_FIELD_NUMBER: builtins.int
-            CONTEXT_FIELD_NUMBER: builtins.int
-            DATE_FIELD_NUMBER: builtins.int
-            RELEVANCE_FIELD_NUMBER: builtins.int
-            id: builtins.str
-            text: builtins.str
-            context: builtins.str
-            date: builtins.str
-            relevance: builtins.float
-            def __init__(
-                self,
-                *,
-                id: builtins.str | None = ...,
-                text: builtins.str | None = ...,
-                context: builtins.str | None = ...,
-                date: builtins.str | None = ...,
-                relevance: builtins.float | None = ...,
-            ) -> None: ...
-            def HasField(self, field_name: typing.Literal["_context", b"_context", "_date", b"_date", "_id", b"_id", "_relevance", b"_relevance", "_text", b"_text", "context", b"context", "date", b"date", "id", b"id", "relevance", b"relevance", "text", b"text"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing.Literal["_context", b"_context", "_date", b"_date", "_id", b"_id", "_relevance", b"_relevance", "_text", b"_text", "context", b"context", "date", b"date", "id", b"id", "relevance", b"relevance", "text", b"text"]) -> None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_context", b"_context"]) -> typing.Literal["context"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_date", b"_date"]) -> typing.Literal["date"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_id", b"_id"]) -> typing.Literal["id"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_relevance", b"_relevance"]) -> typing.Literal["relevance"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_text", b"_text"]) -> typing.Literal["text"] | None: ...
-
-        ITEMS_FIELD_NUMBER: builtins.int
-        @property
-        def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo]: ...
-        def __init__(
-            self,
-            *,
-            items: collections.abc.Iterable[global___UserQueryBrainResponse.VoiceMemosArray.BrainVoiceMemo] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
-
-    @typing.final
-    class Sop(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        ID_FIELD_NUMBER: builtins.int
-        TITLE_FIELD_NUMBER: builtins.int
-        SNIPPET_FIELD_NUMBER: builtins.int
-        id: builtins.str
-        title: builtins.str
-        snippet: builtins.str
-        def __init__(
-            self,
-            *,
-            id: builtins.str | None = ...,
-            title: builtins.str | None = ...,
-            snippet: builtins.str | None = ...,
-        ) -> None: ...
-        def HasField(self, field_name: typing.Literal["_id", b"_id", "_snippet", b"_snippet", "_title", b"_title", "id", b"id", "snippet", b"snippet", "title", b"title"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing.Literal["_id", b"_id", "_snippet", b"_snippet", "_title", b"_title", "id", b"id", "snippet", b"snippet", "title", b"title"]) -> None: ...
-        @typing.overload
-        def WhichOneof(self, oneof_group: typing.Literal["_id", b"_id"]) -> typing.Literal["id"] | None: ...
-        @typing.overload
-        def WhichOneof(self, oneof_group: typing.Literal["_snippet", b"_snippet"]) -> typing.Literal["snippet"] | None: ...
-        @typing.overload
-        def WhichOneof(self, oneof_group: typing.Literal["_title", b"_title"]) -> typing.Literal["title"] | None: ...
-
-    @typing.final
-    class HistoricalArray(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        @typing.final
-        class BrainHistorical(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-            TICKET_ID_FIELD_NUMBER: builtins.int
-            TITLE_FIELD_NUMBER: builtins.int
-            SNIPPET_FIELD_NUMBER: builtins.int
-            RELEVANCE_FIELD_NUMBER: builtins.int
-            ticket_id: builtins.str
-            title: builtins.str
-            snippet: builtins.str
-            relevance: builtins.float
-            def __init__(
-                self,
-                *,
-                ticket_id: builtins.str | None = ...,
-                title: builtins.str | None = ...,
-                snippet: builtins.str | None = ...,
-                relevance: builtins.float | None = ...,
-            ) -> None: ...
-            def HasField(self, field_name: typing.Literal["_relevance", b"_relevance", "_snippet", b"_snippet", "_ticket_id", b"_ticket_id", "_title", b"_title", "relevance", b"relevance", "snippet", b"snippet", "ticket_id", b"ticket_id", "title", b"title"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing.Literal["_relevance", b"_relevance", "_snippet", b"_snippet", "_ticket_id", b"_ticket_id", "_title", b"_title", "relevance", b"relevance", "snippet", b"snippet", "ticket_id", b"ticket_id", "title", b"title"]) -> None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_relevance", b"_relevance"]) -> typing.Literal["relevance"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_snippet", b"_snippet"]) -> typing.Literal["snippet"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_title", b"_title"]) -> typing.Literal["title"] | None: ...
-
-        ITEMS_FIELD_NUMBER: builtins.int
-        @property
-        def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserQueryBrainResponse.HistoricalArray.BrainHistorical]: ...
-        def __init__(
-            self,
-            *,
-            items: collections.abc.Iterable[global___UserQueryBrainResponse.HistoricalArray.BrainHistorical] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
-
-    VOICE_MEMOS_FIELD_NUMBER: builtins.int
-    SOP_FIELD_NUMBER: builtins.int
-    HISTORICAL_FIELD_NUMBER: builtins.int
-    @property
-    def voice_memos(self) -> global___UserQueryBrainResponse.VoiceMemosArray: ...
-    @property
-    def sop(self) -> global___UserQueryBrainResponse.Sop: ...
-    @property
-    def historical(self) -> global___UserQueryBrainResponse.HistoricalArray: ...
-    def __init__(
-        self,
-        *,
-        voice_memos: global___UserQueryBrainResponse.VoiceMemosArray | None = ...,
-        sop: global___UserQueryBrainResponse.Sop | None = ...,
-        historical: global___UserQueryBrainResponse.HistoricalArray | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_historical", b"_historical", "_sop", b"_sop", "_voice_memos", b"_voice_memos", "historical", b"historical", "sop", b"sop", "voice_memos", b"voice_memos"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_historical", b"_historical", "_sop", b"_sop", "_voice_memos", b"_voice_memos", "historical", b"historical", "sop", b"sop", "voice_memos", b"voice_memos"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_historical", b"_historical"]) -> typing.Literal["historical"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_sop", b"_sop"]) -> typing.Literal["sop"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_voice_memos", b"_voice_memos"]) -> typing.Literal["voice_memos"] | None: ...
-
-global___UserQueryBrainResponse = UserQueryBrainResponse
-
-@typing.final
-class UserLiveStateResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    @typing.final
-    class TicketsArray(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        @typing.final
-        class TicketSummary(google.protobuf.message.Message):
-            DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-            TICKET_ID_FIELD_NUMBER: builtins.int
-            PROPERTY_ID_FIELD_NUMBER: builtins.int
-            STATUS_FIELD_NUMBER: builtins.int
-            SEVERITY_FIELD_NUMBER: builtins.int
-            CATEGORY_FIELD_NUMBER: builtins.int
-            LAST_ACTION_FIELD_NUMBER: builtins.int
-            COST_AUTHORIZED_USD_FIELD_NUMBER: builtins.int
-            SNIPPET_FIELD_NUMBER: builtins.int
-            ticket_id: builtins.str
-            property_id: builtins.str
-            status: builtins.str
-            severity: builtins.float
-            category: builtins.str
-            last_action: builtins.str
-            cost_authorized_usd: builtins.float
-            snippet: builtins.str
-            def __init__(
-                self,
-                *,
-                ticket_id: builtins.str | None = ...,
-                property_id: builtins.str | None = ...,
-                status: builtins.str | None = ...,
-                severity: builtins.float | None = ...,
-                category: builtins.str | None = ...,
-                last_action: builtins.str | None = ...,
-                cost_authorized_usd: builtins.float | None = ...,
-                snippet: builtins.str | None = ...,
-            ) -> None: ...
-            def HasField(self, field_name: typing.Literal["_category", b"_category", "_cost_authorized_usd", b"_cost_authorized_usd", "_last_action", b"_last_action", "_property_id", b"_property_id", "_severity", b"_severity", "_snippet", b"_snippet", "_status", b"_status", "_ticket_id", b"_ticket_id", "category", b"category", "cost_authorized_usd", b"cost_authorized_usd", "last_action", b"last_action", "property_id", b"property_id", "severity", b"severity", "snippet", b"snippet", "status", b"status", "ticket_id", b"ticket_id"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing.Literal["_category", b"_category", "_cost_authorized_usd", b"_cost_authorized_usd", "_last_action", b"_last_action", "_property_id", b"_property_id", "_severity", b"_severity", "_snippet", b"_snippet", "_status", b"_status", "_ticket_id", b"_ticket_id", "category", b"category", "cost_authorized_usd", b"cost_authorized_usd", "last_action", b"last_action", "property_id", b"property_id", "severity", b"severity", "snippet", b"snippet", "status", b"status", "ticket_id", b"ticket_id"]) -> None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_category", b"_category"]) -> typing.Literal["category"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_cost_authorized_usd", b"_cost_authorized_usd"]) -> typing.Literal["cost_authorized_usd"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_last_action", b"_last_action"]) -> typing.Literal["last_action"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_property_id", b"_property_id"]) -> typing.Literal["property_id"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_severity", b"_severity"]) -> typing.Literal["severity"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_snippet", b"_snippet"]) -> typing.Literal["snippet"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_status", b"_status"]) -> typing.Literal["status"] | None: ...
-            @typing.overload
-            def WhichOneof(self, oneof_group: typing.Literal["_ticket_id", b"_ticket_id"]) -> typing.Literal["ticket_id"] | None: ...
-
-        ITEMS_FIELD_NUMBER: builtins.int
-        @property
-        def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserLiveStateResponse.TicketsArray.TicketSummary]: ...
-        def __init__(
-            self,
-            *,
-            items: collections.abc.Iterable[global___UserLiveStateResponse.TicketsArray.TicketSummary] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
-
-    @typing.final
-    class RecentEventJsonsArray(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        ITEMS_FIELD_NUMBER: builtins.int
-        @property
-        def items(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-        def __init__(
-            self,
-            *,
-            items: collections.abc.Iterable[builtins.str] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
-
-    TICKETS_FIELD_NUMBER: builtins.int
-    RECENT_EVENT_JSONS_FIELD_NUMBER: builtins.int
-    @property
-    def tickets(self) -> global___UserLiveStateResponse.TicketsArray: ...
-    @property
-    def recent_event_jsons(self) -> global___UserLiveStateResponse.RecentEventJsonsArray: ...
-    def __init__(
-        self,
-        *,
-        tickets: global___UserLiveStateResponse.TicketsArray | None = ...,
-        recent_event_jsons: global___UserLiveStateResponse.RecentEventJsonsArray | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_recent_event_jsons", b"_recent_event_jsons", "_tickets", b"_tickets", "recent_event_jsons", b"recent_event_jsons", "tickets", b"tickets"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_recent_event_jsons", b"_recent_event_jsons", "_tickets", b"_tickets", "recent_event_jsons", b"recent_event_jsons", "tickets", b"tickets"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_recent_event_jsons", b"_recent_event_jsons"]) -> typing.Literal["recent_event_jsons"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_tickets", b"_tickets"]) -> typing.Literal["tickets"] | None: ...
-
-global___UserLiveStateResponse = UserLiveStateResponse
