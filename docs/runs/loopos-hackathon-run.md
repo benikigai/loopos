@@ -2,7 +2,20 @@
 **Date:** 2026-04-29
 **Spec:** docs/specs/loopos-hackathon.md
 **Branch:** reboot-pivot
-**Status:** In progress (3/14 tasks done)
+**Status:** In progress (4/14 tasks done)
+
+## Task 4: Retrieval helper (four-layer Brain)
+**Status:** Complete
+**Files changed:**
+  - `backend/src/servicers/helpers/retrieval.py` — added (~165 lines): `retrieve_brain_context(transcript, property_id, category)` returns `{voice_memos, matched_sop, historical_resolutions, synthesized_skill}`
+**What changed and why:** Implements the four-layer Brain over the JSON corpus from T3. Voice memo ranking uses cosine over OpenAI embeddings via TokenRouter, cached in `embeddings_cache.pkl`; falls back to keyword bag-of-words overlap if `TOKENROUTER_API_KEY` is unset or embedding API fails. Tag-level boost (+0.15 for property match, +0.10 for category match) ensures Mr. Wang voice memo surfaces as top match for Shirley's HVAC ticket. SOP match prefers direct id match (category="hvac_leak" → SOP id="hvac_leak"), falls back to trigger_phrases substring count. Historical resolutions filtered by property+category, sorted recency-desc, synthetic relevance via slot decay. Skill loaded from `data/skills/handle_<category>.json`.
+**Tests run:** 2 smoke paths via REPL — all pass:
+  - Shirley fixture (no embedding API): top memo = Mr. Wang (`vm_2024_03_taipei_ac`), SOP = `hvac_leak`, historical = Sept 2025 recurrence, skill = handle_hvac_leak with cap=$200 ✓
+  - Lockout path (Yosemite): matches `lockout` SOP ✓
+**Issues found / fixed:** None
+**Remaining risks:** Live embedding-mode untested (no API keys this env). With keyword-only mode the relevance scores are low (~0.24); embeddings will deliver more precise scoring. Will verify under T5 smoke when env is set.
+**Reviewer verdict:** PASS (self-review)
+**Deslop pass:** Nothing to clean.
 
 ## Task 3: Seed data corpus
 **Status:** Complete
