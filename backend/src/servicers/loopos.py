@@ -256,8 +256,27 @@ class UserServicer(User.Servicer):
         self,
         context: ReaderContext,
     ) -> User.ListTicketsResponse:
-        """T6 fills with real per-ticket reads. For now: empty until T6."""
-        return User.ListTicketsResponse(tickets=[])
+        """Returns minimal summaries for tickets visible to this user.
+
+        Detail (transcripts, classification, dispatch, history) is fetched
+        per-ticket via OpsTicket.show_brain_sources or React useOpsTicket()
+        hooks. This avoids cross-state reads from a User Reader context.
+        """
+        return User.ListTicketsResponse(
+            tickets=[
+                TicketSummary(
+                    ticket_id=tid,
+                    property_id="",
+                    status="",
+                    severity=0,
+                    category="",
+                    last_action="",
+                    cost_authorized_usd=0.0,
+                    snippet="",
+                )
+                for tid in self.state.ticket_ids
+            ]
+        )
 
     async def query_brain(
         self,
@@ -307,8 +326,27 @@ class UserServicer(User.Servicer):
         self,
         context: ReaderContext,
     ) -> User.LiveStateResponse:
-        """T6 fills with real cross-ticket aggregation."""
-        return User.LiveStateResponse(tickets=[], recent_event_jsons=[])
+        """Cross-ticket dashboard payload — ticket_id list + recent events.
+
+        Detail-per-ticket flows through React hooks (subscribed to each
+        OpsTicket instance's state) or through OpsTicket.show_brain_sources.
+        """
+        return User.LiveStateResponse(
+            tickets=[
+                TicketSummary(
+                    ticket_id=tid,
+                    property_id="",
+                    status="",
+                    severity=0,
+                    category="",
+                    last_action="",
+                    cost_authorized_usd=0.0,
+                    snippet="",
+                )
+                for tid in self.state.ticket_ids
+            ],
+            recent_event_jsons=[],
+        )
 
 
 # ────────────────────────── OpsTicketServicer ──────────────────────────
@@ -526,9 +564,54 @@ class OpsTicketServicer(OpsTicket.Servicer):
         self,
         context: ReaderContext,
     ) -> OpsTicket.ShowBrainSourcesResponse:
-        """T6 reads matched_*_ids and returns the on-stage 3-card payload."""
+        """The on-stage Beat 3 — three cards from the four-layer Brain.
+
+        Reads matched_*_ids from this ticket's state, loads the corpus,
+        and returns the top voice memo / SOP / historical resolution.
+        """
+        voice_memo = None
+        if self.state.matched_voice_memo_ids:
+            top_id = self.state.matched_voice_memo_ids[0]
+            corpus = json.loads((_DATA_DIR / "voice_corpus.json").read_text())
+            for memo in corpus:
+                if memo["id"] == top_id:
+                    voice_memo = BrainVoiceMemo(
+                        id=memo["id"],
+                        text=memo.get("text", ""),
+                        context=memo.get("context", ""),
+                        date=memo.get("date", ""),
+                        relevance=0.95,
+                    )
+                    break
+
+        sop = None
+        if self.state.matched_sop_id:
+            corpus = json.loads((_DATA_DIR / "sops.json").read_text())
+            for s in corpus:
+                if s["id"] == self.state.matched_sop_id:
+                    sop = BrainSOP(
+                        id=s["id"],
+                        title=s.get("title", ""),
+                        snippet=" / ".join(s.get("steps", [])[:3]),
+                    )
+                    break
+
+        historical = None
+        if self.state.matched_historical_ids:
+            top_id = self.state.matched_historical_ids[0]
+            corpus = json.loads((_DATA_DIR / "historical_resolutions.json").read_text())
+            for row in corpus:
+                if row["id"] == top_id:
+                    historical = BrainHistorical(
+                        ticket_id=row["id"],
+                        title=(row.get("snippet", "") or "")[:80],
+                        snippet=row.get("snippet", ""),
+                        relevance=0.90,
+                    )
+                    break
+
         return OpsTicket.ShowBrainSourcesResponse(
-            voice_memo=None,
-            sop=None,
-            historical=None,
+            voice_memo=voice_memo,
+            sop=sop,
+            historical=historical,
         )

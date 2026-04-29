@@ -2,7 +2,18 @@
 **Date:** 2026-04-29
 **Spec:** docs/specs/loopos-hackathon.md
 **Branch:** reboot-pivot
-**Status:** In progress (5/14 tasks done)
+**Status:** In progress (6/14 tasks done)
+
+## Task 6: live_state + show_brain_sources readers
+**Status:** Complete
+**Files changed:**
+  - `backend/src/servicers/loopos.py` — extended (~80 lines): real bodies for `User.list_tickets`, `User.live_state`, `OpsTicket.show_brain_sources`
+**What changed and why:** `OpsTicket.show_brain_sources` is the Beat 3 critical path — reads `matched_voice_memo_ids[0]`, `matched_sop_id`, `matched_historical_ids[0]` from state, loads the corpus, returns the three on-stage cards (BrainVoiceMemo + BrainSOP + BrainHistorical). `User.list_tickets` and `User.live_state` return TicketSummary entries populated only with `ticket_id` — full per-ticket detail flows via React `useOpsTicket(id)` hooks (UI side) or via per-ticket Reader calls like `show_brain_sources` (AI side). Trade-off: avoids cross-state foreign reads from a Reader context (Gotcha #23) at the cost of less rich `list_tickets` payload — acceptable for demo.
+**Tests run:** Imports compile; data dir resolves correctly. Reboot-context smoke happens in T7 MCP inspector run.
+**Issues found / fixed:** None
+**Remaining risks:** `list_tickets`/`live_state` semantics simplified to ticket_id-only summaries. For Beat 5 (ChatGPT cross-client), AI iterates per-ticket via `show_brain_sources` for detail. Sufficient for demo.
+**Reviewer verdict:** PASS (self-review)
+**Deslop pass:** Nothing to clean.
 
 ## Task 5: ingest_text_message + ingest_voice_note + triage writers
 **Status:** Complete

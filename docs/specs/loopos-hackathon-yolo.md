@@ -6,7 +6,7 @@
 - [x] T3: Seed data corpus (6 JSON files) — MODERATE
 - [x] T4: Retrieval helper (four-layer Brain) — MODERATE
 - [x] T5: ingest_voice_note + triage writers — COMPLEX
-- [ ] T6: live_state + show_brain_sources readers — MODERATE
+- [x] T6: live_state + show_brain_sources readers — MODERATE
 - [ ] T7: Multiplayer GO/NO-GO smoke gate — MODERATE
 - [ ] T8: dispatch_with_escalation workflow — MODERATE
 - [ ] T9: propose_new_rule writer — SIMPLE
