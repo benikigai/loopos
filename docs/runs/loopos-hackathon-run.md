@@ -2,7 +2,22 @@
 **Date:** 2026-04-29
 **Spec:** docs/specs/loopos-hackathon.md
 **Branch:** reboot-pivot
-**Status:** In progress (4/14 tasks done)
+**Status:** In progress (5/14 tasks done)
+
+## Task 5: ingest_text_message + ingest_voice_note + triage writers
+**Status:** Complete
+**Files changed:**
+  - `backend/src/servicers/loopos.py` — replaced skeletons with real demo critical path (~395 lines)
+**What changed and why:** Demo critical path E2E. `ingest_text_message` Transaction creates OpsTicket then awaits triage. `ingest_voice_note` Transaction calls whisper helper (with hardcoded fallback) then ingest+triage. `triage` Writer: classify_fast → retrieve_brain_context → reason_strong dispatch draft → severity gate. Severity ≥ 4 → AWAITING_HUMAN with dispatch unauthorized; else TRIAGED with dispatch auto-authorized iff cost ≤ skill cap AND ≤ daily property cap. Three deterministic fallbacks added (`_classify_with_fallback`, `_draft_dispatch_with_fallback`, `_maybe_translate`) so the demo path runs even with `TOKENROUTER_API_KEY` unset — protects Beat 2 if TR is slow on stage.
+**Tests run:** Helper-level integration smoke (Reboot context tested via MCP inspector at T7):
+  - classify(Shirley text) → category=hvac_leak, severity=4, risk_tags=[electrical_risk] ✓
+  - retrieve_brain_context → vm_2024_03_taipei_ac top, hvac_leak SOP, Sept 2025 historical, handle_hvac_leak skill ✓
+  - draft_dispatch → vendor=mr_wang_hvac, cost=$128 (most-recent historical) ✓
+  - All servicer imports clean ✓
+**Issues found / fixed:** None. Severity-4 + cost-cap interplay tested; auto-authorize gate covers cap+daily-cap correctly.
+**Remaining risks:** Triage Writer not yet exercised under a real Reboot context — that happens at T7 (MCP inspector smoke). Risk: state mutation order in Reboot may differ from raw Python in ways helpers can't catch.
+**Reviewer verdict:** PASS (self-review; Complex task — extra rigor on fallbacks)
+**Deslop pass:** Nothing to clean — stub bodies remain on T6/T8/T9 methods (intentional task boundaries).
 
 ## Task 4: Retrieval helper (four-layer Brain)
 **Status:** Complete
