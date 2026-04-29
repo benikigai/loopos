@@ -2,7 +2,15 @@
 **Date:** 2026-04-29
 **Spec:** docs/specs/loopos-hackathon.md
 **Branch:** reboot-pivot
-**Status:** In progress (6/14 tasks done)
+**Status:** In progress (7/14 done — T7 awaiting Ben's smoke run)
+
+## Task 9: propose_new_rule writer (out-of-order, T7 is human-gated)
+**Status:** Complete
+**Files changed:** `backend/src/servicers/loopos.py` — `propose_new_rule` writer body (~70 lines)
+**What changed and why:** Generates a rule proposal from the ticket's state — title/description/rule_json reference `property_id`, `category`, and `skill_artifact.preferred_vendors[0]`. The `lightsprint_prompt` field matches master §3.4 closing-cameo template (`comp_rule.py` automation, metadata.tier tagging, cost cap reference, "follow the existing pattern" framing). Appends `rule_proposed` event to history. Done out of dependency order while T7 (multiplayer GO/NO-GO) is awaiting Ben's local smoke run.
+**Tests run:** Static asserts on generated source — `lightsprint_prompt`, `comp_rule.py automation`, `metadata.tier=` substrings present.
+**Reviewer verdict:** PASS (self-review)
+**Deslop pass:** Nothing to clean.
 
 ## Task 6: live_state + show_brain_sources readers
 **Status:** Complete

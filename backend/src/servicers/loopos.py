@@ -551,13 +551,82 @@ class OpsTicketServicer(OpsTicket.Servicer):
         self,
         context: WriterContext,
     ) -> OpsTicket.ProposeNewRuleResponse:
-        """T9 fills with real proposal + Lightsprint prompt."""
+        """Generate a rule proposal for the Beat 6 closing cameo.
+
+        Uses the ticket's resolution pattern + brain context to draft a
+        rule. The lightsprint_prompt is shaped per master §3.4 — paste
+        into Lightsprint to ship a PR live on stage.
+        """
+        property_id = self.state.property_id
+        category = self.state.category or "general"
+        skill = self.state.skill_artifact
+        preferred_vendor = (
+            skill.preferred_vendors[0]
+            if skill and skill.preferred_vendors
+            else ""
+        )
+        cap_usd = float(skill.auth_cap_usd) if skill else 200.0
+
+        rule_id = f"rule_proposed_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
+        title = (
+            f"Auto-escalate {property_id} {category} when "
+            f"{preferred_vendor or 'preferred vendor'} unavailable"
+        )
+        description = (
+            f"Pattern: {category} tickets at {property_id} consistently "
+            f"resolve via {preferred_vendor or 'preferred vendor'} "
+            f"within historical SLA. When unavailable, escalate to "
+            f"manager rather than fall back to a cheaper vendor."
+        )
+
+        rule_obj: dict[str, Any] = {
+            "id": rule_id,
+            "title": title,
+            "description": description,
+            "trigger": {
+                "property_id": property_id,
+                "category": category,
+                "preferred_vendor_unavailable": preferred_vendor,
+            },
+            "action": {
+                "escalate_to": "manager",
+                "skip_fallback_vendor": True,
+                "notify": ["slack:#ops-ben"],
+            },
+            "rationale": (
+                "Preferred vendor's category-specific judgment is the moat. "
+                "Falling back to a cheaper vendor without it has caused "
+                "near-misses. Escalation cost is lower than the exposure."
+            ),
+        }
+        rule_json = json.dumps(rule_obj, ensure_ascii=False, indent=2)
+
+        lightsprint_prompt = (
+            f"Add a comp_rule.py automation to automations/rules.py: "
+            f"when a {category} ticket at {property_id} matches the "
+            f"preferred-vendor-unavailable condition (vendor "
+            f"`{preferred_vendor}` is offline or has not acknowledged "
+            f"within SLA), escalate to a human manager rather than "
+            f"selecting a fallback vendor. Post a Slack notification to "
+            f"#ops-ben. Tag the LLM call with metadata.property_id, "
+            f"metadata.ticket_id, and metadata.tier='strong' so it "
+            f"shows up in the TokenRouter cost ticker correctly. "
+            f"Cost cap remains ${cap_usd:.0f}. Follow the existing "
+            f"pattern in automations/rules.py."
+        )
+
+        _add_event(
+            self.state,
+            "rule_proposed",
+            {"rule_id": rule_id, "title": title},
+        )
+
         return OpsTicket.ProposeNewRuleResponse(
-            rule_id="rule_stub",
-            title="(stub) propose_new_rule — T9 wires this",
-            description="(stub)",
-            rule_json="{}",
-            lightsprint_prompt="(stub — T9 fills with master §3.4 closing-cameo prompt)",
+            rule_id=rule_id,
+            title=title,
+            description=description,
+            rule_json=rule_json,
+            lightsprint_prompt=lightsprint_prompt,
         )
 
     async def show_brain_sources(

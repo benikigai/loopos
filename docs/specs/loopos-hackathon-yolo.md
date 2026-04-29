@@ -9,7 +9,7 @@
 - [x] T6: live_state + show_brain_sources readers — MODERATE
 - [ ] T7: Multiplayer GO/NO-GO smoke gate — MODERATE
 - [ ] T8: dispatch_with_escalation workflow — MODERATE
-- [ ] T9: propose_new_rule writer — SIMPLE
+- [x] T9: propose_new_rule writer — SIMPLE
 - [ ] T10: Lightsprint smoke test — SIMPLE
 - [ ] T11: Three-pane React UI (render method) — COMPLEX
 - [ ] T12: README + push — SIMPLE
