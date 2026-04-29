@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "category": "moderate",
+    "description": "Reboot scaffold pre-flight + repo pivot. Run /reboot-chat-app skill in /tmp/loopos-scaffold-test/ first to verify it produces master spec section 2.3 layout. Then on a feature branch reboot-pivot in ~/code/loopos: git rm -r backend/ shared/ fixtures/ web/ CONTRACT.md, run /reboot-chat-app with master section 7 prompt to scaffold api/loopos/v1/app.py, backend/src/servicers/, web/ui/loopos-ui/, .rbtrc, pyproject.toml. Verify uv run rbt dev run boots.",
+    "verify": "tree /tmp/loopos-scaffold-test -L 3 && cd ~/code/loopos && git checkout reboot-pivot && uv run rbt dev run --check",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 2,
+    "category": "simple",
+    "description": "TokenRouter + Runpod helper wrappers. Port existing TokenRouter wrapper to backend/src/servicers/helpers/llm.py with classify_fast and reason_strong tagging extra_body.metadata={property_id, ticket_id, tier} and appending to usage.jsonl. Add backend/src/servicers/helpers/whisper.py with transcribe_and_translate calling Runpod with 10s timeout and HARDCODED_TRANSCRIPTS fallback dict for shirley_ac_zh.m4a, haru_lockout_ja.m4a, celine_plumbing_id.m4a.",
+    "verify": "python -c 'from backend.src.servicers.helpers import llm, whisper; print(llm.classify_fast.__doc__, whisper.transcribe_and_translate.__doc__)' && RUNPOD_WHISPER_URL=http://invalid python -c 'from backend.src.servicers.helpers.whisper import transcribe_and_translate; print(transcribe_and_translate(\"demo_assets/shirley_ac_zh.m4a\"))'",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 3,
+    "category": "moderate",
+    "description": "Seed data corpus. Write 6 JSON files matching master spec section 4 schema and api/loopos/v1/app.py Pydantic models: data/properties.json (4 entries: creekfront_cabin, mtn_city_reno, warm_taipei_2br, ito_stream_house), data/team.json (4: Miguel, Shirley, Haru, Celine), data/vendors.json (4-8), data/sops.json (2: hvac_leak, lockout), data/voice_corpus.json (5-8 entries including vm_2024_03_taipei_ac verbatim from gdrive doc — Mr. Wang HVAC Mandarin OK $80 emergency $200 cap), data/historical_resolutions.json (5), data/skills/handle_hvac_leak.json (1 pre-generated SkillArtifact with skill_id, name, description, trigger_conditions, inputs_required, workflow_steps, preferred_vendors, auth_cap_usd 200, guest_voice_style founder_voice, approval_rules, sources). Tag synthesized voice memos representative true.",
+    "verify": "python -c 'import json,glob; [json.load(open(f)) for f in glob.glob(\"data/**/*.json\",recursive=True)]' && python -c 'from api.loopos.v1.app import Property, OpsTeamMember, Vendor, SkillArtifact; import json; [Property.model_validate(p) for p in json.load(open(\"data/properties.json\"))]'",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 4,
+    "category": "moderate",
+    "description": "Retrieval helper four-layer Brain. Implement backend/src/servicers/helpers/retrieval.py with retrieve_brain_context(ticket) returning dict with voice_memos (top-3 cosine over OpenAI text-embedding-3-small via TokenRouter cached in embeddings_cache.pkl), matched_sop (keyword over trigger_phrases), historical_resolutions (filter property_id and category sorted by recency), synthesized_skill (load handle_hvac_leak.json for category hvac_leak). Keyword fallback if embedding API fails.",
+    "verify": "python -c 'from backend.src.servicers.helpers.retrieval import retrieve_brain_context; from api.loopos.v1.app import OpsTicket; t = OpsTicket(id=\"test\", property_id=\"warm_taipei_2br\", source=\"voice\", raw_input=\"\", transcript_en=\"AC leaking near outlet\", category=\"hvac_leak\", created_at=\"2026-04-29T18:42:11Z\"); r = retrieve_brain_context(t); assert any(\"vm_2024_03_taipei_ac\" in v[\"id\"] for v in r[\"voice_memos\"])'",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 5,
+    "category": "complex",
+    "description": "ingest_voice_note + triage writers in backend/src/servicers/ops_ticket.py. ingest_voice_note(property_id, audio_url) writer creates OpsTicket(status=NEW), calls whisper.transcribe_and_translate, populates transcripts, fires triage. triage(ticket_id) writer calls classify_fast for category/severity/language, retrieve_brain_context for matched_*_ids, attaches skill_artifact (loads data/skills/handle_hvac_leak.json for hvac_leak), calls reason_strong for dispatch draft, gates severity >= 4 to AWAITING_HUMAN else auto-authorize up to property monthly_budget_usd/30. Both methods decorated mcp=Tool().",
+    "verify": "python -m pytest backend/tests/test_ops_ticket.py::test_ingest_and_triage_shirley_path -v",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 6,
+    "category": "moderate",
+    "description": "live_state + show_brain_sources readers in backend/src/servicers/ops_ticket.py. live_state() reader returns active tickets + dispatches + last 20 events. show_brain_sources(ticket_id) reader returns matched voice_memo + sop + historical_resolution objects. Both decorated mcp=Tool().",
+    "verify": "python -m pytest backend/tests/test_ops_ticket.py::test_live_state_and_brain_sources -v",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 7,
+    "category": "moderate",
+    "description": "Multiplayer GO/NO-GO smoke gate. Register LoopOS MCP server in ~/Library/Application Support/Claude/claude_desktop_config.json. Restart Claude Desktop and verify tools appear. Configure ChatGPT MCP connector to same endpoint. From Claude Desktop call ingest_voice_note then list tickets in ChatGPT and verify same ticket appears. Approve from ChatGPT updates state visible from Claude. If ChatGPT MCP unavailable document in demo_notes.md and proceed with verbal-claim degrade for Beat 5.",
+    "verify": "test -f demo_notes.md && grep -E 'multiplayer.*(confirmed|degraded)' demo_notes.md",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 8,
+    "category": "moderate",
+    "description": "dispatch_with_escalation workflow in backend/src/servicers/ops_ticket.py. Workflow method creates Dispatch object status DISPATCHED, mock WhatsApp send (console log), durable wait via Reboot for ack writer call OR auto-escalate after auto_escalate_after_seconds=30 to AWAITING_HUMAN with escalation_event in history. CUTTABLE if T11 slips.",
+    "verify": "python -m pytest backend/tests/test_ops_ticket.py::test_dispatch_workflow_escalates -v",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 9,
+    "category": "simple",
+    "description": "propose_new_rule writer in backend/src/servicers/ops_ticket.py. Returns ProposedRule JSON with id, title, description, trigger, action, rationale, lightsprint_prompt prefilled per master section 3.4 closing cameo template (instructs adding rule to automations/rules.py with metadata tagging). Does NOT modify automations/rules.py.",
+    "verify": "python -m pytest backend/tests/test_ops_ticket.py::test_propose_new_rule_returns_lightsprint_prompt -v",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 10,
+    "category": "simple",
+    "description": "Lightsprint smoke test. Paste T9 generated lightsprint_prompt into Lightsprint sandbox. Verify PR generates against benikigai/loopos modifying automations/rules.py. Capture screenshot to demo_assets/lightsprint_pr_screenshot.png regardless of outcome (Beat 6 fallback). Do not merge the PR. CUTTABLE if T8 cut.",
+    "verify": "test -f demo_assets/lightsprint_pr_screenshot.png",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 11,
+    "category": "complex",
+    "description": "Three-pane React UI render method. Implement render() ui method on OpsTicket and web/ui/loopos-ui/{App.tsx, components/{TicketList,ChatPane,CostTicker,BrainSources,SkillArtifactViewer,ProposeRuleCard}.tsx}, web/ui/loopos-ui/lib/pricing.ts. TicketList (left status property severity last-action cost), ChatPane (center voice-drop transcript classification dispatch), CostTicker (right per-property cards reading /api/usage; for Warm Taipei 2BR shows today $0.043 budget remaining $499.96). On RESOLVED: BrainSources reveal panel with 3 cards, SkillArtifact JSON viewer pretty-printed, ProposeRule card with prefilled prompt. Zinc/stone palette, Inter font, no gradients, no emoji.",
+    "verify": "cd web/ui/loopos-ui && npm run build && curl -s http://localhost:8000/api/usage | head -1",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 12,
+    "category": "simple",
+    "description": "README + push. Write README.md with one-paragraph stage-readable pitch matching gdrive close: every company is an open loop / LoopOS closes the loop / 9 STRs / Claude agent does the work. Update .gitignore to add usage.jsonl, embeddings_cache.pkl, .venv/. Merge reboot-pivot into main and git push origin main.",
+    "verify": "git log origin/main --oneline | head -5 && wc -w README.md",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 13,
+    "category": "simple",
+    "description": "Two timed dry runs. Run full demo end-to-end twice with stopwatch on each of 7 beats. Run 1 logs timing per beat in demo_notes.md. Run 2 hits <=3:00 with refinements applied. Confirm Beat 5 mode (live tab-flip vs verbal-claim per T7) and Beat 6 mode (live Lightsprint vs screenshot per T10).",
+    "verify": "grep -E 'run_2.*0:0[0-2]:[0-5][0-9]' demo_notes.md",
+    "passes": false,
+    "skipped": false
+  },
+  {
+    "id": 14,
+    "category": "simple",
+    "description": "Submit + Lightsprint bounty post. Submit to AWS Builder Loft hackathon platform, capture submission link in demo_notes.md. Post to X/LinkedIn for $25 Lightsprint bounty with preview link to benikigai/loopos.",
+    "verify": "grep -E 'submission_link:|bounty_post:' demo_notes.md",
+    "passes": false,
+    "skipped": false
+  }
+]
