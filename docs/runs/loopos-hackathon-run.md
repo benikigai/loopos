@@ -2,7 +2,23 @@
 **Date:** 2026-04-29
 **Spec:** docs/specs/loopos-hackathon.md
 **Branch:** reboot-pivot
-**Status:** In progress (1/14 tasks done)
+**Status:** In progress (2/14 tasks done)
+
+## Task 2: TokenRouter + Runpod helper wrappers
+**Status:** Complete
+**Files changed:**
+  - `backend/src/servicers/helpers/llm.py` — added (~115 lines): `classify_fast`, `reason_strong`, `embed`; lazy-init OpenAI client; `_log_usage` writes JSONL with $ estimate; project-relative USAGE_LOG path
+  - `backend/src/servicers/helpers/whisper.py` — added (~80 lines): `transcribe_and_translate` with 10s httpx timeout to Runpod; `HARDCODED_TRANSCRIPTS` dict for Shirley (zh-TW), Haru (ja), Celine (id); raises RuntimeError if neither Runpod nor fallback resolves
+**What changed and why:** Per master §3.2/§3.3. Adaptations: lazy LLM client init (env vars not required at import time); project-root usage.jsonl path; httpx (already in deps) instead of requests; structured PRICING dict.
+**Tests run:** 4 smoke tests via REPL — all pass:
+  - Empty env → fallback dict returns Shirley zh-TW transcript ✓
+  - Invalid URL → httpx error caught → Celine id fallback returns ✓
+  - Unknown filename → RuntimeError raised ✓
+  - llm import without env vars → lazy init OK, PRICING accessible ✓
+**Issues found / fixed:** None
+**Remaining risks:** Live LLM/Runpod calls untested (no API keys in this environment); `op run` or .env loading deferred to T7 / actual demo run.
+**Reviewer verdict:** PASS (self-review; Simple task, code matches master spec verbatim)
+**Deslop pass:** Nothing to clean.
 
 ## Task 1: Reboot scaffold pre-flight + repo pivot
 **Status:** Complete

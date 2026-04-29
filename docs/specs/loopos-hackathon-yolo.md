@@ -2,7 +2,7 @@
 **Spec:** docs/specs/loopos-hackathon.md
 
 - [x] T1: Reboot scaffold pre-flight + repo pivot — MODERATE
-- [ ] T2: TokenRouter + Runpod helper wrappers — SIMPLE
+- [x] T2: TokenRouter + Runpod helper wrappers — SIMPLE
 - [ ] T3: Seed data corpus (6 JSON files) — MODERATE
 - [ ] T4: Retrieval helper (four-layer Brain) — MODERATE
 - [ ] T5: ingest_voice_note + triage writers — COMPLEX
