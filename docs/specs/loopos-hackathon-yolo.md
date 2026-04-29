@@ -12,6 +12,6 @@
 - [x] T9: propose_new_rule writer — SIMPLE
 - [ ] T10: Lightsprint smoke test — SIMPLE
 - [x] T11: Three-pane React UI (render method) — COMPLEX
-- [ ] T12: README + push — SIMPLE
+- [~] T12: README + push — SIMPLE (README done; merge to main deferred until T7 passes)
 - [ ] T13: Two timed dry runs — SIMPLE
 - [ ] T14: Submit + Lightsprint bounty post — SIMPLE

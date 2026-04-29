@@ -2,7 +2,12 @@
 **Date:** 2026-04-29
 **Spec:** docs/specs/loopos-hackathon.md
 **Branch:** reboot-pivot
-**Status:** In progress (8/14 done — T7 awaiting Ben's smoke run; T8 + T10 deferrable per spec)
+**Status:** In progress (8/14 done + T12 partial — T7 awaiting Ben; T8/T10 deferrable per spec)
+
+## Task 12 (partial): README rewrite (merge to main deferred)
+**Status:** Partial — README rewritten on reboot-pivot. Merge to main deferred until T7 confirms Reboot wiring works end-to-end.
+**Files changed:** `README.md` — rewrite from FastAPI/Next.js stub to Reboot multiplayer architecture; pitch line ("we don't sell PMS software, we are the property manager"); 3-terminal run instructions; YC RFS coverage; 6-beat demo path with Mr. Wang HVAC and $200 cap matching gdrive pitch doc.
+**Reviewer verdict:** PASS for content; merge held back as defensive risk reduction.
 
 ## Task 11: Three-pane React UI (out of order; T7 still gated on Ben)
 **Status:** Complete
