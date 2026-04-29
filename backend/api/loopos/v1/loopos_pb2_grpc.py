@@ -31,293 +31,6 @@ if _version_not_supported:
     )
 
 
-class UserMethodsStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.IngestTextMessage = channel.unary_unary(
-                '/loopos.v1.UserMethods/IngestTextMessage',
-                request_serializer=loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageRequest.SerializeToString,
-                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageResponse.FromString,
-                _registered_method=True)
-        self.IngestVoiceNote = channel.unary_unary(
-                '/loopos.v1.UserMethods/IngestVoiceNote',
-                request_serializer=loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteRequest.SerializeToString,
-                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteResponse.FromString,
-                _registered_method=True)
-        self.ListTickets = channel.unary_unary(
-                '/loopos.v1.UserMethods/ListTickets',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserListTicketsResponse.FromString,
-                _registered_method=True)
-        self.QueryBrain = channel.unary_unary(
-                '/loopos.v1.UserMethods/QueryBrain',
-                request_serializer=loopos_dot_v1_dot_loopos__pb2.UserQueryBrainRequest.SerializeToString,
-                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserQueryBrainResponse.FromString,
-                _registered_method=True)
-        self.LiveState = channel.unary_unary(
-                '/loopos.v1.UserMethods/LiveState',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserLiveStateResponse.FromString,
-                _registered_method=True)
-        self.Create = channel.unary_unary(
-                '/loopos.v1.UserMethods/Create',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                _registered_method=True)
-
-
-class UserMethodsServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def IngestTextMessage(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def IngestVoiceNote(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ListTickets(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def QueryBrain(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def LiveState(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def Create(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_UserMethodsServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'IngestTextMessage': grpc.unary_unary_rpc_method_handler(
-                    servicer.IngestTextMessage,
-                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageRequest.FromString,
-                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageResponse.SerializeToString,
-            ),
-            'IngestVoiceNote': grpc.unary_unary_rpc_method_handler(
-                    servicer.IngestVoiceNote,
-                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteRequest.FromString,
-                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteResponse.SerializeToString,
-            ),
-            'ListTickets': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListTickets,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserListTicketsResponse.SerializeToString,
-            ),
-            'QueryBrain': grpc.unary_unary_rpc_method_handler(
-                    servicer.QueryBrain,
-                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.UserQueryBrainRequest.FromString,
-                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserQueryBrainResponse.SerializeToString,
-            ),
-            'LiveState': grpc.unary_unary_rpc_method_handler(
-                    servicer.LiveState,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserLiveStateResponse.SerializeToString,
-            ),
-            'Create': grpc.unary_unary_rpc_method_handler(
-                    servicer.Create,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'loopos.v1.UserMethods', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('loopos.v1.UserMethods', rpc_method_handlers)
-
-
- # This class is part of an EXPERIMENTAL API.
-class UserMethods(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def IngestTextMessage(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.UserMethods/IngestTextMessage',
-            loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageRequest.SerializeToString,
-            loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def IngestVoiceNote(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.UserMethods/IngestVoiceNote',
-            loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteRequest.SerializeToString,
-            loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def ListTickets(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.UserMethods/ListTickets',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            loopos_dot_v1_dot_loopos__pb2.UserListTicketsResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def QueryBrain(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.UserMethods/QueryBrain',
-            loopos_dot_v1_dot_loopos__pb2.UserQueryBrainRequest.SerializeToString,
-            loopos_dot_v1_dot_loopos__pb2.UserQueryBrainResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def LiveState(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.UserMethods/LiveState',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            loopos_dot_v1_dot_loopos__pb2.UserLiveStateResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def Create(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.UserMethods/Create',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-
 class OpsTicketMethodsStub(object):
     """Missing associated documentation comment in .proto file."""
 
@@ -594,6 +307,336 @@ class OpsTicketMethods(object):
             '/loopos.v1.OpsTicketMethods/ShowBrainSources',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             loopos_dot_v1_dot_loopos__pb2.OpsTicketShowBrainSourcesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+
+class UserMethodsStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.IngestTextMessage = channel.unary_unary(
+                '/loopos.v1.UserMethods/IngestTextMessage',
+                request_serializer=loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageRequest.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageResponse.FromString,
+                _registered_method=True)
+        self.IngestVoiceNote = channel.unary_unary(
+                '/loopos.v1.UserMethods/IngestVoiceNote',
+                request_serializer=loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteRequest.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteResponse.FromString,
+                _registered_method=True)
+        self.ListTickets = channel.unary_unary(
+                '/loopos.v1.UserMethods/ListTickets',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserListTicketsResponse.FromString,
+                _registered_method=True)
+        self.QueryBrain = channel.unary_unary(
+                '/loopos.v1.UserMethods/QueryBrain',
+                request_serializer=loopos_dot_v1_dot_loopos__pb2.UserQueryBrainRequest.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserQueryBrainResponse.FromString,
+                _registered_method=True)
+        self.LiveState = channel.unary_unary(
+                '/loopos.v1.UserMethods/LiveState',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserLiveStateResponse.FromString,
+                _registered_method=True)
+        self.CostSummary = channel.unary_unary(
+                '/loopos.v1.UserMethods/CostSummary',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.UserCostSummaryResponse.FromString,
+                _registered_method=True)
+        self.Create = channel.unary_unary(
+                '/loopos.v1.UserMethods/Create',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+
+
+class UserMethodsServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def IngestTextMessage(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def IngestVoiceNote(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListTickets(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def QueryBrain(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LiveState(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CostSummary(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Create(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_UserMethodsServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'IngestTextMessage': grpc.unary_unary_rpc_method_handler(
+                    servicer.IngestTextMessage,
+                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageRequest.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageResponse.SerializeToString,
+            ),
+            'IngestVoiceNote': grpc.unary_unary_rpc_method_handler(
+                    servicer.IngestVoiceNote,
+                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteRequest.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteResponse.SerializeToString,
+            ),
+            'ListTickets': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTickets,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserListTicketsResponse.SerializeToString,
+            ),
+            'QueryBrain': grpc.unary_unary_rpc_method_handler(
+                    servicer.QueryBrain,
+                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.UserQueryBrainRequest.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserQueryBrainResponse.SerializeToString,
+            ),
+            'LiveState': grpc.unary_unary_rpc_method_handler(
+                    servicer.LiveState,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserLiveStateResponse.SerializeToString,
+            ),
+            'CostSummary': grpc.unary_unary_rpc_method_handler(
+                    servicer.CostSummary,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.UserCostSummaryResponse.SerializeToString,
+            ),
+            'Create': grpc.unary_unary_rpc_method_handler(
+                    servicer.Create,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'loopos.v1.UserMethods', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('loopos.v1.UserMethods', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class UserMethods(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def IngestTextMessage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.UserMethods/IngestTextMessage',
+            loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageRequest.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.UserIngestTextMessageResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def IngestVoiceNote(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.UserMethods/IngestVoiceNote',
+            loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteRequest.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.UserIngestVoiceNoteResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListTickets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.UserMethods/ListTickets',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.UserListTicketsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def QueryBrain(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.UserMethods/QueryBrain',
+            loopos_dot_v1_dot_loopos__pb2.UserQueryBrainRequest.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.UserQueryBrainResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LiveState(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.UserMethods/LiveState',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.UserLiveStateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CostSummary(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.UserMethods/CostSummary',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.UserCostSummaryResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Create(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.UserMethods/Create',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
             insecure,

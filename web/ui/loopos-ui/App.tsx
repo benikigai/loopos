@@ -9,19 +9,6 @@ const PROPERTY_DISPLAY_NAMES: Record<string, string> = {
   mtn_city_reno: "Mtn City Reno",
 };
 
-// Cost ticker numbers locked to gdrive demo arc (Warm Taipei 2BR · today $0.043
-// · budget remaining $499.96). Real ticker tails usage.jsonl; static here for
-// stage reliability — see master spec §9 fallback row 3.
-const COST_DEMO = {
-  property: "Warm Taipei 2BR",
-  today_usd: 0.043,
-  budget_remaining_usd: 499.96,
-  fast_calls: 8,
-  fast_usd: 0.004,
-  strong_calls: 3,
-  strong_usd: 0.039,
-};
-
 const TicketRow: FC<{
   ticketId: string;
   selected: boolean;
@@ -188,31 +175,75 @@ const ProposeRuleCard: FC<{ ticketId: string }> = ({ ticketId }) => {
 };
 
 const CostTicker: FC = () => {
+  const user = useUser();
+  const { response, isLoading } = user.useCostSummary();
+
+  if (isLoading && !response) {
+    return (
+      <div className={css.tickerCard}>
+        <div className={css.cardLabel}>per-property cost</div>
+        <div className={css.muted}>loading…</div>
+      </div>
+    );
+  }
+
+  const properties = response?.properties ?? [];
+
+  if (properties.length === 0) {
+    return (
+      <div className={css.tickerCard}>
+        <div className={css.cardLabel}>per-property cost</div>
+        <div className={css.muted}>no calls yet today</div>
+        <div className={css.tickerSubLine}>
+          ingest a ticket to start the meter
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={css.tickerCard}>
-      <div className={css.cardLabel}>per-property cost</div>
-      <div className={css.tickerProperty}>{COST_DEMO.property}</div>
-      <div className={css.tickerLine}>
-        today <span className={css.tickerNumber}>${COST_DEMO.today_usd.toFixed(3)}</span>
-      </div>
-      <div className={css.tickerLine}>
-        budget remaining{" "}
-        <span className={css.tickerNumber}>${COST_DEMO.budget_remaining_usd.toFixed(2)}</span>
-      </div>
-      <div className={css.tickerSplit}>
-        <div>
-          <div className={css.cardLabel}>fast tier</div>
-          <div className={css.tickerSubLine}>
-            ${COST_DEMO.fast_usd.toFixed(3)} ({COST_DEMO.fast_calls} calls)
+    <div className={css.tickerStack}>
+      {properties.map((p) => (
+        <div key={p.propertyId} className={css.tickerCard}>
+          <div className={css.cardLabel}>{p.propertyId}</div>
+          <div className={css.tickerProperty}>{p.displayName || p.propertyId}</div>
+          <div className={css.tickerLine}>
+            today{" "}
+            <span className={css.tickerNumber}>${p.todayUsd.toFixed(4)}</span>
+          </div>
+          <div className={css.tickerLine}>
+            budget remaining{" "}
+            <span className={css.tickerNumber}>
+              ${p.budgetRemainingUsd.toFixed(2)}
+            </span>
+          </div>
+          <div className={css.tickerSplit}>
+            <div>
+              <div className={css.cardLabel}>fast tier</div>
+              <div className={css.tickerSubLine}>
+                ${p.fastUsd.toFixed(4)} ({p.fastCalls} calls)
+              </div>
+            </div>
+            <div>
+              <div className={css.cardLabel}>strong tier</div>
+              <div className={css.tickerSubLine}>
+                ${p.strongUsd.toFixed(4)} ({p.strongCalls} calls)
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <div className={css.cardLabel}>strong tier</div>
-          <div className={css.tickerSubLine}>
-            ${COST_DEMO.strong_usd.toFixed(3)} ({COST_DEMO.strong_calls} calls)
+      ))}
+      {response && (
+        <div className={css.tickerCard}>
+          <div className={css.cardLabel}>fleet today</div>
+          <div className={css.tickerLine}>
+            <span>{response.totalCalls} calls</span>
+            <span className={css.tickerNumber}>
+              ${response.totalTodayUsd.toFixed(4)}
+            </span>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

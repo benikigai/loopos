@@ -188,6 +188,38 @@ export const LiveStateResponseSchema = z.object({
 
 export type LiveStateResponse = z.infer<typeof LiveStateResponseSchema>;
 
+export const PropertyCostSchema = z.object({
+    propertyId: z.string().default("").meta({ tag: 1 }),
+    displayName: z.string().default("").meta({ tag: 2 }),
+    todayUsd: z.number().default(0).meta({ tag: 3 }),
+    fastCalls: z.number().default(0).meta({ tag: 4 }),
+    fastUsd: z.number().default(0).meta({ tag: 5 }),
+    strongCalls: z.number().default(0).meta({ tag: 6 }),
+    strongUsd: z.number().default(0).meta({ tag: 7 }),
+    budgetRemainingUsd: z.number().default(0).meta({ tag: 8 }),
+    dailyBudgetUsd: z.number().default(0).meta({ tag: 9 }),
+  });
+
+export type PropertyCost = z.infer<typeof PropertyCostSchema>;
+
+export const CostSummaryResponseSchema = z.object({
+    properties: z.array(z.object({
+    propertyId: z.string().default("").meta({ tag: 1 }),
+    displayName: z.string().default("").meta({ tag: 2 }),
+    todayUsd: z.number().default(0).meta({ tag: 3 }),
+    fastCalls: z.number().default(0).meta({ tag: 4 }),
+    fastUsd: z.number().default(0).meta({ tag: 5 }),
+    strongCalls: z.number().default(0).meta({ tag: 6 }),
+    strongUsd: z.number().default(0).meta({ tag: 7 }),
+    budgetRemainingUsd: z.number().default(0).meta({ tag: 8 }),
+    dailyBudgetUsd: z.number().default(0).meta({ tag: 9 }),
+  })).default(reboot_api.EMPTY_ARRAY).meta({ tag: 1 }),
+    totalTodayUsd: z.number().default(0).meta({ tag: 2 }),
+    totalCalls: z.number().default(0).meta({ tag: 3 }),
+  });
+
+export type CostSummaryResponse = z.infer<typeof CostSummaryResponseSchema>;
+
 export const ShowBrainSourcesResponseSchema = z.object({
     voiceMemo: z.object({
     id: z.string().default("").meta({ tag: 1 }),
@@ -325,18 +357,6 @@ export const OpsTicketStateSchema = z.object({
 
 export type OpsTicketState = z.infer<typeof OpsTicketStateSchema>;
 
-export const UserListTicketsRequestSchema = z.object({});
-
-export type UserListTicketsRequest = z.infer<typeof UserListTicketsRequestSchema>;
-
-export const UserLiveStateRequestSchema = z.object({});
-
-export type UserLiveStateRequest = z.infer<typeof UserLiveStateRequestSchema>;
-
-export const UserCreateRequestSchema = z.object({});
-
-export type UserCreateRequest = z.infer<typeof UserCreateRequestSchema>;
-
 export const OpsTicketTriageRequestSchema = z.object({});
 
 export type OpsTicketTriageRequest = z.infer<typeof OpsTicketTriageRequestSchema>;
@@ -349,37 +369,23 @@ export const OpsTicketShowBrainSourcesRequestSchema = z.object({});
 
 export type OpsTicketShowBrainSourcesRequest = z.infer<typeof OpsTicketShowBrainSourcesRequestSchema>;
 
+export const UserListTicketsRequestSchema = z.object({});
+
+export type UserListTicketsRequest = z.infer<typeof UserListTicketsRequestSchema>;
+
+export const UserLiveStateRequestSchema = z.object({});
+
+export type UserLiveStateRequest = z.infer<typeof UserLiveStateRequestSchema>;
+
+export const UserCostSummaryRequestSchema = z.object({});
+
+export type UserCostSummaryRequest = z.infer<typeof UserCostSummaryRequestSchema>;
+
+export const UserCreateRequestSchema = z.object({});
+
+export type UserCreateRequest = z.infer<typeof UserCreateRequestSchema>;
+
 export const api = {
-  User: {
-    state: UserStateSchema,
-    methods: {
-      ingestTextMessage: reboot_api.transaction({
-        request: IngestTextRequestSchema,
-        response: IngestResponseSchema,
-      }),
-      ingestVoiceNote: reboot_api.transaction({
-        request: IngestVoiceRequestSchema,
-        response: IngestResponseSchema,
-      }),
-      listTickets: reboot_api.reader({
-        request: UserListTicketsRequestSchema,
-        response: ListTicketsResponseSchema,
-      }),
-      queryBrain: reboot_api.reader({
-        request: QueryBrainRequestSchema,
-        response: QueryBrainResponseSchema,
-      }),
-      liveState: reboot_api.reader({
-        request: UserLiveStateRequestSchema,
-        response: LiveStateResponseSchema,
-      }),
-      create: reboot_api.writer({
-        factory: {},
-        request: UserCreateRequestSchema,
-        response: z.void(),
-      }),
-    },
-  },
   OpsTicket: {
     state: OpsTicketStateSchema,
     methods: {
@@ -407,6 +413,40 @@ export const api = {
       showBrainSources: reboot_api.reader({
         request: OpsTicketShowBrainSourcesRequestSchema,
         response: ShowBrainSourcesResponseSchema,
+      }),
+    },
+  },
+  User: {
+    state: UserStateSchema,
+    methods: {
+      ingestTextMessage: reboot_api.transaction({
+        request: IngestTextRequestSchema,
+        response: IngestResponseSchema,
+      }),
+      ingestVoiceNote: reboot_api.transaction({
+        request: IngestVoiceRequestSchema,
+        response: IngestResponseSchema,
+      }),
+      listTickets: reboot_api.reader({
+        request: UserListTicketsRequestSchema,
+        response: ListTicketsResponseSchema,
+      }),
+      queryBrain: reboot_api.reader({
+        request: QueryBrainRequestSchema,
+        response: QueryBrainResponseSchema,
+      }),
+      liveState: reboot_api.reader({
+        request: UserLiveStateRequestSchema,
+        response: LiveStateResponseSchema,
+      }),
+      costSummary: reboot_api.reader({
+        request: UserCostSummaryRequestSchema,
+        response: CostSummaryResponseSchema,
+      }),
+      create: reboot_api.writer({
+        factory: {},
+        request: UserCreateRequestSchema,
+        response: z.void(),
       }),
     },
   },

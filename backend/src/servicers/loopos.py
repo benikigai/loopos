@@ -17,6 +17,7 @@ from loopos.v1.loopos import (
     BrainVoiceMemo,
     Dispatch,
     HistoryEvent,
+    PropertyCost,
     SkillArtifact,
     SkillSources,
     TicketSummary,
@@ -346,6 +347,79 @@ class UserServicer(User.Servicer):
                 for tid in self.state.ticket_ids
             ],
             recent_event_jsons=[],
+        )
+
+    async def cost_summary(
+        self,
+        context: ReaderContext,
+    ) -> User.CostSummaryResponse:
+        """Per-property LLM cost rollup from usage.jsonl.
+
+        Reads the local usage log written by helpers/llm.py, groups today's
+        rows by property_id, and computes per-tier $/calls plus a daily
+        budget remaining. The dashboard CostTicker subscribes to this.
+        """
+        usage_log = _PROJECT_ROOT / "usage.jsonl"
+        properties = _load_properties()
+        per_property: dict[str, dict[str, Any]] = {}
+
+        today = datetime.now(timezone.utc).date().isoformat()
+
+        if usage_log.exists():
+            for line in usage_log.read_text().splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if not row.get("ts", "").startswith(today):
+                    continue
+                pid = row.get("property_id", "")
+                if not pid:
+                    continue
+                bucket = per_property.setdefault(
+                    pid,
+                    {"fast_calls": 0, "fast_usd": 0.0, "strong_calls": 0, "strong_usd": 0.0},
+                )
+                tier = row.get("tier", "fast")
+                key_calls = f"{tier}_calls"
+                key_usd = f"{tier}_usd"
+                if key_calls in bucket:
+                    bucket[key_calls] += 1
+                    bucket[key_usd] += float(row.get("usd", 0.0))
+
+        rows: list[PropertyCost] = []
+        total_today = 0.0
+        total_calls = 0
+        for pid, bucket in per_property.items():
+            today_usd = bucket["fast_usd"] + bucket["strong_usd"]
+            calls = bucket["fast_calls"] + bucket["strong_calls"]
+            total_today += today_usd
+            total_calls += calls
+            prop = properties.get(pid, {})
+            monthly_budget = float(prop.get("monthly_budget_usd", 0))
+            daily_budget = monthly_budget / 30.0
+            rows.append(
+                PropertyCost(
+                    property_id=pid,
+                    display_name=prop.get("name", pid),
+                    today_usd=round(today_usd, 4),
+                    fast_calls=bucket["fast_calls"],
+                    fast_usd=round(bucket["fast_usd"], 4),
+                    strong_calls=bucket["strong_calls"],
+                    strong_usd=round(bucket["strong_usd"], 4),
+                    budget_remaining_usd=round(max(0.0, daily_budget - today_usd), 2),
+                    daily_budget_usd=round(daily_budget, 2),
+                )
+            )
+        rows.sort(key=lambda r: r.today_usd, reverse=True)
+
+        return User.CostSummaryResponse(
+            properties=rows,
+            total_today_usd=round(total_today, 4),
+            total_calls=total_calls,
         )
 
 

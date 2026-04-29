@@ -210,6 +210,12 @@
   cursor: not-allowed;
 }
 
+.tickerStack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .tickerCard {
   display: flex;
   flex-direction: column;

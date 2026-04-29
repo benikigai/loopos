@@ -147,6 +147,24 @@ class LiveStateResponse(Model):
     recent_event_jsons: list[str] = Field(tag=2, default_factory=list)
 
 
+class PropertyCost(Model):
+    property_id: str = Field(tag=1, default="")
+    display_name: str = Field(tag=2, default="")
+    today_usd: float = Field(tag=3, default=0.0)
+    fast_calls: int = Field(tag=4, default=0)
+    fast_usd: float = Field(tag=5, default=0.0)
+    strong_calls: int = Field(tag=6, default=0)
+    strong_usd: float = Field(tag=7, default=0.0)
+    budget_remaining_usd: float = Field(tag=8, default=0.0)
+    daily_budget_usd: float = Field(tag=9, default=0.0)
+
+
+class CostSummaryResponse(Model):
+    properties: list[PropertyCost] = Field(tag=1, default_factory=list)
+    total_today_usd: float = Field(tag=2, default=0.0)
+    total_calls: int = Field(tag=3, default=0)
+
+
 class ShowBrainSourcesResponse(Model):
     voice_memo: Optional[BrainVoiceMemo] = Field(tag=1, default=None)
     sop: Optional[BrainSOP] = Field(tag=2, default=None)
@@ -278,6 +296,17 @@ api = API(
                     "Return the current dashboard state — active ticket summaries "
                     "and the last 20 events. Used by the UI and by AI clients to "
                     "introspect the system."
+                ),
+                mcp=Tool(),
+            ),
+            cost_summary=Reader(
+                request=None,
+                response=CostSummaryResponse,
+                description=(
+                    "Per-property LLM cost rollup for today, sourced from "
+                    "usage.jsonl. Returns one PropertyCost row per property that "
+                    "had activity today, plus a fleet-wide total. Used by the "
+                    "dashboard's cost ticker."
                 ),
                 mcp=Tool(),
             ),
