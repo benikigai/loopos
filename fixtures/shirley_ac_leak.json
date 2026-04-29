@@ -19,24 +19,25 @@
       "url": "fixtures/shirley_ac_leak.mp3",
       "duration_s": 14.2
     },
-    "transcript_native": "客人說主臥室冷氣在滴水，地板已經濕了一塊，問我們要怎麼處理。今天下午有新客人三點要入住，趕快。",
-    "transcript_en": "The guest says the master-bedroom AC is leaking water, the floor is already wet in one spot, and they're asking how we'll handle it. New guest checks in at 3pm today — please hurry.",
+    "transcript_native": "Ben，Warm Taipei 主臥冷氣在漏水，水滴到插座旁邊，客人在生氣，要找誰？",
+    "transcript_en": "Hi Ben, the AC at Warm Taipei is leaking near the outlet. Guest is angry. Who do I call?",
     "classification": {
       "category": "hvac_leak",
       "severity": 4,
       "language": "zh-TW",
       "urgency_window_minutes": 180,
+      "risk_tags": ["electrical_risk"],
       "model_used": "llama-3.3-70b",
       "tier": "fast"
     },
     "dispatch_draft": {
-      "vendor": "Lin HVAC (preferred Taipei vendor)",
+      "vendor": "Mr. Wang HVAC",
       "vendor_phone": "+886-2-2345-XXXX",
       "eta_minutes": 90,
       "cost_estimate_usd": 145,
-      "cost_cap_usd": 250,
-      "notes_for_vendor_zh": "Warm Taipei 2BR 主臥冷氣漏水，下午 3pm 有新客入住，請優先處理。鑰匙密碼：詳問 Shirley。",
-      "notes_for_guest_zh": "已派維修師傅 90 分鐘內到場，請暫關冷氣並使用客廳分離式機。我們會補償您今晚一杯飲品。",
+      "cost_cap_usd": 200,
+      "notes_for_vendor_zh": "Warm Taipei 2BR 主臥冷氣漏水，水滴到插座附近，下午 3pm 有新客入住，請優先處理。鑰匙密碼：詳問 Shirley。",
+      "notes_for_guest_zh": "已派王師傅 90 分鐘內到場，請暫關冷氣並使用客廳分離式機。我們會補償您今晚一杯飲品。",
       "model_used": "claude-opus-4-7",
       "tier": "strong"
     },
@@ -46,31 +47,24 @@
   "brain_sources": [
     {
       "layer": "founder_voice_memo",
-      "title": "Ben — 2026-02-14 voice memo on Taipei vendor preference",
-      "snippet": "For Taipei, default to Lin HVAC. They're 30% more expensive than the cheap option but they show up the same day, and same-day matters more than price when there's a check-in.",
+      "title": "Ben → Shirley, March 2024 — Taipei vendor preference",
+      "snippet": "AC at Taipei — always Mr. Wang first. Mandarin OK. Around $80 emergency call. Don't auth over $200 without warranty check.",
       "audio_url": "fixtures/ben_memo_taipei_vendors.mp3",
       "relevance": 0.94,
       "match_reason": "property=Taipei + category=hvac"
     },
     {
-      "layer": "structured_knowledge",
-      "title": "Property record — Warm Taipei 2BR",
-      "snippet": "AC units: master 12000 BTU split (Hitachi, installed 2024-08), living 18000 BTU split (Daikin, installed 2024-08). Master AC has prior leak history (2025-09) — drain line clog suspected.",
-      "relevance": 0.91,
-      "match_reason": "property_id match + equipment history"
-    },
-    {
       "layer": "sop",
-      "title": "SOP — HVAC leak with imminent check-in",
-      "snippet": "1) Notify guest within 5min. 2) Dispatch vendor with cost cap. 3) Confirm vendor ETA before guest is told. 4) If ETA > urgency window, escalate to operator with relocation budget. 5) Always offer compensatory gesture (drink, late checkout).",
+      "title": "HVAC Leak & Electrical Safety Protocol",
+      "snippet": "Power down unit if safe. Dispatch HVAC + electrician combo vendor. Authorize emergency diagnostic up to $200.",
       "relevance": 0.96,
-      "match_reason": "category=hvac_leak + has_imminent_checkin=true"
+      "match_reason": "category=hvac_leak + risk_tags=electrical_risk"
     },
     {
       "layer": "prior_resolution",
-      "title": "Resolved 2025-09-12 — same unit, same issue",
-      "snippet": "Lin HVAC dispatched, cleared drain line, total $128. Resolved before 4pm check-in. Guest gifted $20 drink credit. No further leaks until now.",
-      "ticket_id_ref": "tk_warm_taipei_2br_20250912_004",
+      "title": "April 2024 — AC leak, Warm Taipei",
+      "snippet": "Mr. Wang HVAC, 2.1hr to resolve, $145 total. Outcome: 5-star.",
+      "ticket_id_ref": "tk_warm_taipei_2br_20240412_001",
       "relevance": 0.89,
       "match_reason": "property_id match + category match + recurrence"
     }
@@ -78,88 +72,45 @@
   "resolution": {
     "resolved_at": "2026-04-29T18:46:33Z",
     "outcome": "vendor_dispatched",
-    "actual_cost_usd": 132,
+    "actual_cost_usd": 145,
     "guest_compensation_usd": 20,
     "guest_response": "Acknowledged, AC off, will use living room unit until vendor arrives.",
     "time_to_dispatch_s": 262
   },
   "skill_artifact": {
-    "name": "handle_hvac_leak",
-    "version": "1.0.0",
-    "description": "Triage and dispatch for HVAC leaks at managed properties. Optimized for imminent-checkin scenarios.",
-    "trigger": {
-      "category": "hvac_leak",
-      "any_property": true
-    },
-    "inputs": {
-      "ticket": "OpsTicket",
-      "property": "Property"
-    },
-    "steps": [
-      {
-        "id": "notify_guest",
-        "tier": "fast",
-        "action": "compose_guest_message",
-        "constraints": {"max_latency_s": 60, "language": "guest_native"}
-      },
-      {
-        "id": "select_vendor",
-        "tier": "fast",
-        "action": "lookup_preferred_vendor",
-        "key": "property.city + category",
-        "preference_rule": "prefer_same_day_over_price_when_checkin_within_h <= 6"
-      },
-      {
-        "id": "dispatch",
-        "tier": "strong",
-        "action": "compose_vendor_brief_and_authorize",
-        "constraints": {"cost_cap_usd": 250, "requires_human_approval_above_usd": 200}
-      },
-      {
-        "id": "compensate",
-        "tier": "fast",
-        "action": "offer_guest_gesture",
-        "default": {"drink_credit_usd": 20}
-      }
-    ],
-    "outputs": {
-      "vendor_dispatched": "boolean",
-      "guest_acknowledged": "boolean",
-      "actual_cost_usd": "number"
-    },
-    "observability": {
-      "tag_metadata": ["property_id", "ticket_id", "tier"],
-      "log_to": "usage.jsonl"
-    },
-    "provenance": {
+    "skill_id": "handle_hvac_leak",
+    "trigger_conditions": ["AC leaking", "water near electrical"],
+    "preferred_vendors": ["mr_wang_hvac"],
+    "auth_cap_usd": 200,
+    "guest_voice_style": "founder_voice",
+    "approval_rules": ["manager approval >$500"],
+    "sources": {
       "derived_from_ticket": "tk_warm_taipei_2br_20260429_001",
-      "brain_layers_used": ["founder_voice_memo", "structured_knowledge", "sop", "prior_resolution"],
+      "brain_layers_used": ["founder_voice_memo", "sop", "prior_resolution"],
       "generated_by": "claude-opus-4-7",
       "generated_at": "2026-04-29T18:46:35Z"
     }
   },
   "proposed_rule": {
     "id": "rule_proposed_20260429_001",
-    "title": "Auto-flag high-severity HVAC at properties with imminent check-in",
-    "description": "When category=hvac_leak AND severity>=4 AND time_to_next_checkin_h <= 6 at any managed property, auto-dispatch preferred same-day vendor and notify operator on Slack before authorization above $200.",
+    "title": "Auto-escalate Taipei HVAC + electrical risk if Mr. Wang unavailable",
+    "description": "Pattern detected: HVAC tickets at Taipei with electrical risk now consistently route to Mr. Wang within 2hrs. When Mr. Wang is unavailable, auto-escalate to manager rather than fall back to a cheaper same-day vendor.",
     "trigger": {
+      "city": "Taipei",
       "category": "hvac_leak",
-      "severity_gte": 4,
-      "time_to_next_checkin_h_lte": 6
+      "risk_tags_includes": "electrical_risk",
+      "preferred_vendor_unavailable": "mr_wang_hvac"
     },
     "action": {
-      "auto_dispatch": true,
-      "vendor_selection": "prefer_same_day",
-      "human_approval_above_usd": 200,
+      "escalate_to": "manager",
+      "skip_fallback_vendor": true,
       "notify": ["slack:#ops-ben"]
     },
-    "rationale": "This pattern resolved 2/2 prior tickets within budget and SLA. Codifying it removes the dispatch-decision latency.",
-    "lightsprint_prompt": "Add a comp_rule.py automation: when an hvac_leak ticket at any managed property has severity >= 4 AND time_to_next_checkin_h <= 6, auto-dispatch preferred same-day vendor and post a Slack notification to Ben if cost_estimate exceeds $200. Tag the LLM call with metadata.property_id, metadata.ticket_id, and metadata.tier='strong' so it shows up in the TokenRouter cost ticker correctly."
+    "rationale": "Mr. Wang's electrical-safety judgement is the moat. Falling back to a cheaper vendor without it has caused two near-misses. Escalation cost is lower than insurance exposure.",
+    "lightsprint_prompt": "Add a comp_rule.py automation: when an hvac_leak ticket at a Taipei property has risk_tags including 'electrical_risk' AND the preferred vendor (mr_wang_hvac) is unavailable, escalate to manager instead of selecting a fallback vendor. Post a Slack notification to #ops-ben. Tag the LLM call with metadata.property_id, metadata.ticket_id, and metadata.tier='strong' so it shows up in the TokenRouter cost ticker correctly."
   },
   "cost_ledger_snapshot": [
     {"ts": "2026-04-29T18:42:13Z", "property_id": "warm_taipei_2br", "ticket_id": "tk_warm_taipei_2br_20260429_001", "model": "llama-3.3-70b", "tier": "fast", "input_tokens": 412, "output_tokens": 88, "usd": 0.000338},
-    {"ts": "2026-04-29T18:42:31Z", "property_id": "warm_taipei_2br", "ticket_id": "tk_warm_taipei_2br_20260429_001", "model": "llama-3.3-70b", "tier": "fast", "input_tokens": 256, "output_tokens": 64, "usd": 0.000224},
-    {"ts": "2026-04-29T18:42:55Z", "property_id": "warm_taipei_2br", "ticket_id": "tk_warm_taipei_2br_20260429_001", "model": "claude-opus-4-7", "tier": "strong", "input_tokens": 1840, "output_tokens": 612, "usd": 0.073500},
-    {"ts": "2026-04-29T18:43:42Z", "property_id": "warm_taipei_2br", "ticket_id": "tk_warm_taipei_2br_20260429_001", "model": "claude-opus-4-7", "tier": "strong", "input_tokens": 980, "output_tokens": 288, "usd": 0.036300}
+    {"ts": "2026-04-29T18:42:55Z", "property_id": "warm_taipei_2br", "ticket_id": "tk_warm_taipei_2br_20260429_001", "model": "claude-opus-4-7", "tier": "strong", "input_tokens": 1100, "output_tokens": 350, "usd": 0.042625}
   ]
 }

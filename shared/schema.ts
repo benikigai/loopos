@@ -39,6 +39,7 @@ export interface Classification {
   severity: 1 | 2 | 3 | 4 | 5;
   language: string;
   urgency_window_minutes: number;
+  risk_tags?: string[];
   model_used: string;
   tier: Tier;
 }
@@ -81,7 +82,6 @@ export interface OpsTicket {
 
 export type BrainLayer =
   | "founder_voice_memo"
-  | "structured_knowledge"
   | "sop"
   | "prior_resolution";
 
@@ -95,29 +95,14 @@ export interface BrainSource {
   match_reason: string;
 }
 
-export interface SkillStep {
-  id: string;
-  tier: Tier;
-  action: string;
-  constraints?: Record<string, unknown>;
-  preference_rule?: string;
-  default?: Record<string, unknown>;
-  key?: string;
-}
-
 export interface SkillArtifact {
-  name: string;
-  version: string;
-  description: string;
-  trigger: Record<string, unknown>;
-  inputs: Record<string, string>;
-  steps: SkillStep[];
-  outputs: Record<string, string>;
-  observability: {
-    tag_metadata: string[];
-    log_to: string;
-  };
-  provenance: {
+  skill_id: string;
+  trigger_conditions: string[];
+  preferred_vendors: string[];
+  auth_cap_usd: number;
+  guest_voice_style: string;
+  approval_rules: string[];
+  sources: {
     derived_from_ticket: string;
     brain_layers_used: BrainLayer[];
     generated_by: string;

@@ -33,7 +33,7 @@ All endpoints return JSON. CORS open for `localhost:3000` during dev.
 | `POST` | `/ingest` | Accepts `{audio_url?, text?, sender, property_id, channel}`. Creates an `OpsTicket`. Returns `{ticket_id}`. |
 | `GET` | `/tickets` | List of `OpsTicket` summaries (id, sender, property_id, status, created_at, snippet). |
 | `GET` | `/tickets/:id` | Full `OpsTicket` (includes transcript, translation, classification, dispatch_draft). |
-| `GET` | `/tickets/:id/brain` | `{sources: BrainSource[]}` — the 4-layer brain match. |
+| `GET` | `/tickets/:id/brain` | `{sources: BrainSource[]}` — the 3-layer brain match. |
 | `POST` | `/tickets/:id/resolve` | Marks ticket resolved. Returns `{skill: SkillArtifact, proposed_rule: Rule}`. |
 | `GET` | `/costs/by-property` | `{[property_id]: {today_usd, fast_calls, fast_usd, strong_calls, strong_usd, budget_remaining_usd}}`. Polled every 1s by cost ticker. Reads from `usage.jsonl`. |
 | `GET` | `/usage` | Tail of `usage.jsonl`, last 100 rows. (Optional — `/costs/by-property` is the primary feed.) |

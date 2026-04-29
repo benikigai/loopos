@@ -23,7 +23,7 @@ TicketStatus = Literal[
     "ingested", "classified", "draft_dispatch", "dispatched", "resolved"
 ]
 BrainLayer = Literal[
-    "founder_voice_memo", "structured_knowledge", "sop", "prior_resolution"
+    "founder_voice_memo", "sop", "prior_resolution"
 ]
 
 
@@ -51,6 +51,7 @@ class Classification(BaseModel):
     severity: int = Field(ge=1, le=5)
     language: str
     urgency_window_minutes: int
+    risk_tags: list[str] | None = None
     model_used: str
     tier: Tier
 
@@ -94,38 +95,21 @@ class BrainSource(BaseModel):
     match_reason: str
 
 
-class SkillStep(BaseModel):
-    id: str
-    tier: Tier
-    action: str
-    constraints: dict[str, Any] | None = None
-    preference_rule: str | None = None
-    default: dict[str, Any] | None = None
-    key: str | None = None
-
-
-class SkillProvenance(BaseModel):
+class SkillSources(BaseModel):
     derived_from_ticket: str
     brain_layers_used: list[BrainLayer]
     generated_by: str
     generated_at: str
 
 
-class SkillObservability(BaseModel):
-    tag_metadata: list[str]
-    log_to: str
-
-
 class SkillArtifact(BaseModel):
-    name: str
-    version: str
-    description: str
-    trigger: dict[str, Any]
-    inputs: dict[str, str]
-    steps: list[SkillStep]
-    outputs: dict[str, str]
-    observability: SkillObservability
-    provenance: SkillProvenance
+    skill_id: str
+    trigger_conditions: list[str]
+    preferred_vendors: list[str]
+    auth_cap_usd: float
+    guest_voice_style: str
+    approval_rules: list[str]
+    sources: SkillSources
 
 
 class ProposedRule(BaseModel):

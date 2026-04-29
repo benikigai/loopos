@@ -89,7 +89,7 @@ One Claude app account per LoopOS customer. Each operator on the team is added a
 
 These are not chatbot pleasantries — they are durable method calls. State persists across operators, devices, and sessions.
 
-**Why "one account per company" not "one per operator":** the Company Brain needs *all* operator interactions to converge. Shirley's "I always use Lin HVAC for Taipei" and Haru's "the Ito vendor is slower in winter" are both knowledge — they only become a brain if they share a backend. Per-operator accounts re-fragment the knowledge LoopOS exists to consolidate.
+**Why "one account per company" not "one per operator":** the Company Brain needs *all* operator interactions to converge. Shirley's "I always use Mr. Wang HVAC for Taipei" and Haru's "the Ito vendor is slower in winter" are both knowledge — they only become a brain if they share a backend. Per-operator accounts re-fragment the knowledge LoopOS exists to consolidate.
 
 ### 2. Reboot — durable workflow & MCP layer
 
@@ -110,14 +110,15 @@ Per Reboot's Claude Code integration, methods decorated `mcp=Tool()` become MCP 
 
 ### 3. Company Brain — a view, not a system
 
-The brain is not a separate service. It's a queryable read-side over Reboot's durable state. Four layers:
+The brain is not a separate service. It's a queryable read-side over Reboot's durable state. Three layers:
 
 | Layer | Source | Authoring path |
 |---|---|---|
 | `founder_voice_memo` | Ben recording 2-min memos via Claude voice input | Ben says "Claude, save this as a voice memo" → MCP tool `add_founder_memo()` |
-| `structured_knowledge` | `Property` records, vendor cards, equipment specs | Synced from PMS (Beds24) + manual edits |
 | `sop` | Markdown SOP files | Edited in Lightsprint, committed to repo, indexed on commit |
 | `prior_resolution` | Resolved `OpsTicket` snapshots | Auto, on resolve |
+
+`Property` records (vendor cards, equipment specs) are not a brain layer — they're structured state on the `Property` durable object itself, queried directly when needed.
 
 **The "executable skills file" payoff (YC #4):** when a `Rule` is approved, a `SkillArtifact` is emitted as JSON, registered in Reboot, and exposed as a new MCP tool (`handle_hvac_leak`, `handle_late_checkout`, etc.). Tom Blomfield asked literally for this primitive. We render it on stage.
 
@@ -148,8 +149,8 @@ Claude (via report_issue MCP tool):
    → LoopOS creates OpsTicket(warm_taipei_2br)
    → fast-tier classify (severity 4, hvac_leak)
    → brain query: founder memo + SOP + prior resolution match
-   → strong-tier reasoning drafts dispatch (Lin HVAC, $145 est, $250 cap)
-   → response back to Shirley: "派 Lin HVAC, 90 分鐘到，$145 預估。授權嗎？"
+   → strong-tier reasoning drafts dispatch (Mr. Wang HVAC, $145 est, $200 cap)
+   → response back to Shirley: "派王師傅 HVAC, 90 分鐘到，$145 預估。授權嗎？"
 
 Shirley → Claude: "授權。"
 
@@ -176,7 +177,7 @@ Hackathon scope — minimum to demo. Decorated `mcp=Tool()` in Reboot.
 | Tool | Caller | Effect |
 |---|---|---|
 | `report_issue(audio_url \| text, property_hint?)` | operator | creates `OpsTicket`, runs Whisper + classify |
-| `find_brain_sources(question, property_id?)` | operator or LoopOS itself | ranked retrieval over the 4 brain layers |
+| `find_brain_sources(question, property_id?)` | operator or LoopOS itself | ranked retrieval over the 3 brain layers |
 | `propose_dispatch(ticket_id)` | LoopOS internal | strong-tier reasoning, returns DispatchDraft |
 | `dispatch_vendor(ticket_id, vendor, cost_cap)` | operator | authorizes dispatch |
 | `resolve_ticket(ticket_id, outcome, actual_cost)` | operator | emits `SkillArtifact`, surfaces `Rule` candidate |
@@ -257,7 +258,7 @@ If we slip on any of (3)–(4), we still demo from fixture without the audience 
 | RFS | Item | How LoopOS hits it | Surface in pitch |
 |---|---|---|---|
 | **#2** | AI-Native Service Company (Alströmer) | Ben *is* the property manager. AI does the work, captures operator margin. | Sentence 1 of 60s pitch |
-| **#4** | Company Brain (Blomfield) | 4-layer brain → executable skills file in JSON | Sentence 2 + Skill JSON reveal |
+| **#4** | Company Brain (Blomfield) | 3-layer brain → executable skills file in JSON | Sentence 2 + Skill JSON reveal |
 | **#15** | AI OS for Companies (Hu) | Closed loop architecture; every interaction legible; cost ticker queryable | Demo embodies it; Q&A line ready |
 | **#12** | Software for Agents (Epstein) | Every Skill is `agent.json`-compatible (post-hack) | Q&A bridge if "what's next" lands |
 
