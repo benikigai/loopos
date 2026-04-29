@@ -1,0 +1,11 @@
+{
+  "package": "loopos.v1",
+  "uis": [
+    {
+      "name": "show_loopos_dashboard",
+      "stateName": "User",
+      "path": "web/ui/loopos-ui",
+      "title": "LoopOS"
+    }
+  ]
+}

@@ -1,26 +1,37 @@
-# env
-.env
-.env.local
-backend/.env
-
-# usage log (per-deploy)
-usage.jsonl
-backend/usage.jsonl
-
-# python
+# Python
+.venv/
+venv/
 __pycache__/
 *.pyc
 *.pyo
-.venv/
-venv/
+*.egg-info/
+.mypy_cache/
 .pytest_cache/
+.ruff_cache/
 
-# node
+# Reboot generated state
+.rbt/
+.reboot/
+
+# Node
 node_modules/
 .next/
 dist/
 build/
 *.log
 
-# os
+# LoopOS local state
+usage.jsonl
+backend/usage.jsonl
+embeddings_cache.pkl
+
+# Env
+.env
+.env.local
+backend/.env
+
+# OS / editor
 .DS_Store
+*.swp
+.vscode/
+.idea/

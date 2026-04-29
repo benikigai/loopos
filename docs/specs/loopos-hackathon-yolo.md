@@ -1,7 +1,7 @@
 # Yolo: LoopOS Hackathon Slice
 **Spec:** docs/specs/loopos-hackathon.md
 
-- [ ] T1: Reboot scaffold pre-flight + repo pivot — MODERATE
+- [x] T1: Reboot scaffold pre-flight + repo pivot — MODERATE
 - [ ] T2: TokenRouter + Runpod helper wrappers — SIMPLE
 - [ ] T3: Seed data corpus (6 JSON files) — MODERATE
 - [ ] T4: Retrieval helper (four-layer Brain) — MODERATE
