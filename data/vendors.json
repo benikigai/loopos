@@ -1,0 +1,79 @@
+[
+  {
+    "id": "mr_wang_hvac",
+    "name": "Mr. Wang HVAC",
+    "specialty": "hvac_electrical",
+    "properties": ["warm_taipei_2br"],
+    "languages": ["zh-TW"],
+    "typical_cost_usd_range": [80, 200],
+    "avg_response_hours": 2.0,
+    "phone": "+886-2-2345-XXXX",
+    "notes": "Mandarin OK. Same-day on most calls. Don't auth >$200 without warranty check."
+  },
+  {
+    "id": "ito_setsubi",
+    "name": "Ito Setsubi",
+    "specialty": "hvac_plumbing",
+    "properties": ["ito_stream_house"],
+    "languages": ["ja"],
+    "typical_cost_usd_range": [100, 300],
+    "avg_response_hours": 4.0,
+    "phone": "+81-557-XX-XXXX",
+    "notes": "Slower in winter (Dec–Feb)."
+  },
+  {
+    "id": "yosemite_hvac_co",
+    "name": "Yosemite HVAC Co.",
+    "specialty": "hvac",
+    "properties": ["creekfront_cabin"],
+    "languages": ["en"],
+    "typical_cost_usd_range": [120, 400],
+    "avg_response_hours": 3.5,
+    "phone": "+1-209-XXX-XXXX",
+    "notes": "Reliable; standard call-out fee $90."
+  },
+  {
+    "id": "sierra_plumbing",
+    "name": "Sierra Plumbing",
+    "specialty": "plumbing",
+    "properties": ["creekfront_cabin"],
+    "languages": ["en"],
+    "typical_cost_usd_range": [100, 350],
+    "avg_response_hours": 2.5,
+    "phone": "+1-209-XXX-XXXX",
+    "notes": "After-hours +25%."
+  },
+  {
+    "id": "reno_hvac_pros",
+    "name": "Reno HVAC Pros",
+    "specialty": "hvac",
+    "properties": ["mtn_city_reno"],
+    "languages": ["en"],
+    "typical_cost_usd_range": [110, 380],
+    "avg_response_hours": 4.0,
+    "phone": "+1-775-XXX-XXXX",
+    "notes": "Weekend dispatch only via SMS."
+  },
+  {
+    "id": "reno_plumbing_24",
+    "name": "Reno 24/7 Plumbing",
+    "specialty": "plumbing",
+    "properties": ["mtn_city_reno"],
+    "languages": ["en"],
+    "typical_cost_usd_range": [150, 500],
+    "avg_response_hours": 1.5,
+    "phone": "+1-775-XXX-XXXX",
+    "notes": "Premium pricing; use only when guest is on-site."
+  },
+  {
+    "id": "taipei_water_works",
+    "name": "Taipei Water Works",
+    "specialty": "plumbing",
+    "properties": ["warm_taipei_2br"],
+    "languages": ["zh-TW"],
+    "typical_cost_usd_range": [60, 250],
+    "avg_response_hours": 3.0,
+    "phone": "+886-2-XXXX-XXXX",
+    "notes": "City-licensed; required for drainage main work."
+  }
+]

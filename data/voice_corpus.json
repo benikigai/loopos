@@ -1,0 +1,52 @@
+[
+  {
+    "id": "vm_2024_03_taipei_ac",
+    "type": "voice_memo",
+    "date": "2024-03-15",
+    "context": "Ben → Shirley, after 2nd AC issue at Warm Taipei",
+    "language": "en",
+    "text": "AC at Taipei — always Mr. Wang first. Mandarin OK. Around $80 emergency call. Don't auth over $200 without warranty check. He's quick, like 2hrs response.",
+    "tags": ["hvac", "warm_taipei_2br", "vendor_preference", "mr_wang_hvac"],
+    "representative": false
+  },
+  {
+    "id": "vm_2024_06_ito_winter_vendor",
+    "type": "voice_memo",
+    "date": "2024-06-08",
+    "context": "Ben → Haru, planning winter ops",
+    "language": "en",
+    "text": "Ito Setsubi is fine in summer but expect 4-6hr response Dec through Feb. If it's a cold-snap pipe burst and guest is in the house, jump to my private contact list — don't wait on Setsubi.",
+    "tags": ["hvac", "plumbing", "ito_stream_house", "vendor_preference", "seasonal"],
+    "representative": true
+  },
+  {
+    "id": "vm_2024_07_yosemite_lockbox",
+    "type": "voice_memo",
+    "date": "2024-07-21",
+    "context": "Ben → Miguel, after early-arrival incident",
+    "language": "en",
+    "text": "Yosemite lockouts: don't dispatch a locksmith first. The Schlage code rotates daily — push the code via the app, then call to confirm. Locksmith is the $200+ fallback if the lock itself failed. Guests at Creekfront are usually fine to wait 15 min.",
+    "tags": ["lockout", "creekfront_cabin", "smart_lock", "vendor_preference"],
+    "representative": true
+  },
+  {
+    "id": "vm_2024_09_reno_cleaner_protocol",
+    "type": "voice_memo",
+    "date": "2024-09-02",
+    "context": "Ben → Miguel, post-Labor-Day same-day-checkin escalation",
+    "language": "en",
+    "text": "Reno checkout is 11am, cleaner needs 90 min minimum. If a guest extends checkout past 11:30 we need to charge them at least an hour late-checkout fee — otherwise the cleaner cascades into the next check-in and we end up comping the new guest.",
+    "tags": ["cleaning", "mtn_city_reno", "comp_policy", "scheduling"],
+    "representative": true
+  },
+  {
+    "id": "vm_2024_11_bali_plumbing_caveat",
+    "type": "voice_memo",
+    "date": "2024-11-18",
+    "context": "Ben → Celine, drafting the Bali villa SOP",
+    "language": "en",
+    "text": "For Bali plumbing always use the local kampung plumber first, not the resort-area company. Local guy is $30 a call, knows the building. The resort company is $150 minimum and they show up an hour late. Only escalate to them if it's a sewage main thing.",
+    "tags": ["plumbing", "bali_villa_placeholder", "vendor_preference"],
+    "representative": true
+  }
+]

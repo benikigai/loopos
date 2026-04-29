@@ -1,0 +1,38 @@
+{
+  "skill_id": "handle_hvac_leak",
+  "name": "Handle HVAC Leak",
+  "description": "Triage and dispatch for HVAC leaks at managed properties. Optimized for imminent-checkin scenarios with electrical-risk awareness.",
+  "trigger_conditions": [
+    "AC leaking",
+    "water near electrical",
+    "category=hvac_leak",
+    "severity>=3"
+  ],
+  "inputs_required": [
+    "property_id",
+    "transcript_en",
+    "severity",
+    "risk_tags"
+  ],
+  "workflow_steps": [
+    "Classify severity and risk_tags via fast-tier LLM.",
+    "Retrieve top-3 voice memos + matched SOP + historical resolutions for property+category.",
+    "Reason via strong-tier LLM to draft dispatch with vendor + cost cap.",
+    "If severity >= 4 → AWAITING_HUMAN; else auto-authorize up to property cap.",
+    "Mock-WhatsApp the assigned operator; durable wait for ack or 30s escalation.",
+    "On resolve, propose a new rule if resolution pattern matches a candidate."
+  ],
+  "preferred_vendors": ["mr_wang_hvac"],
+  "auth_cap_usd": 200,
+  "guest_voice_style": "founder_voice",
+  "approval_rules": [
+    "manager approval >$500",
+    "skip-vendor-fallback if preferred unavailable AND risk_tags includes electrical_risk"
+  ],
+  "sources": {
+    "derived_from_ticket": "tk_warm_taipei_2br_20260429_001",
+    "brain_layers_used": ["founder_voice_memo", "sop", "prior_resolution"],
+    "generated_by": "claude-opus-4-7",
+    "generated_at": "2026-04-29T18:46:35Z"
+  }
+}

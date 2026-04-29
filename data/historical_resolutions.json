@@ -1,0 +1,67 @@
+[
+  {
+    "id": "tk_warm_taipei_2br_20240412_001",
+    "property_id": "warm_taipei_2br",
+    "category": "hvac_leak",
+    "resolved_at": "2024-04-12T09:24:00+08:00",
+    "vendor_id": "mr_wang_hvac",
+    "duration_hours": 2.1,
+    "actual_cost_usd": 145,
+    "outcome": "vendor_dispatched",
+    "guest_rating": 5,
+    "snippet": "Mr. Wang HVAC, 2.1hr to resolve, $145 total. Outcome: 5-star.",
+    "tags": ["hvac", "warm_taipei_2br", "mr_wang_hvac"]
+  },
+  {
+    "id": "tk_warm_taipei_2br_20250912_004",
+    "property_id": "warm_taipei_2br",
+    "category": "hvac_leak",
+    "resolved_at": "2025-09-12T14:18:00+08:00",
+    "vendor_id": "mr_wang_hvac",
+    "duration_hours": 1.8,
+    "actual_cost_usd": 128,
+    "outcome": "vendor_dispatched",
+    "guest_rating": 5,
+    "snippet": "Mr. Wang HVAC, drain-line clog cleared. $128 total. Resolved before 4pm check-in.",
+    "tags": ["hvac", "warm_taipei_2br", "mr_wang_hvac", "recurrence"]
+  },
+  {
+    "id": "tk_ito_stream_house_20250207_002",
+    "property_id": "ito_stream_house",
+    "category": "plumbing_leak",
+    "resolved_at": "2025-02-07T11:45:00+09:00",
+    "vendor_id": "ito_setsubi",
+    "duration_hours": 5.5,
+    "actual_cost_usd": 220,
+    "outcome": "vendor_dispatched",
+    "guest_rating": 4,
+    "snippet": "Ito Setsubi, kitchen pipe burst from cold snap. 5.5hr response (winter slowdown). $220.",
+    "tags": ["plumbing", "ito_stream_house", "ito_setsubi", "winter"]
+  },
+  {
+    "id": "tk_creekfront_cabin_20240801_007",
+    "property_id": "creekfront_cabin",
+    "category": "lockout",
+    "resolved_at": "2024-08-01T16:30:00-07:00",
+    "vendor_id": "miguel_personal",
+    "duration_hours": 0.4,
+    "actual_cost_usd": 0,
+    "outcome": "self_resolved",
+    "guest_rating": 5,
+    "snippet": "Schlage code rotated, pushed via app. Guest in 15 min. No vendor cost.",
+    "tags": ["lockout", "creekfront_cabin", "smart_lock"]
+  },
+  {
+    "id": "tk_mtn_city_reno_20251015_011",
+    "property_id": "mtn_city_reno",
+    "category": "hvac_leak",
+    "resolved_at": "2025-10-15T19:50:00-07:00",
+    "vendor_id": "reno_hvac_pros",
+    "duration_hours": 3.2,
+    "actual_cost_usd": 165,
+    "outcome": "vendor_dispatched",
+    "guest_rating": 4,
+    "snippet": "Reno HVAC Pros, weekend dispatch. Capacitor replaced. $165.",
+    "tags": ["hvac", "mtn_city_reno", "reno_hvac_pros"]
+  }
+]

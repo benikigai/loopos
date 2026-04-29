@@ -3,7 +3,7 @@
 
 - [x] T1: Reboot scaffold pre-flight + repo pivot — MODERATE
 - [x] T2: TokenRouter + Runpod helper wrappers — SIMPLE
-- [ ] T3: Seed data corpus (6 JSON files) — MODERATE
+- [x] T3: Seed data corpus (6 JSON files) — MODERATE
 - [ ] T4: Retrieval helper (four-layer Brain) — MODERATE
 - [ ] T5: ingest_voice_note + triage writers — COMPLEX
 - [ ] T6: live_state + show_brain_sources readers — MODERATE

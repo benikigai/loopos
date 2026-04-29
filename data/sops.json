@@ -1,0 +1,68 @@
+[
+  {
+    "id": "hvac_leak",
+    "title": "HVAC Leak & Electrical Safety Protocol",
+    "trigger_phrases": [
+      "AC leaking",
+      "AC drip",
+      "冷氣在漏水",
+      "水滴",
+      "outlet",
+      "插座",
+      "electrical risk",
+      "water near electrical"
+    ],
+    "steps": [
+      "Power down unit if safe (operator confirms with guest first).",
+      "Dispatch HVAC + electrician combo vendor (preferred per property).",
+      "Authorize emergency diagnostic up to $200.",
+      "Notify guest in their native language with vendor ETA.",
+      "Offer compensatory gesture (drink credit / late checkout)."
+    ],
+    "preferred_vendors_by_property": {
+      "warm_taipei_2br": ["mr_wang_hvac"],
+      "ito_stream_house": ["ito_setsubi"],
+      "creekfront_cabin": ["yosemite_hvac_co"],
+      "mtn_city_reno": ["reno_hvac_pros"]
+    },
+    "comp_policy": {
+      "drink_credit_usd": 20,
+      "late_checkout_hours": 2
+    },
+    "escalation_thresholds": {
+      "cost_estimate_usd_above": 200,
+      "severity_at_or_above": 4
+    }
+  },
+  {
+    "id": "lockout",
+    "title": "Guest Lockout Protocol",
+    "trigger_phrases": [
+      "locked out",
+      "鍵を開けられない",
+      "key not working",
+      "early arrival"
+    ],
+    "steps": [
+      "Confirm guest identity via reservation reference.",
+      "Walk guest through smart-lock recovery code if device supports it.",
+      "If smart-lock fails, dispatch on-call team member with backup keys.",
+      "If no team member within 30 min, authorize locksmith up to $150.",
+      "Post-resolution: rotate the smart-lock code."
+    ],
+    "preferred_vendors_by_property": {
+      "warm_taipei_2br": ["shirley_personal"],
+      "ito_stream_house": ["haru_personal"],
+      "creekfront_cabin": ["miguel_personal"],
+      "mtn_city_reno": ["miguel_personal"]
+    },
+    "comp_policy": {
+      "drink_credit_usd": 15,
+      "late_checkout_hours": 1
+    },
+    "escalation_thresholds": {
+      "cost_estimate_usd_above": 150,
+      "severity_at_or_above": 3
+    }
+  }
+]

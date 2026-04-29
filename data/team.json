@@ -1,0 +1,38 @@
+[
+  {
+    "id": "miguel",
+    "name": "Miguel",
+    "languages": ["en", "es"],
+    "properties": ["creekfront_cabin", "mtn_city_reno"],
+    "timezone": "America/Los_Angeles",
+    "whatsapp": "+1-555-MIGUEL",
+    "role": "ops_lead_west_us"
+  },
+  {
+    "id": "shirley",
+    "name": "Shirley",
+    "languages": ["zh-TW", "en"],
+    "properties": ["warm_taipei_2br"],
+    "timezone": "Asia/Taipei",
+    "whatsapp": "+886-9-XXXX-XXXX",
+    "role": "ops_lead_taiwan"
+  },
+  {
+    "id": "haru",
+    "name": "Haru",
+    "languages": ["ja", "en"],
+    "properties": ["ito_stream_house"],
+    "timezone": "Asia/Tokyo",
+    "whatsapp": "+81-90-XXXX-XXXX",
+    "role": "ops_lead_japan"
+  },
+  {
+    "id": "celine",
+    "name": "Celine",
+    "languages": ["id", "en"],
+    "properties": ["bali_villa_placeholder"],
+    "timezone": "Asia/Makassar",
+    "whatsapp": "+62-8XX-XXXX-XXXX",
+    "role": "ops_lead_indonesia"
+  }
+]

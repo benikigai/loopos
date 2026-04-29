@@ -1,0 +1,58 @@
+[
+  {
+    "id": "creekfront_cabin",
+    "name": "Creekfront Cabin",
+    "city": "Yosemite",
+    "country": "US",
+    "timezone": "America/Los_Angeles",
+    "primary_language": "en",
+    "monthly_budget_usd": 800,
+    "preferred_vendors_by_issue": {
+      "hvac_leak": ["yosemite_hvac_co"],
+      "lockout": ["miguel_personal"],
+      "plumbing_leak": ["sierra_plumbing"]
+    }
+  },
+  {
+    "id": "mtn_city_reno",
+    "name": "Mtn City Reno",
+    "city": "Reno",
+    "country": "US",
+    "timezone": "America/Los_Angeles",
+    "primary_language": "en",
+    "monthly_budget_usd": 600,
+    "preferred_vendors_by_issue": {
+      "hvac_leak": ["reno_hvac_pros"],
+      "lockout": ["miguel_personal"],
+      "plumbing_leak": ["reno_plumbing_24"]
+    }
+  },
+  {
+    "id": "warm_taipei_2br",
+    "name": "Warm Taipei 2BR",
+    "city": "Taipei",
+    "country": "TW",
+    "timezone": "Asia/Taipei",
+    "primary_language": "zh-TW",
+    "monthly_budget_usd": 500,
+    "preferred_vendors_by_issue": {
+      "hvac_leak": ["mr_wang_hvac"],
+      "lockout": ["shirley_personal"],
+      "plumbing_leak": ["taipei_water_works"]
+    }
+  },
+  {
+    "id": "ito_stream_house",
+    "name": "Ito Stream House",
+    "city": "Ito",
+    "country": "JP",
+    "timezone": "Asia/Tokyo",
+    "primary_language": "ja",
+    "monthly_budget_usd": 500,
+    "preferred_vendors_by_issue": {
+      "hvac_leak": ["ito_setsubi"],
+      "lockout": ["haru_personal"],
+      "plumbing_leak": ["ito_setsubi"]
+    }
+  }
+]

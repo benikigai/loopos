@@ -2,7 +2,28 @@
 **Date:** 2026-04-29
 **Spec:** docs/specs/loopos-hackathon.md
 **Branch:** reboot-pivot
-**Status:** In progress (2/14 tasks done)
+**Status:** In progress (3/14 tasks done)
+
+## Task 3: Seed data corpus
+**Status:** Complete
+**Files changed:**
+  - `data/properties.json` — 4 entries (creekfront_cabin, mtn_city_reno, warm_taipei_2br, ito_stream_house)
+  - `data/team.json` — 4 entries (Miguel/Shirley/Haru/Celine)
+  - `data/vendors.json` — 7 entries (Mr. Wang HVAC, Ito Setsubi, Yosemite HVAC, Sierra Plumbing, Reno HVAC Pros, Reno 24/7 Plumbing, Taipei Water Works)
+  - `data/sops.json` — 2 entries (hvac_leak, lockout per spec minimum)
+  - `data/voice_corpus.json` — 5 entries (Mr. Wang Taipei verbatim from gdrive doc + 4 representative)
+  - `data/historical_resolutions.json` — 5 entries (April 2024 + Sept 2025 Mr. Wang recurrence; Ito winter pipe; Yosemite smart-lock; Reno HVAC weekend)
+  - `data/skills/handle_hvac_leak.json` — 1 SkillArtifact (skill_id, name, description, trigger_conditions, inputs_required, workflow_steps, preferred_vendors=[mr_wang_hvac], auth_cap_usd=200, guest_voice_style=founder_voice, approval_rules, sources)
+**What changed and why:** Spec minimum corpus to unblock T4 retrieval and T5 triage. Voice memos other than Mr. Wang tagged `representative: true` per Q3=A. SkillArtifact Pydantic-validates against `api/loopos/v1/loopos.py`.
+**Tests run:**
+  - JSON parse all 7 files ✓
+  - Cross-reference: every property_id in team/vendors/historical exists in properties.json (modulo intentional `bali_villa_placeholder`) ✓
+  - Mr. Wang voice memo verbatim string-match against gdrive doc ✓
+  - `SkillArtifact.model_validate(skill)` passes ✓
+**Issues found / fixed:** None
+**Remaining risks:** Voice corpus is 5 (master spec wanted 20). Tagged representative; pitch line "20 in production, sample shown" works. Ben can swap real entries in if T13 dry run leaves time.
+**Reviewer verdict:** PASS (self-review)
+**Deslop pass:** Nothing to clean.
 
 ## Task 2: TokenRouter + Runpod helper wrappers
 **Status:** Complete
