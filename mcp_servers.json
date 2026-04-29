@@ -1,8 +1,7 @@
 {
   "mcpServers": {
     "loopos": {
-      "url": "http://localhost:9991/mcp",
-      "useOAuth": true
+      "url": "http://localhost:9991/mcp"
     }
   }
 }
