@@ -5,7 +5,7 @@
 
 Built for **AWS Builder Loft "Build YC's Next Unicorn — Agent Hack Day"**, April 29 2026.
 
-I run nine short-term rentals across four countries with a five-person multilingual ops team. We replaced our back office with a Claude agent that does the work. We don't sell PMS software — we *are* the property manager.
+I run five short-term rentals across four countries with a four-person multilingual ops team. We replaced our back office with a Claude agent that does the work. We don't sell PMS software — we *are* the property manager.
 
 ---
 
