@@ -1,11 +1,19 @@
 # LoopOS
 
-> **Closed-loop AI operating system for deskless service companies.**
-> Every company is an open loop — decisions in Slack, work in tickets, knowledge in heads. LoopOS closes the loop.
+> **We replaced the back office with an agent.**
+> Powered by a Company Brain.
+
+I run nine short-term rentals across four countries with a five-person multilingual ops team. The agent triages tickets, retrieves the right context from a four-layer Brain, drafts the dispatch, and routes it to the right vendor at the right cost cap. The team uses Claude Desktop, ChatGPT, or any MCP client — all of them plug into the same durable state.
 
 Built for **AWS Builder Loft "Build YC's Next Unicorn — Agent Hack Day"**, April 29 2026.
 
-I run nine short-term rentals across four countries with a five-person multilingual ops team. We replaced our back office with a Claude agent that does the work. We don't sell PMS software — we *are* the property manager.
+### The two YC Requests for Startups it answers
+
+> **YC Request for Startups #2 · Alströmer:** *"Sell the service, not the software."*
+> Alströmer named insurance, accounting, compliance, healthcare. STR ops is the same shape. Service spend dwarfs software spend. We replaced the back office with an agent. We take the margin.
+
+> **YC Request for Startups #4 · Blomfield:** *"Tribal knowledge in heads, email, Slack, tickets. Agents can't work that way."*
+> Blomfield wants a living map. An executable skills file. We built one — four layers, one JSON. The agent runs against it. Not search. Not RAG.
 
 ---
 
@@ -55,13 +63,13 @@ flowchart TB
     LS -.PR.-> STATE
 ```
 
-**Three things make it work:**
+**What you're looking at:**
 
 | | |
 |---|---|
-| **Multiplayer state** | Reboot's durable workflow + MCP server. Same `OpsTicket` instance visible from any AI client. Beat 5 of the demo: tab-flip from Claude → ChatGPT, same ticket, approve dispatch from either. |
-| **Executable Skills** | Resolved patterns get distilled into a `SkillArtifact` (YC #4 *executable skills file*, named by Tom Blomfield). The agent runs against the artifact, not against chat-over-docs. |
-| **Per-property unit economics** | Every LLM call routed through TokenRouter with `metadata.{property_id, ticket_id, tier}`. Cost ticker reads `usage.jsonl` server-side — `$0.043 today / $499.96 budget remaining`-style telemetry without any extra service. |
+| **Reboot multiplayer durable state** | Same `OpsTicket` instance visible from Claude, ChatGPT, any MCP client. Auto-construct on OAuth identity. Beat 5 of the demo: tab-flip from Claude → ChatGPT, same ticket, approve dispatch from either. |
+| **Four-layer Company Brain** | Founder voice memos · SOPs · resolution history · skills registry. Synthesized into JSON the agent runs against. The agent's decisions trace back to all four sources, visible in the dashboard's brain reveal panel. |
+| **TokenRouter unit economics** | Every LLM call routed through TokenRouter with `metadata.{property_id, ticket_id, tier}`. Cost ticker reads `usage.jsonl` server-side — real-time per-property $ telemetry. Margin per property, not per month. |
 
 ---
 
@@ -156,6 +164,118 @@ strong $0.000015  / input, $0.000075  / output
 
 ---
 
+## How TokenRouter + Reboot work in detail
+
+### TokenRouter — the model gateway
+
+OpenAI-compatible. We use the OpenAI Python SDK with `base_url` swapped to TokenRouter:
+
+```python
+client = OpenAI(api_key=os.environ["TOKENROUTER_API_KEY"],
+                base_url=os.environ["TOKENROUTER_BASE_URL"])
+```
+
+Three call sites in `backend/src/servicers/helpers/llm.py`:
+
+**`classify_fast(text, property_id, ticket_id)`** — `claude-haiku-4-5`, JSON-mode response. Sends a system prompt + ticket text; gets back `{category, severity, language, urgency_window_minutes, risk_tags}`. Tagged with `extra_body.metadata = {property_id, ticket_id, tier: "fast"}`. ~150 input / 60 output tokens, ~$0.0003.
+
+**`reason_strong(prompt, property_id, ticket_id)`** — `claude-opus-4-7`, free-form. Two consumers:
+- *Translation* (when `transcript_native` is non-English) → returns English text
+- *Dispatch drafting* → returns JSON `{vendor_id, cost_estimate_usd, eta_minutes, notes_for_vendor, notes_for_guest}`
+
+~1100 input / 350 output, ~$0.04.
+
+**`embed(text)`** — `text-embedding-3-small`, used by retrieval helper for voice memo cosine ranking. Cached in `embeddings_cache.pkl`.
+
+**What TokenRouter buys us:**
+- One client, one API key, one endpoint for haiku + opus + embeddings
+- Per-call `metadata.property_id` tagging → TR's dashboard groups cost per property
+- Local `usage.jsonl` parallel log so the dashboard's `User.cost_summary` Reader can compute per-property $ without hitting TR's API at render time
+- Cost ticker reads `usage.jsonl`, not TR's dashboard — works even if TR is slow on stage
+
+### Reboot — durable workflow + MCP + React-in-Claude
+
+**1. State model.** `User` and `OpsTicket` are durable types, rocksdb-backed at `.rbt/dev/loopos/p000000`. Survives restarts.
+
+```python
+class UserState(Model):
+    ticket_ids: list[str]                # one User per OAuth identity
+
+class OpsTicketState(Model):
+    property_id, severity, status, ...   # 19 fields
+    skill_artifact: Optional[SkillArtifact]
+    history: list[HistoryEvent]          # the activity feed lives here
+    dispatches: list[Dispatch]
+```
+
+`User` has `_is_auto_construct = True` — Reboot auto-creates the User instance when a new OAuth user_id arrives. No application-level "create user" code.
+
+**2. Method types we use.**
+
+| Type | Where | What |
+|---|---|---|
+| **Writer** | `OpsTicket.triage`, `acknowledge_dispatch`, `propose_new_rule`, `create` (factory) | Atomic single-state mutation. `triage` chains classify → retrieve → reason inside one writer call. |
+| **Transaction** | `User.ingest_text_message`, `ingest_voice_note` | Multi-state atomic: create OpsTicket factory + append ID to User.ticket_ids + await triage. |
+| **Reader** | `User.list_tickets/live_state/query_brain/cost_summary`, `OpsTicket.show_brain_sources/activity_feed` | Read-only. Subscribed via WebSocket from React. Auto-rerender on state change. |
+| **Workflow** | `OpsTicket.dispatch_with_escalation` | Durable async with timer. (Currently stub; production: 30s wait for ack or auto-escalate.) |
+| **UI** | `User.show_loopos_dashboard` | Opens the React app **inside Claude's chat iframe**. Reboot serves the dist bundle via Envoy. |
+
+**3. MCP server — auto-generated from decorators.**
+
+```python
+methods=Methods(
+    triage=Writer(..., mcp=Tool()),    # ← that's the entire MCP wiring
+)
+```
+
+The `mcp=Tool()` decorator on each method exposes it as an MCP tool. We have 12 tools without writing any MCP plumbing. Claude Desktop and ChatGPT both speak MCP over HTTP — they hit the same Reboot instance, see the same `OpsTicket(state_id)`. **That's Beat 5 multiplayer.**
+
+OAuth in dev: Reboot auto-runs `Anonymous(_is_dev_default=True)`. Each fresh MCP session gets an `anon-{ULID}` user_id, JWT-signed bearer token, auto-constructed User instance.
+
+**4. React inside Claude — `ui` method + `RebootClientProvider`.**
+
+```tsx
+<RebootClientProvider>
+  <ErrorBoundary><LoopOsApp /></ErrorBoundary>
+</RebootClientProvider>
+```
+
+`RebootClientProvider` auto-detects iframe context, picks up the bearer token, wires WebSocket to backend at `localhost:9991`. Generated React hooks per state type:
+
+```tsx
+const ticket = useOpsTicket({ id: ticketId });
+const { response } = ticket.useShowBrainSources();   // WebSocket subscription
+await ticket.proposeNewRule();                        // mutation
+```
+
+The hooks subscribe to state changes and trigger re-renders automatically. No manual WebSocket code.
+
+**5. Envoy.** Reboot uses Envoy as a proxy. We installed it via `brew install envoy` and set `REBOOT_LOCAL_ENVOY_MODE=executable`. Envoy routes:
+- `/__/web/**` → static dist files (prod) or Vite (dev)
+- `/mcp` → MCP server
+- gRPC traffic → backend servicer
+
+### What this stack replaces
+
+If we built this without Reboot/TokenRouter, the equivalent would be:
+
+```
+FastAPI + Pydantic              →  Reboot Models + auto-API
+Custom OAuth + JWT              →  Anonymous(_is_dev_default=True)
+WebSocket + state diffing       →  useUser/useOpsTicket hooks
+Postgres + migrations           →  durable Reboot state, no schema code
+MCP server library + manual     →  mcp=Tool() decorator, auto-exposure
+  tool exposure
+Anthropic SDK + OpenAI SDK      →  one OpenAI SDK pointed at TR
+  + cost log per call              + extra_body.metadata + usage.jsonl
+2-tier router logic             →  tier="fast" / "strong" args
+Envoy / nginx routing           →  bundled with `rbt dev run`
+```
+
+Two libraries doing what would otherwise be six services + ~2000 lines of glue.
+
+---
+
 ## Sponsor stack — what's actually invoked
 
 Honest attribution: only sponsors whose code path actually fires during
@@ -171,14 +291,26 @@ in the codebase but require a different demo path to activate.
 
 ---
 
-## YC Summer 2026 RFS coverage
+## YC Summer 2026 Requests for Startups
 
-| RFS | Author | LoopOS proof | Pitch surface |
-|---|---|---|---|
-| **#2** AI-native service companies | Gustaf Alströmer | Operator-margin model — I am the property manager. Real revenue, real ops team. | 60s pitch sentence 1 |
-| **#4** Company Brain | Tom Blomfield | `SkillArtifact` JSON viewer — the *executable skills file* primitive, rendered live from real triage | 60s pitch sentence 2 + Beat 4 |
-| **#15** AI OS for companies | Diana Hu | Closed-loop architecture; every interaction legible; cost ticker queryable | Demo embodies it; Q&A bridge |
-| **#12** Software for agents | Aaron Epstein | Every Skill is `agent.json`-compatible | Q&A only — no /agents/ endpoints today |
+### #2 · Gustaf Alströmer — *"Sell the service, not the software."*
+
+> The era of AI copilots is ending. The next era is companies that skip the human entirely and just do the work. Total spend on services is many times larger than spend on software. Categories YC named: insurance brokerage, accounting/tax/audit, compliance, healthcare administration.
+
+LoopOS proof: I run nine STR properties across four countries. Real revenue, real ops team (Miguel, Shirley, Haru, Celine). The agent does the back-office work. We take the operator margin. STR ops isn't on YC's named list — same shape, untapped.
+
+### #4 · Tom Blomfield — *"Knowledge in heads, email, Slack, tickets. Agents can't work that way."*
+
+> The biggest blocker to AI automation isn't model quality. It's domain knowledge. Tom wants a system that pulls knowledge out of every fragmented source, structures it, keeps it current, and turns it into an executable skills file for AI. Not a search tool. Not a chatbot over documents. A living map of how a company actually works.
+
+LoopOS proof: the four-layer Brain renders live in the dashboard. `data/voice_corpus.json` (founder voice memos) + `data/sops.json` (SOPs) + `data/historical_resolutions.json` (resolution history) + `data/skills/` (skills registry). On Beat 4 the `SkillArtifact` JSON viewer shows the executable Skill the agent runs against — Blomfield's exact primitive.
+
+### Q&A bridges (not in 60s pitch)
+
+| RFS | Author | If they ask "what about…" |
+|---|---|---|
+| **#15** AI OS for companies | Diana Hu | Every interaction is a durable, queryable Reboot state. The cost ticker is a live `Reader` over `usage.jsonl`. Closed loop: every resolved ticket sharpens the Brain. |
+| **#12** Software for agents | Aaron Epstein | Every Skill is `agent.json`-compatible — same JSON shape. We're not building `/agents/` endpoints today, but the artifact ports unchanged. |
 
 ---
 
