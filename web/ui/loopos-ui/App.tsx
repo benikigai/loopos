@@ -394,9 +394,6 @@ export const LoopOsApp: FC = () => {
             </div>
           </div>
         </div>
-        <div className={css.aboutPitch}>
-          We don't sell PMS software. We ARE the property manager.
-        </div>
       </section>
 
       {/* ticket strip — horizontal on narrow viewports */}
