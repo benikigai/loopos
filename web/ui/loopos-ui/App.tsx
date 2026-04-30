@@ -206,6 +206,7 @@ const ProposeRuleCard: FC<{ ticketId: string }> = ({ ticketId }) => {
     lightsprintPrompt: string;
   }>(null);
   const [pending, setPending] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const onPropose = async () => {
     setPending(true);
@@ -223,11 +224,22 @@ const ProposeRuleCard: FC<{ ticketId: string }> = ({ ticketId }) => {
     }
   };
 
+  const onCopy = async () => {
+    if (!proposed) return;
+    try {
+      await navigator.clipboard.writeText(proposed.lightsprintPrompt);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      /* ignore */
+    }
+  };
+
   return (
     <div className={css.section}>
       <div className={css.sectionHeader}>
         <span className={css.cardLabel}>propose new rule</span>
-        <SponsorBadge sponsor="Lightsprint" />
+        <SponsorBadge sponsor="Reboot" />
       </div>
       {!proposed ? (
         <button className={css.button} onClick={onPropose} disabled={pending}>
@@ -237,8 +249,16 @@ const ProposeRuleCard: FC<{ ticketId: string }> = ({ ticketId }) => {
         <>
           <div className={css.cardTitle}>{proposed.title}</div>
           <div className={css.cardBody}>{proposed.description}</div>
-          <div className={css.cardLabel}>lightsprint prompt</div>
+          <div className={css.proposeBanner}>
+            <span className={css.cardLabel}>destination: Lightsprint</span>
+            <span className={css.muted}>
+              paste this prompt into Lightsprint sandbox to ship a PR against benikigai/loopos
+            </span>
+          </div>
           <pre className={css.skillJson}>{proposed.lightsprintPrompt}</pre>
+          <button className={css.button} onClick={onCopy}>
+            {copied ? "copied ✓" : "copy prompt"}
+          </button>
         </>
       )}
     </div>
@@ -333,8 +353,41 @@ export const LoopOsApp: FC = () => {
     <div className={css.container}>
       <header className={css.header}>
         <span className={css.brand}>LoopOS</span>
-        <span className={css.tag}>company brain · ops execution</span>
+        <span className={css.tag}>closed-loop AI ops for deskless service companies</span>
       </header>
+
+      {/* About / pitch banner */}
+      <section className={css.aboutSection}>
+        <div className={css.aboutPillarRow}>
+          <div className={css.aboutPillar}>
+            <SponsorBadge sponsor="Reboot" />
+            <div className={css.aboutPillarText}>
+              <strong>Multiplayer durable state.</strong> Same ticket visible
+              from Claude, ChatGPT, any MCP client. Every operator's AI plugs
+              into one shared backend.
+            </div>
+          </div>
+          <div className={css.aboutPillar}>
+            <SponsorBadge sponsor="TokenRouter" />
+            <div className={css.aboutPillarText}>
+              <strong>Per-property unit economics.</strong> Every LLM call
+              tagged + costed in real time. Margin per property, not per month.
+            </div>
+          </div>
+          <div className={css.aboutPillar}>
+            <span className={css.ycBadge}>YC #4</span>
+            <div className={css.aboutPillarText}>
+              <strong>Executable Skills.</strong> Resolved patterns become
+              JSON skills the agent runs against — not chat-over-docs. The
+              Company Brain primitive Tom Blomfield asked for.
+            </div>
+          </div>
+        </div>
+        <div className={css.aboutPitch}>
+          We don't sell PMS software. We ARE the property manager.
+          AI-native service company, software margins.
+        </div>
+      </section>
 
       {/* ticket strip — horizontal on narrow viewports */}
       <section className={css.section}>

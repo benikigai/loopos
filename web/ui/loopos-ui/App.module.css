@@ -266,6 +266,64 @@
 }
 .button:disabled { opacity: 0.6; cursor: not-allowed; }
 
+/* About banner */
+.aboutSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.aboutPillarRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 720px) {
+  .aboutPillarRow { grid-template-columns: 1fr 1fr 1fr; }
+}
+.aboutPillar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+}
+.aboutPillarText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text);
+  line-height: 1.45;
+}
+.aboutPillarText strong {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+.aboutPitch {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text);
+  line-height: 1.5;
+  font-style: italic;
+  border-top: 1px solid var(--color-border);
+  padding-top: 8px;
+}
+
+/* Propose rule destination banner */
+.proposeBanner {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 7px 9px;
+  background: var(--color-bg);
+  border: 1px dashed var(--color-orange);
+  border-radius: 4px;
+}
+
 /* cost ticker */
 .tickerGrid {
   display: grid;

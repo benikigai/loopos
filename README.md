@@ -156,14 +156,18 @@ strong $0.000015  / input, $0.000075  / output
 
 ---
 
-## Sponsor stack — load-bearing roles
+## Sponsor stack — what's actually invoked
 
-| Sponsor | Role | Beat |
+Honest attribution: only sponsors whose code path actually fires during
+the demo carry a load-bearing claim. Sponsors marked *off-stage* exist
+in the codebase but require a different demo path to activate.
+
+| Sponsor | Role | Status in current demo |
 |---|---|---|
-| **Reboot** | Durable multiplayer state, MCP server, React UI **inside Claude** | Beat 3 brain reveal · Beat 5 cross-client multiplayer |
-| **TokenRouter** | Two-tier OpenAI-compatible router with per-call metadata tagging → real-time per-property cost ticker | Beat 2 cost ticker increment |
-| **Runpod** | Faster-whisper serverless for multilingual ingest (zh-TW/ja/id → en); hardcoded fallback dict for stage reliability | Beat 1 voice transcription |
-| **Lightsprint** | Closing cameo — paste `lightsprint_prompt` from `propose_new_rule`, ship a PR live against this repo | Beat 6 closed-loop ship |
+| **Reboot** | Durable multiplayer state, MCP server, React UI **inside Claude**; auto-construct of User per OAuth identity | ✅ load-bearing — every tool call goes through it |
+| **TokenRouter** | Two-tier OpenAI-compatible router with per-call metadata tagging → real-time per-property cost ticker (claude-haiku-4-5 fast tier, claude-opus-4-7 strong tier) | ✅ load-bearing — Beat 2 cost ticker shows real $ |
+| **Runpod** | Faster-whisper serverless for multilingual voice ingest (zh-TW/ja/id → en) with hardcoded fallback dict | ⚠ off-stage in text-only demo — only fires via `ingest_voice_note`. Wire by recording an audio file and ingesting it. |
+| **Lightsprint** | Closing cameo — paste `lightsprint_prompt` from `propose_new_rule`, ship a PR live against this repo | ⚠ off-stage by default — `propose_new_rule` generates the prompt via **Reboot**; Lightsprint only runs after manual paste into Lightsprint's sandbox |
 
 ---
 

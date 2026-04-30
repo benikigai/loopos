@@ -76,7 +76,10 @@ _DEFAULT_SPONSORS = {
     "dispatched": "TokenRouter",
     "triage_decision": "Reboot",
     "dispatch_acknowledged": "Reboot",
-    "rule_proposed": "Lightsprint",
+    # rule_proposed: Reboot generates the prompt; Lightsprint only runs if
+    # the operator pastes the prompt into Lightsprint's sandbox. Honest
+    # attribution: the action in our system is Reboot's.
+    "rule_proposed": "Reboot",
     "triaged": "Reboot",
     "triaged_and_authorized": "Reboot",
 }
@@ -780,7 +783,13 @@ class OpsTicketServicer(OpsTicket.Servicer):
         _add_event(
             self.state,
             "rule_proposed",
-            {"rule_id": rule_id, "title": title},
+            {
+                "sponsor": "Reboot",
+                "summary": f"rule proposal generated · ready for Lightsprint paste",
+                "rule_id": rule_id,
+                "title": title,
+                "destination": "Lightsprint",
+            },
         )
 
         return OpsTicket.ProposeNewRuleResponse(
