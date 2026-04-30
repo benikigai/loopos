@@ -3,7 +3,7 @@
 > **We replaced the back office with an agent.**
 > Powered by a Company Brain.
 
-I run nine short-term rentals across four countries with a five-person multilingual ops team. The agent triages tickets, retrieves the right context from a four-layer Brain, drafts the dispatch, and routes it to the right vendor at the right cost cap. The team uses Claude Desktop, ChatGPT, or any MCP client — all of them plug into the same durable state.
+I run five short-term rentals across Japan, Taiwan, Philippines, and Bali with four multilingual assistants on the ground. The agent triages tickets, retrieves the right context from a four-layer Brain, drafts the dispatch, and routes it to the right vendor at the right cost cap. The team uses Claude Desktop, ChatGPT, or any MCP client — all of them plug into the same durable state.
 
 Built for **AWS Builder Loft "Build YC's Next Unicorn — Agent Hack Day"**, April 29 2026.
 
