@@ -191,7 +191,7 @@ const SkillArtifactViewer: FC<{ ticketId: string }> = ({ ticketId }) => {
     <div className={css.section}>
       <div className={css.sectionHeader}>
         <span className={css.cardLabel}>skill artifact</span>
-        <span className={css.ycBadge}>YC #4 · executable skills file</span>
+        <span className={css.ycBadge}>YC Request for Startups #4 · executable skills file</span>
       </div>
       <pre className={css.skillJson}>{JSON.stringify(json, null, 2)}</pre>
     </div>
@@ -364,7 +364,7 @@ export const LoopOsApp: FC = () => {
         </div>
         <div className={css.aboutPillarRow}>
           <div className={css.aboutPillar}>
-            <span className={css.ycBadge}>YC #2 · Alströmer</span>
+            <span className={css.ycBadge}>YC Request for Startups #2 · Alströmer</span>
             <div className={css.aboutPillarText}>
               <strong>"Sell the service, not the software."</strong>
               <br />
@@ -374,7 +374,7 @@ export const LoopOsApp: FC = () => {
             </div>
           </div>
           <div className={css.aboutPillar}>
-            <span className={css.ycBadge}>YC #4 · Blomfield</span>
+            <span className={css.ycBadge}>YC Request for Startups #4 · Blomfield</span>
             <div className={css.aboutPillarText}>
               <strong>"Tribal knowledge in heads, email, Slack, tickets.
               Agents can't work that way."</strong>
