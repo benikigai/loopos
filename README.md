@@ -297,7 +297,7 @@ in the codebase but require a different demo path to activate.
 
 > The era of AI copilots is ending. The next era is companies that skip the human entirely and just do the work. Total spend on services is many times larger than spend on software. Categories YC named: insurance brokerage, accounting/tax/audit, compliance, healthcare administration.
 
-LoopOS proof: I run nine STR properties across four countries. Real revenue, real ops team (Miguel, Shirley, Haru, Celine). The agent does the back-office work. We take the operator margin. STR ops isn't on YC's named list — same shape, untapped.
+LoopOS proof: I run five STR properties across Japan, Taiwan, Philippines, and Bali. Real revenue, real ops team — four assistants on the ground in each country. The agent does the back-office work. We take the operator margin. STR ops isn't on YC's named list — same shape, untapped.
 
 ### #4 · Tom Blomfield — *"Knowledge in heads, email, Slack, tickets. Agents can't work that way."*
 
