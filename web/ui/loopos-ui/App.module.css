@@ -270,11 +270,23 @@
 .aboutSection {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   background: var(--color-panel);
   border: 1px solid var(--color-border);
   border-radius: 6px;
-  padding: 12px 14px;
+  padding: 14px 16px;
+}
+.aboutLead {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+.aboutLeadAccent {
+  color: var(--color-accent);
+  font-weight: 700;
 }
 .aboutPillarRow {
   display: grid;

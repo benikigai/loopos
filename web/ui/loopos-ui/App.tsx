@@ -353,39 +353,41 @@ export const LoopOsApp: FC = () => {
     <div className={css.container}>
       <header className={css.header}>
         <span className={css.brand}>LoopOS</span>
-        <span className={css.tag}>closed-loop AI ops for deskless service companies</span>
       </header>
 
-      {/* About / pitch banner */}
+      {/* Pitch banner */}
       <section className={css.aboutSection}>
+        <div className={css.aboutLead}>
+          We replaced the back office with an agent.
+          <br />
+          <span className={css.aboutLeadAccent}>Powered by a Company Brain.</span>
+        </div>
         <div className={css.aboutPillarRow}>
           <div className={css.aboutPillar}>
-            <SponsorBadge sponsor="Reboot" />
+            <span className={css.ycBadge}>YC #2</span>
             <div className={css.aboutPillarText}>
-              <strong>Multiplayer durable state.</strong> Same ticket visible
-              from Claude, ChatGPT, any MCP client. Every operator's AI plugs
-              into one shared backend.
-            </div>
-          </div>
-          <div className={css.aboutPillar}>
-            <SponsorBadge sponsor="TokenRouter" />
-            <div className={css.aboutPillarText}>
-              <strong>Per-property unit economics.</strong> Every LLM call
-              tagged + costed in real time. Margin per property, not per month.
+              <strong>We're the operator.</strong> AI does the work. We take
+              operator margin. Service-co economics, software margins.
             </div>
           </div>
           <div className={css.aboutPillar}>
             <span className={css.ycBadge}>YC #4</span>
             <div className={css.aboutPillarText}>
-              <strong>Executable Skills.</strong> Resolved patterns become
-              JSON skills the agent runs against — not chat-over-docs. The
-              Company Brain primitive Tom Blomfield asked for.
+              <strong>Executable Skills</strong> — JSON, not chat-over-docs.
+              The Company Brain primitive Tom Blomfield asked for, rendered
+              live.
+            </div>
+          </div>
+          <div className={css.aboutPillar}>
+            <SponsorBadge sponsor="TokenRouter" />
+            <div className={css.aboutPillarText}>
+              <strong>Per-property cost telemetry.</strong> Every LLM call
+              tagged + costed in real time. Margin per property, not per month.
             </div>
           </div>
         </div>
         <div className={css.aboutPitch}>
           We don't sell PMS software. We ARE the property manager.
-          AI-native service company, software margins.
         </div>
       </section>
 
