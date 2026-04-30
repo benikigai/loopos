@@ -364,25 +364,33 @@ export const LoopOsApp: FC = () => {
         </div>
         <div className={css.aboutPillarRow}>
           <div className={css.aboutPillar}>
-            <span className={css.ycBadge}>YC #2</span>
+            <span className={css.ycBadge}>YC #2 · Alströmer</span>
             <div className={css.aboutPillarText}>
-              <strong>We're the operator.</strong> AI does the work. We take
-              operator margin. Service-co economics, software margins.
+              <strong>"Sell the service, not the software."</strong>
+              <br />
+              Alströmer named insurance, accounting, compliance, healthcare.
+              STR ops is the same shape. We replaced the back office with
+              an agent. We take the margin.
             </div>
           </div>
           <div className={css.aboutPillar}>
-            <span className={css.ycBadge}>YC #4</span>
+            <span className={css.ycBadge}>YC #4 · Blomfield</span>
             <div className={css.aboutPillarText}>
-              <strong>Executable Skills</strong> — JSON, not chat-over-docs.
-              The Company Brain primitive Tom Blomfield asked for, rendered
-              live.
+              <strong>"Tribal knowledge in heads, email, Slack, tickets.
+              Agents can't work that way."</strong>
+              <br />
+              Blomfield wants a living map. An executable skills file. We
+              built one — four layers, one JSON. The agent runs against it.
+              Not search. Not RAG.
             </div>
           </div>
           <div className={css.aboutPillar}>
             <SponsorBadge sponsor="TokenRouter" />
             <div className={css.aboutPillarText}>
-              <strong>Per-property cost telemetry.</strong> Every LLM call
-              tagged + costed in real time. Margin per property, not per month.
+              <strong>Per-property cost telemetry.</strong>
+              <br />
+              Every LLM call tagged. Every $ costed in real time. Margin per
+              property, not per month.
             </div>
           </div>
         </div>
