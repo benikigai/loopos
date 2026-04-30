@@ -31,293 +31,6 @@ if _version_not_supported:
     )
 
 
-class OpsTicketMethodsStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.Create = channel.unary_unary(
-                '/loopos.v1.OpsTicketMethods/Create',
-                request_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketCreateRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                _registered_method=True)
-        self.Triage = channel.unary_unary(
-                '/loopos.v1.OpsTicketMethods/Triage',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                _registered_method=True)
-        self.AcknowledgeDispatch = channel.unary_unary(
-                '/loopos.v1.OpsTicketMethods/AcknowledgeDispatch',
-                request_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketAcknowledgeDispatchRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                _registered_method=True)
-        self.DispatchWithEscalation = channel.unary_unary(
-                '/loopos.v1.OpsTicketMethods/DispatchWithEscalation',
-                request_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationRequest.SerializeToString,
-                response_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationResponse.FromString,
-                _registered_method=True)
-        self.ProposeNewRule = channel.unary_unary(
-                '/loopos.v1.OpsTicketMethods/ProposeNewRule',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketProposeNewRuleResponse.FromString,
-                _registered_method=True)
-        self.ShowBrainSources = channel.unary_unary(
-                '/loopos.v1.OpsTicketMethods/ShowBrainSources',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketShowBrainSourcesResponse.FromString,
-                _registered_method=True)
-
-
-class OpsTicketMethodsServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def Create(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def Triage(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AcknowledgeDispatch(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def DispatchWithEscalation(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ProposeNewRule(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ShowBrainSources(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_OpsTicketMethodsServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'Create': grpc.unary_unary_rpc_method_handler(
-                    servicer.Create,
-                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketCreateRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'Triage': grpc.unary_unary_rpc_method_handler(
-                    servicer.Triage,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'AcknowledgeDispatch': grpc.unary_unary_rpc_method_handler(
-                    servicer.AcknowledgeDispatch,
-                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketAcknowledgeDispatchRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'DispatchWithEscalation': grpc.unary_unary_rpc_method_handler(
-                    servicer.DispatchWithEscalation,
-                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationRequest.FromString,
-                    response_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationResponse.SerializeToString,
-            ),
-            'ProposeNewRule': grpc.unary_unary_rpc_method_handler(
-                    servicer.ProposeNewRule,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketProposeNewRuleResponse.SerializeToString,
-            ),
-            'ShowBrainSources': grpc.unary_unary_rpc_method_handler(
-                    servicer.ShowBrainSources,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketShowBrainSourcesResponse.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'loopos.v1.OpsTicketMethods', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('loopos.v1.OpsTicketMethods', rpc_method_handlers)
-
-
- # This class is part of an EXPERIMENTAL API.
-class OpsTicketMethods(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def Create(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.OpsTicketMethods/Create',
-            loopos_dot_v1_dot_loopos__pb2.OpsTicketCreateRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def Triage(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.OpsTicketMethods/Triage',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def AcknowledgeDispatch(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.OpsTicketMethods/AcknowledgeDispatch',
-            loopos_dot_v1_dot_loopos__pb2.OpsTicketAcknowledgeDispatchRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def DispatchWithEscalation(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.OpsTicketMethods/DispatchWithEscalation',
-            loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationRequest.SerializeToString,
-            loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def ProposeNewRule(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.OpsTicketMethods/ProposeNewRule',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            loopos_dot_v1_dot_loopos__pb2.OpsTicketProposeNewRuleResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def ShowBrainSources(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/loopos.v1.OpsTicketMethods/ShowBrainSources',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            loopos_dot_v1_dot_loopos__pb2.OpsTicketShowBrainSourcesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-
 class UserMethodsStub(object):
     """Missing associated documentation comment in .proto file."""
 
@@ -637,6 +350,336 @@ class UserMethods(object):
             '/loopos.v1.UserMethods/Create',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+
+class OpsTicketMethodsStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.Create = channel.unary_unary(
+                '/loopos.v1.OpsTicketMethods/Create',
+                request_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketCreateRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.Triage = channel.unary_unary(
+                '/loopos.v1.OpsTicketMethods/Triage',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.AcknowledgeDispatch = channel.unary_unary(
+                '/loopos.v1.OpsTicketMethods/AcknowledgeDispatch',
+                request_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketAcknowledgeDispatchRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.DispatchWithEscalation = channel.unary_unary(
+                '/loopos.v1.OpsTicketMethods/DispatchWithEscalation',
+                request_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationRequest.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationResponse.FromString,
+                _registered_method=True)
+        self.ProposeNewRule = channel.unary_unary(
+                '/loopos.v1.OpsTicketMethods/ProposeNewRule',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketProposeNewRuleResponse.FromString,
+                _registered_method=True)
+        self.ShowBrainSources = channel.unary_unary(
+                '/loopos.v1.OpsTicketMethods/ShowBrainSources',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketShowBrainSourcesResponse.FromString,
+                _registered_method=True)
+        self.ActivityFeed = channel.unary_unary(
+                '/loopos.v1.OpsTicketMethods/ActivityFeed',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketActivityFeedResponse.FromString,
+                _registered_method=True)
+
+
+class OpsTicketMethodsServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def Create(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Triage(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AcknowledgeDispatch(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DispatchWithEscalation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ProposeNewRule(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ShowBrainSources(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ActivityFeed(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_OpsTicketMethodsServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'Create': grpc.unary_unary_rpc_method_handler(
+                    servicer.Create,
+                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketCreateRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'Triage': grpc.unary_unary_rpc_method_handler(
+                    servicer.Triage,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'AcknowledgeDispatch': grpc.unary_unary_rpc_method_handler(
+                    servicer.AcknowledgeDispatch,
+                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketAcknowledgeDispatchRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'DispatchWithEscalation': grpc.unary_unary_rpc_method_handler(
+                    servicer.DispatchWithEscalation,
+                    request_deserializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationRequest.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationResponse.SerializeToString,
+            ),
+            'ProposeNewRule': grpc.unary_unary_rpc_method_handler(
+                    servicer.ProposeNewRule,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketProposeNewRuleResponse.SerializeToString,
+            ),
+            'ShowBrainSources': grpc.unary_unary_rpc_method_handler(
+                    servicer.ShowBrainSources,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketShowBrainSourcesResponse.SerializeToString,
+            ),
+            'ActivityFeed': grpc.unary_unary_rpc_method_handler(
+                    servicer.ActivityFeed,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=loopos_dot_v1_dot_loopos__pb2.OpsTicketActivityFeedResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'loopos.v1.OpsTicketMethods', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('loopos.v1.OpsTicketMethods', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class OpsTicketMethods(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def Create(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.OpsTicketMethods/Create',
+            loopos_dot_v1_dot_loopos__pb2.OpsTicketCreateRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Triage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.OpsTicketMethods/Triage',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def AcknowledgeDispatch(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.OpsTicketMethods/AcknowledgeDispatch',
+            loopos_dot_v1_dot_loopos__pb2.OpsTicketAcknowledgeDispatchRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DispatchWithEscalation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.OpsTicketMethods/DispatchWithEscalation',
+            loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationRequest.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.OpsTicketDispatchWithEscalationResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ProposeNewRule(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.OpsTicketMethods/ProposeNewRule',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.OpsTicketProposeNewRuleResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ShowBrainSources(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.OpsTicketMethods/ShowBrainSources',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.OpsTicketShowBrainSourcesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ActivityFeed(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/loopos.v1.OpsTicketMethods/ActivityFeed',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            loopos_dot_v1_dot_loopos__pb2.OpsTicketActivityFeedResponse.FromString,
             options,
             channel_credentials,
             insecure,

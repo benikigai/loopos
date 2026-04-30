@@ -4,20 +4,22 @@
   font-family: var(--font-sans);
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  padding: 14px;
   min-height: 100vh;
 }
 
 .header {
   display: flex;
   align-items: baseline;
-  gap: 14px;
+  gap: 12px;
   border-bottom: 1px solid var(--color-border);
-  padding: 14px 20px;
+  padding-bottom: 10px;
 }
 
 .brand {
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--color-accent);
   letter-spacing: 0.02em;
@@ -27,37 +29,31 @@
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-text-muted);
-  letter-spacing: 0.02em;
 }
 
-.threePane {
-  display: grid;
-  grid-template-columns: 220px 1fr 280px;
-  gap: 16px;
-  padding: 16px 20px;
-  flex: 1;
-  min-height: 0;
-}
-
-.leftPane,
-.rightPane {
+.section {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 10px;
-}
-
-.centerPane {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-width: 0;
+  flex-wrap: wrap;
 }
 
 .muted {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--color-text-muted);
-  padding: 8px 4px;
+  padding: 6px 0;
 }
 
 .cardLabel {
@@ -68,135 +64,199 @@
   letter-spacing: 0.08em;
 }
 
+/* sponsor badge */
+.sponsorBadge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.sponsorModel {
+  font-weight: 400;
+  opacity: 0.8;
+}
+.rebootBadge { color: var(--color-blue); border-color: var(--color-blue); background: rgba(96,165,250,0.1); }
+.tokenrouterBadge { color: var(--color-green); border-color: var(--color-green); background: rgba(74,222,128,0.1); }
+.runpodBadge { color: var(--color-purple); border-color: var(--color-purple); background: rgba(167,139,250,0.1); }
+.lightsprintBadge { color: var(--color-orange); border-color: var(--color-orange); background: rgba(251,146,60,0.1); }
+.ycBadge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-yellow);
+  border: 1px solid var(--color-yellow);
+  background: rgba(251,191,36,0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* ticket strip — horizontal scroll */
+.ticketStrip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
 .ticketRow {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 10px 12px;
-  background: var(--color-panel);
+  min-width: 180px;
+  padding: 8px 10px;
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 5px;
   text-align: left;
   cursor: pointer;
   font-family: inherit;
   color: var(--color-text);
   transition: border-color 0.12s ease;
+  flex-shrink: 0;
 }
-
-.ticketRow:hover {
-  border-color: var(--color-accent);
-}
-
+.ticketRow:hover { border-color: var(--color-accent); }
 .ticketRowSelected {
   border-color: var(--color-accent);
   background: var(--color-bg-dark);
 }
-
-.ticketRowTop,
-.ticketRowBottom {
+.ticketRowTop, .ticketRowBottom {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
 }
-
 .ticketProperty {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--color-text);
 }
-
 .ticketCategory {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--color-text-muted);
 }
-
 .ticketStatus {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-
 .severityPill {
   font-family: var(--font-mono);
-  font-size: 10px;
-  padding: 2px 6px;
+  font-size: 9px;
+  padding: 1px 5px;
   border-radius: 3px;
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
 }
+.severityHigh { border-color: var(--color-orange); color: var(--color-orange); }
 
-.severityHigh {
-  border-color: var(--color-orange);
-  color: var(--color-orange);
-}
-
-.brainCards {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.brainCard {
+/* activity feed — vertical timeline */
+.activityFeed {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: var(--color-panel);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  padding: 12px 14px;
 }
+.activityEvent {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 10px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 2px solid var(--color-accent);
+  border-radius: 4px;
+}
+.activityHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.activityTime {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+.activityType {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.activitySummary {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+.activityCost {
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+.activityTokens { color: var(--color-text-muted); }
+.activityUsd { color: var(--color-green); font-weight: 600; }
 
+/* brain cards */
+.brainCards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.brainCard {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 9px 11px;
+}
 .cardTitle {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--color-text);
 }
-
 .cardBody {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--color-text);
   line-height: 1.5;
   white-space: pre-wrap;
 }
-
 .cardMeta {
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--color-text-muted);
 }
 
-.skillBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  background: var(--color-panel);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  padding: 12px 14px;
-}
-
+/* skill JSON */
 .skillJson {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-text);
   background: var(--color-bg-dark);
-  padding: 10px 12px;
+  padding: 9px 11px;
   border-radius: 4px;
   white-space: pre-wrap;
   overflow-x: auto;
   line-height: 1.5;
 }
 
+/* button */
 .button {
   font-family: var(--font-mono);
-  font-size: 12px;
-  padding: 8px 12px;
+  font-size: 11px;
+  padding: 7px 11px;
   background: var(--color-accent);
   color: var(--color-bg);
   border: none;
@@ -204,58 +264,60 @@
   cursor: pointer;
   align-self: flex-start;
 }
+.button:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+/* cost ticker */
+.tickerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
 }
-
-.tickerStack {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
 .tickerCard {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: var(--color-panel);
+  gap: 5px;
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: 6px;
-  padding: 12px 14px;
+  border-radius: 5px;
+  padding: 9px 11px;
 }
-
 .tickerProperty {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--color-text);
 }
-
 .tickerLine {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--color-text);
   display: flex;
   justify-content: space-between;
 }
-
 .tickerNumber {
   color: var(--color-green);
   font-weight: 600;
 }
-
 .tickerSplit {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
   border-top: 1px solid var(--color-border);
-  padding-top: 8px;
+  padding-top: 6px;
 }
-
 .tickerSubLine {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text);
+}
+.fleetTotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-text);
+  padding-top: 6px;
+  border-top: 1px solid var(--color-border);
 }

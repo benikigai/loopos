@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from loopos.v1.loopos import (
+    ActivityEvent,
     BrainHistorical,
     BrainSOP,
     BrainVoiceMemo,
@@ -66,69 +67,106 @@ def _add_event(state: Any, type_: str, payload: dict[str, Any]) -> None:
     )
 
 
-def _maybe_translate(text: str, language: str, ticket_id: str, property_id: str) -> str:
+_DEFAULT_SPONSORS = {
+    "ingested": "Reboot",
+    "transcribed": "Runpod",
+    "translated": "TokenRouter",
+    "classified": "TokenRouter",
+    "brain_retrieved": "Reboot",
+    "dispatched": "TokenRouter",
+    "triage_decision": "Reboot",
+    "dispatch_acknowledged": "Reboot",
+    "rule_proposed": "Lightsprint",
+    "triaged": "Reboot",
+    "triaged_and_authorized": "Reboot",
+}
+
+
+def _default_sponsor_for_event_type(type_: str) -> str:
+    return _DEFAULT_SPONSORS.get(type_, "Reboot")
+
+
+def _default_summary_for_event(type_: str, payload: dict[str, Any]) -> str:
+    if type_ == "ingested":
+        return f"ticket created from {payload.get('source','')} input"
+    if type_ == "dispatch_acknowledged":
+        return f"dispatch {payload.get('dispatch_id','')[:14]} acknowledged"
+    if type_ == "rule_proposed":
+        return f"rule proposed: {payload.get('title','')}"
+    return type_.replace("_", " ")
+
+
+def _maybe_translate(text: str, language: str, ticket_id: str, property_id: str) -> tuple[str, Optional[dict[str, Any]]]:
     """Translate non-English transcript to English via reason_strong.
 
     Falls back to the input text if no LLM credentials are configured (dev
     fixture path). The actual demo always has env vars set.
+
+    Returns (text, usage_row_or_None).
     """
     if not text or language.lower().startswith("en"):
-        return text
+        return text, None
     if not os.environ.get("TOKENROUTER_API_KEY"):
-        return text
+        return text, None
     try:
         prompt = (
             "Translate the following ops message to English. "
             "Return ONLY the English translation, no preamble.\n\n"
             f"Source language: {language}\nMessage: {text}"
         )
-        return llm.reason_strong(prompt, property_id=property_id, ticket_id=ticket_id).strip()
+        result, row = llm.reason_strong(prompt, property_id=property_id, ticket_id=ticket_id)
+        return result.strip(), row
     except Exception as exc:
         print(f"[triage] translate fallback (returning native): {exc}")
-        return text
+        return text, None
 
 
-def _classify_with_fallback(text: str, property_id: str, ticket_id: str) -> dict[str, Any]:
-    """classify_fast with deterministic fallback for the Shirley demo path."""
+def _classify_with_fallback(
+    text: str, property_id: str, ticket_id: str
+) -> tuple[dict[str, Any], Optional[dict[str, Any]]]:
+    """classify_fast with deterministic fallback. Returns (classification, usage_row_or_None)."""
     if os.environ.get("TOKENROUTER_API_KEY"):
         try:
-            return llm.classify_fast(text, property_id=property_id, ticket_id=ticket_id)
+            classification, row = llm.classify_fast(text, property_id=property_id, ticket_id=ticket_id)
+            return classification, row
         except Exception as exc:
             print(f"[triage] classify fallback: {exc}")
 
     # Deterministic fallback heuristics so the demo never blocks.
     lower = text.lower()
     if any(t in lower for t in ["ac", "leak", "hvac", "冷氣", "漏水"]):
-        return {
+        c = {
             "category": "hvac_leak",
             "severity": 4 if any(t in lower for t in ["outlet", "插座", "electrical", "angry"]) else 3,
             "language": "zh-TW" if any(c in text for c in "冷氣漏水插座") else "en",
             "urgency_window_minutes": 180,
             "risk_tags": ["electrical_risk"] if any(t in lower for t in ["outlet", "插座", "electrical"]) else [],
         }
-    if any(t in lower for t in ["lockout", "locked out", "鍵を開けられない", "kunci"]):
-        return {
+    elif any(t in lower for t in ["lockout", "locked out", "鍵を開けられない", "kunci"]):
+        c = {
             "category": "lockout",
             "severity": 3,
             "language": "ja" if "鍵" in text else ("id" if "kunci" in lower else "en"),
             "urgency_window_minutes": 30,
             "risk_tags": [],
         }
-    if any(t in lower for t in ["plumb", "pipe", "water", "pipa"]):
-        return {
+    elif any(t in lower for t in ["plumb", "pipe", "water", "pipa", "蛇口", "水漏れ"]):
+        c = {
             "category": "plumbing_leak",
             "severity": 3,
-            "language": "id" if "pipa" in lower else "en",
+            "language": "ja" if any(j in text for j in "蛇口水漏れ") else ("id" if "pipa" in lower else "en"),
             "urgency_window_minutes": 120,
             "risk_tags": [],
         }
-    return {
-        "category": "general_inquiry",
-        "severity": 2,
-        "language": "en",
-        "urgency_window_minutes": 240,
-        "risk_tags": [],
-    }
+    else:
+        c = {
+            "category": "general_inquiry",
+            "severity": 2,
+            "language": "en",
+            "urgency_window_minutes": 240,
+            "risk_tags": [],
+        }
+    return c, None
 
 
 def _draft_dispatch_with_fallback(
@@ -137,8 +175,8 @@ def _draft_dispatch_with_fallback(
     property_record: dict[str, Any],
     category: str,
     ticket_id: str,
-) -> dict[str, Any]:
-    """Drafts vendor + cost. Uses reason_strong if available, else heuristic."""
+) -> tuple[dict[str, Any], Optional[dict[str, Any]]]:
+    """Drafts vendor + cost. Returns (draft, usage_row_or_None)."""
     skill = brain.get("synthesized_skill") or {}
     preferred_vendors: list[str] = (
         skill.get("preferred_vendors")
@@ -168,7 +206,7 @@ def _draft_dispatch_with_fallback(
                 "cost_estimate_usd (number), eta_minutes (int), "
                 "notes_for_vendor (string), notes_for_guest (string)."
             )
-            raw = llm.reason_strong(prompt, property_id=property_record["id"], ticket_id=ticket_id)
+            raw, row = llm.reason_strong(prompt, property_id=property_record["id"], ticket_id=ticket_id)
             parsed = json.loads(raw)
             return {
                 "vendor_id": parsed.get("vendor_id", vendor_id),
@@ -176,7 +214,7 @@ def _draft_dispatch_with_fallback(
                 "eta_minutes": int(parsed.get("eta_minutes", 90)),
                 "notes_for_vendor": parsed.get("notes_for_vendor", ""),
                 "notes_for_guest": parsed.get("notes_for_guest", ""),
-            }
+            }, row
         except Exception as exc:
             print(f"[triage] dispatch draft fallback: {exc}")
 
@@ -186,7 +224,7 @@ def _draft_dispatch_with_fallback(
         "eta_minutes": 90,
         "notes_for_vendor": "",
         "notes_for_guest": "",
-    }
+    }, None
 
 
 def _ticket_summary_from_state(ticket_id: str, state: Any) -> TicketSummary:
@@ -458,8 +496,9 @@ class OpsTicketServicer(OpsTicket.Servicer):
     ) -> None:
         """classify → retrieve_brain → reason_strong → severity gate.
 
-        Severity ≥ 4 → AWAITING_HUMAN with dispatch drafted (not authorized).
-        Severity < 4 → TRIAGED with dispatch auto-authorized up to daily cap.
+        Emits granular history events at each architectural step so the
+        dashboard's activity feed shows Whisper / TokenRouter classify /
+        Reboot brain / TokenRouter dispatch / Reboot decision in real time.
         """
         ticket_id = context.state_id
         property_id = self.state.property_id
@@ -470,23 +509,46 @@ class OpsTicketServicer(OpsTicket.Servicer):
         text_native = self.state.transcript_native or self.state.raw_input
         text_en = self.state.transcript_en
         if not text_en and text_native:
-            text_en = _maybe_translate(
+            text_en, translate_row = _maybe_translate(
                 text_native,
                 self.state.detected_language or "auto",
                 ticket_id=ticket_id,
                 property_id=property_id,
             )
             self.state.transcript_en = text_en
+            if translate_row:
+                _add_event(self.state, "translated", {
+                    "sponsor": "TokenRouter",
+                    "tier": "strong",
+                    "model": translate_row["model"],
+                    "summary": "translated transcript to English",
+                    "input_tokens": translate_row["input_tokens"],
+                    "output_tokens": translate_row["output_tokens"],
+                    "usd": translate_row["usd"],
+                })
 
         triage_text = text_en or text_native
 
         # Classify.
-        classification = _classify_with_fallback(triage_text, property_id, ticket_id)
+        classification, classify_row = _classify_with_fallback(triage_text, property_id, ticket_id)
         self.state.category = classification.get("category", "")
         self.state.severity = int(classification.get("severity", 0))
         self.state.detected_language = (
             self.state.detected_language or classification.get("language", "")
         )
+        risk_tags = classification.get("risk_tags") or []
+        _add_event(self.state, "classified", {
+            "sponsor": "TokenRouter",
+            "tier": "fast",
+            "model": (classify_row or {}).get("model", "fallback-heuristic"),
+            "summary": (
+                f"category={classification.get('category','')} · severity={classification.get('severity',0)}"
+                + (f" · risk_tags=[{','.join(risk_tags)}]" if risk_tags else "")
+            ),
+            "input_tokens": (classify_row or {}).get("input_tokens", 0),
+            "output_tokens": (classify_row or {}).get("output_tokens", 0),
+            "usd": (classify_row or {}).get("usd", 0.0),
+        })
 
         # Retrieve brain context.
         brain = retrieval.retrieve_brain_context(
@@ -499,6 +561,22 @@ class OpsTicketServicer(OpsTicket.Servicer):
         self.state.matched_historical_ids = [
             h["id"] for h in brain["historical_resolutions"]
         ]
+        sources_label_parts = []
+        if brain["voice_memos"]:
+            sources_label_parts.append(f"founder voice ({len(brain['voice_memos'])})")
+        if brain["matched_sop"]:
+            sources_label_parts.append(f"SOP ({brain['matched_sop']['id']})")
+        if brain["historical_resolutions"]:
+            sources_label_parts.append(f"historical ({len(brain['historical_resolutions'])})")
+        if brain.get("synthesized_skill"):
+            sources_label_parts.append(f"skill ({brain['synthesized_skill']['skill_id']})")
+        _add_event(self.state, "brain_retrieved", {
+            "sponsor": "Reboot",
+            "summary": "matched " + " + ".join(sources_label_parts) if sources_label_parts else "no brain match",
+            "voice_memo_top": (brain["voice_memos"][0]["id"] if brain["voice_memos"] else ""),
+            "sop_id": (brain["matched_sop"] or {}).get("id", ""),
+            "historical_top": (brain["historical_resolutions"][0]["id"] if brain["historical_resolutions"] else ""),
+        })
 
         # Attach skill artifact.
         skill_d = brain.get("synthesized_skill")
@@ -529,7 +607,7 @@ class OpsTicketServicer(OpsTicket.Servicer):
             self.state.assigned_to = member["id"]
 
         # Draft dispatch.
-        draft = _draft_dispatch_with_fallback(
+        draft, dispatch_row = _draft_dispatch_with_fallback(
             triage_text, brain, property_record, self.state.category, ticket_id
         )
         dispatch = Dispatch(
@@ -542,6 +620,20 @@ class OpsTicketServicer(OpsTicket.Servicer):
             acknowledged=False,
             escalated=False,
         )
+        _add_event(self.state, "dispatched", {
+            "sponsor": "TokenRouter",
+            "tier": "strong",
+            "model": (dispatch_row or {}).get("model", "fallback-heuristic"),
+            "summary": (
+                f"draft: {draft['vendor_id']} · ${draft['cost_estimate_usd']:.0f} est · "
+                f"ETA {draft['eta_minutes']}min"
+            ),
+            "vendor_id": draft["vendor_id"],
+            "cost_estimate_usd": draft["cost_estimate_usd"],
+            "input_tokens": (dispatch_row or {}).get("input_tokens", 0),
+            "output_tokens": (dispatch_row or {}).get("output_tokens", 0),
+            "usd": (dispatch_row or {}).get("usd", 0.0),
+        })
 
         # Severity gate.
         cap = float(skill_d.get("auth_cap_usd", 200.0) if skill_d else 200.0)
@@ -553,44 +645,40 @@ class OpsTicketServicer(OpsTicket.Servicer):
 
         if self.state.severity >= 4:
             self.state.status = "AWAITING_HUMAN"
-            _add_event(
-                self.state,
-                "triaged",
-                {
-                    "category": self.state.category,
-                    "severity": self.state.severity,
-                    "auto_authorized": False,
-                    "reason": "severity>=4",
-                },
+            reason = (
+                f"severity {self.state.severity} ≥ 4"
+                + (f" + {','.join(risk_tags)}" if risk_tags else "")
+                + " → manual review"
             )
+            _add_event(self.state, "triage_decision", {
+                "sponsor": "Reboot",
+                "summary": f"AWAITING_HUMAN — {reason}",
+                "outcome": "AWAITING_HUMAN",
+                "reason": reason,
+            })
         elif within_cap:
             dispatch.authorized = True
             self.state.cost_authorized_usd = dispatch.cost_estimate_usd
             self.state.status = "TRIAGED"
-            _add_event(
-                self.state,
-                "triaged_and_authorized",
-                {
-                    "category": self.state.category,
-                    "severity": self.state.severity,
-                    "auto_authorized": True,
-                    "cost_estimate_usd": dispatch.cost_estimate_usd,
-                },
-            )
+            _add_event(self.state, "triage_decision", {
+                "sponsor": "Reboot",
+                "summary": f"TRIAGED auto-authorized · ${dispatch.cost_estimate_usd:.0f} ≤ ${cap:.0f} cap",
+                "outcome": "TRIAGED",
+                "auto_authorized": True,
+                "cost_estimate_usd": dispatch.cost_estimate_usd,
+            })
         else:
             self.state.status = "AWAITING_HUMAN"
-            _add_event(
-                self.state,
-                "triaged",
-                {
-                    "category": self.state.category,
-                    "severity": self.state.severity,
-                    "auto_authorized": False,
-                    "reason": "cost_above_cap",
-                    "cost_estimate_usd": dispatch.cost_estimate_usd,
-                    "cap_usd": cap,
-                },
-            )
+            _add_event(self.state, "triage_decision", {
+                "sponsor": "Reboot",
+                "summary": (
+                    f"AWAITING_HUMAN — ${dispatch.cost_estimate_usd:.0f} > ${cap:.0f} cap"
+                ),
+                "outcome": "AWAITING_HUMAN",
+                "reason": "cost_above_cap",
+                "cost_estimate_usd": dispatch.cost_estimate_usd,
+                "cap_usd": cap,
+            })
 
         self.state.dispatches.append(dispatch)
 
@@ -702,6 +790,39 @@ class OpsTicketServicer(OpsTicket.Servicer):
             rule_json=rule_json,
             lightsprint_prompt=lightsprint_prompt,
         )
+
+    async def activity_feed(
+        self,
+        context: ReaderContext,
+    ) -> OpsTicket.ActivityFeedResponse:
+        """Architecture trace — every step (Whisper / TokenRouter / Reboot /
+        Lightsprint) for this ticket with sponsor + tier + model + tokens + cost.
+        """
+        events: list[ActivityEvent] = []
+        for ev in self.state.history:
+            try:
+                payload = json.loads(ev.payload_json or "{}")
+            except json.JSONDecodeError:
+                payload = {}
+            sponsor = payload.get("sponsor") or _default_sponsor_for_event_type(ev.type)
+            events.append(
+                ActivityEvent(
+                    ts=ev.ts,
+                    type=ev.type,
+                    sponsor=sponsor,
+                    tier=payload.get("tier", ""),
+                    model=payload.get("model", ""),
+                    summary=payload.get("summary", _default_summary_for_event(ev.type, payload)),
+                    detail=json.dumps({k: v for k, v in payload.items()
+                                       if k not in {"sponsor", "tier", "model", "summary",
+                                                    "input_tokens", "output_tokens", "usd"}},
+                                      ensure_ascii=False),
+                    input_tokens=int(payload.get("input_tokens", 0) or 0),
+                    output_tokens=int(payload.get("output_tokens", 0) or 0),
+                    usd=float(payload.get("usd", 0.0) or 0.0),
+                )
+            )
+        return OpsTicket.ActivityFeedResponse(events=events)
 
     async def show_brain_sources(
         self,

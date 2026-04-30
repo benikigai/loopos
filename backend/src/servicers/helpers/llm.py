@@ -60,7 +60,7 @@ def _log_usage(
     tier: str,
     input_tokens: int,
     output_tokens: int,
-) -> None:
+) -> dict[str, Any]:
     row = {
         "ts": datetime.now(timezone.utc).isoformat(),
         "property_id": property_id,
@@ -74,10 +74,13 @@ def _log_usage(
     USAGE_LOG.parent.mkdir(parents=True, exist_ok=True)
     with USAGE_LOG.open("a") as f:
         f.write(json.dumps(row) + "\n")
+    return row
 
 
-def classify_fast(text: str, property_id: str, ticket_id: str) -> dict[str, Any]:
-    """Cheap OSS model for triage. Returns parsed JSON classification."""
+def classify_fast(
+    text: str, property_id: str, ticket_id: str
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Cheap OSS model for triage. Returns (parsed_json, usage_row)."""
     response = _get_client().chat.completions.create(
         model=FAST_MODEL,
         messages=[
@@ -103,7 +106,7 @@ def classify_fast(text: str, property_id: str, ticket_id: str) -> dict[str, Any]
         },
     )
     usage = response.usage
-    _log_usage(
+    row = _log_usage(
         property_id,
         ticket_id,
         FAST_MODEL,
@@ -111,11 +114,14 @@ def classify_fast(text: str, property_id: str, ticket_id: str) -> dict[str, Any]
         usage.prompt_tokens if usage else 0,
         usage.completion_tokens if usage else 0,
     )
-    return json.loads(response.choices[0].message.content or "{}")
+    parsed = json.loads(response.choices[0].message.content or "{}")
+    return parsed, row
 
 
-def reason_strong(prompt: str, property_id: str, ticket_id: str) -> str:
-    """Claude Opus for hard reasoning. Returns raw text."""
+def reason_strong(
+    prompt: str, property_id: str, ticket_id: str
+) -> tuple[str, dict[str, Any]]:
+    """Claude Opus for hard reasoning. Returns (text, usage_row)."""
     response = _get_client().chat.completions.create(
         model=STRONG_MODEL,
         messages=[{"role": "user", "content": prompt}],
@@ -128,7 +134,7 @@ def reason_strong(prompt: str, property_id: str, ticket_id: str) -> str:
         },
     )
     usage = response.usage
-    _log_usage(
+    row = _log_usage(
         property_id,
         ticket_id,
         STRONG_MODEL,
@@ -136,7 +142,7 @@ def reason_strong(prompt: str, property_id: str, ticket_id: str) -> str:
         usage.prompt_tokens if usage else 0,
         usage.completion_tokens if usage else 0,
     )
-    return response.choices[0].message.content or ""
+    return response.choices[0].message.content or "", row
 
 
 def embed(text: str) -> list[float]:

@@ -165,6 +165,23 @@ class CostSummaryResponse(Model):
     total_calls: int = Field(tag=3, default=0)
 
 
+class ActivityEvent(Model):
+    ts: str = Field(tag=1, default="")
+    type: str = Field(tag=2, default="")
+    sponsor: str = Field(tag=3, default="")
+    tier: str = Field(tag=4, default="")
+    model: str = Field(tag=5, default="")
+    summary: str = Field(tag=6, default="")
+    detail: str = Field(tag=7, default="")
+    input_tokens: int = Field(tag=8, default=0)
+    output_tokens: int = Field(tag=9, default=0)
+    usd: float = Field(tag=10, default=0.0)
+
+
+class ActivityFeedResponse(Model):
+    events: list[ActivityEvent] = Field(tag=1, default_factory=list)
+
+
 class ShowBrainSourcesResponse(Model):
     voice_memo: Optional[BrainVoiceMemo] = Field(tag=1, default=None)
     sop: Optional[BrainSOP] = Field(tag=2, default=None)
@@ -367,6 +384,17 @@ api = API(
                 description=(
                     "Return the Brain sources that triage matched to this ticket: "
                     "founder voice memo, SOP, historical resolution."
+                ),
+                mcp=Tool(),
+            ),
+            activity_feed=Reader(
+                request=None,
+                response=ActivityFeedResponse,
+                description=(
+                    "Return the architectural activity trace for this ticket — "
+                    "every step (Whisper / TokenRouter classify / Reboot brain / "
+                    "TokenRouter dispatch / Reboot decision / Lightsprint rule) "
+                    "with sponsor, tier, model, tokens, and cost."
                 ),
                 mcp=Tool(),
             ),
