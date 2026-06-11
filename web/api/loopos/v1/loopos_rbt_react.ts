@@ -5,10 +5,10 @@
 
 import * as protobuf_es from "@bufbuild/protobuf";
 import {
-  ListValue, 
-	Empty, 
-	Struct, 
-	Value
+  Empty, 
+	ListValue, 
+	Value, 
+	Struct
 } from "@bufbuild/protobuf";
 import * as reboot_react from "@reboot-dev/reboot-react";
 import * as reboot_web from "@reboot-dev/reboot-web";
@@ -8766,14 +8766,6 @@ class OpsTicketInstance {
 export const useOpsTicket = (
   { id }: { id: string }
 ): UseOpsTicketApi => {
-  // PATCH: Reboot codegen omits these from useOpsTicket but inner hooks
-  // (useTriage, useAcknowledgeDispatch, useProposeNewRule, etc.) reference
-  // them in useMemo dependency arrays. Without these declarations the bundle
-  // throws ReferenceError: mcpApp is not defined at first render.
-  const mcpApp = useMcpApp();
-  const mcpToolData = useMcpToolData();
-  void mcpApp; void mcpToolData;
-
   const stateRef = reboot_api.stateIdToRef(
     "loopos.v1.OpsTicket",
     id,
